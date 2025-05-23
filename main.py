@@ -43,18 +43,34 @@ class MainWindow(QMainWindow):
         wm_group.setLayout(QVBoxLayout())
         wm_group.layout().addWidget(QLabel("Open windows here"))
         self.box2_layout.addWidget(wm_group)
-      
+
+        pm_group = QGroupBox("Profile Manager")
+        pm_group.setFixedSize(300, 200)
+        self.box2_layout.addWidget(pm_group)
+        
         self.box3_layout = QVBoxLayout()
         self.box3_widget = QWidget()
         self.box3_widget.setLayout(self.box3_layout)
         self.body_layout.addWidget(self.box3_widget)
 
         calc_box = QGroupBox("Calculator")
-        calc_box.setFixedSize(300, 160)
+        calc_box.setFixedSize(300, 200)
         calc_layout = QVBoxLayout()
         calc_layout.addWidget(CalcWidget())
         calc_box.setLayout(calc_layout)
         self.box3_layout.addWidget(calc_box)
+
+        lu_group = QGroupBox("Last Used Tool")
+        lu_group.setFixedSize(300, 100)
+        self.box3_layout.addWidget(pm_group)
+
+        vft_group = QGroupBox("View Favourite Tools")
+        vft_group.setFixedSize(300, 200)
+        self.box3_layout.addWidget(vft_group)
+
+        vf_group = QGroupBox("View Favourites")
+        vf_group.setFixedSize(300, 200)
+        self.box3_layout.addWidget(vf_group)
 
         self.box4_layout = QVBoxLayout()
         self.box4_widget = QWidget()
