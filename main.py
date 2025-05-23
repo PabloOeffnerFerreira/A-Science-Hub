@@ -33,7 +33,6 @@ class MainWindow(QMainWindow):
         nav_group.layout().addWidget(QLabel("Tool list here"))
         self.box1_layout.addWidget(nav_group)
 
-        # --- Box 2 ---
         self.box2_layout = QVBoxLayout()
         self.box2_widget = QWidget()
         self.box2_widget.setLayout(self.box2_layout)
