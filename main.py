@@ -1,110 +1,107 @@
-from PyQt6.QtWidgets import (
-    QApplication, QMainWindow, QVBoxLayout, QHBoxLayout,
-    QWidget, QPushButton, QLabel, QLineEdit, QGroupBox
-)
 import sys
-
-class MainWindow(QMainWindow):
+from PyQt6.QtWidgets import (
+    QApplication, QMainWindow, QWidget, QLabel, QPushButton,
+    QHBoxLayout, QVBoxLayout, QFrame, QSizePolicy, QListWidget, QGridLayout
+)
+from utils import (
+    LastUsedPanel, FavoritesPanel, WindowManagerPanel, CalculatorPanel)
+class ScienceHub(QMainWindow):
     def __init__(self):
         super().__init__()
         self.setWindowTitle("A Science Hub")
-        self.setGeometry(100, 100, 300, 200)
+        self.setObjectName("main_science_hub")
+        self.setGeometry(100, 100, 1200, 800)
+        self.setStyleSheet("""
+            QMainWindow { background: #23272E; }
+            QLabel, QListWidget, QPushButton {
+                color: #EEE;
+                font-size: 14px;
+            }
+            QPushButton {
+                background: #444; 
+                border-radius: 8px;
+                padding: 10px 18px;
+                margin: 4px 0;
+            }
+            QPushButton:hover {
+                background: #333;
+            }
+            QListWidget {
+                background: #1A1A1A;
+                border: none;
+                min-width: 160px;
+        """)
+        self.initUI()
 
-        self.central_widget = QWidget()
-        self.setCentralWidget(self.central_widget)
+    def initUI(self):
+        central_widget = QWidget()
+        main_layout = QHBoxLayout()
+        central_widget.setLayout(main_layout)
+        self.setCentralWidget(central_widget)
 
-        self.layout = QVBoxLayout()
-        self.central_widget.setLayout(self.layout)
+        # Sidebar (unchanged)
+        sidebar = QVBoxLayout()
+        sidebar.addWidget(QLabel("Categories"))
+        self.category_list = QListWidget()
+        self.category_list.addItems([
+    "Chemistry", "Biology", "Physics", "Geology", "Math",
+    "Placeholder 1", "Placeholder 2", "Placeholder 3", "Placeholder 4", "Placeholder 5",
+    "Placeholder 6", "Placeholder 7", "Placeholder 8", "Placeholder 9", "Placeholder 10"
+])
 
-        self.settopbar = QHBoxLayout()
-        self.layout.addLayout(self.settopbar)
+        sidebar.addWidget(self.category_list)
 
-        self.body_layout = QHBoxLayout()
-        self.layout.addLayout(self.body_layout)
+        self.launch_btn = QPushButton("Launch Toolkit")
+        self.launch_btn.setEnabled(False)
+        sidebar.addWidget(self.launch_btn)
 
-        self.box1_layout = QVBoxLayout()
-        self.box1_widget = QWidget()
-        self.box1_widget.setLayout(self.box1_layout)
-        self.body_layout.addWidget(self.box1_widget)
+        self.category_list.itemSelectionChanged.connect(self.update_launch_btn_state)
+        self.launch_btn.clicked.connect(self.launch_toolkit)
+        sidebar.addStretch()
 
-        nav_group = QGroupBox("Navigation")
-        nav_group.setFixedSize(300, 200)
-        nav_group.setLayout(QVBoxLayout())
-        nav_group.layout().addWidget(QLabel("Tool list here"))
-        self.box1_layout.addWidget(nav_group)
+        sidebar_frame = QFrame()
+        sidebar_frame.setLayout(sidebar)
+        sidebar_frame.setFixedWidth(200)
+   
+        central_panel_layout = QGridLayout()
 
-        self.box2_layout = QVBoxLayout()
-        self.box2_widget = QWidget()
-        self.box2_widget.setLayout(self.box2_layout)
-        self.body_layout.addWidget(self.box2_widget)
+        headline = QLabel("Welcome to Science Hub")
+        headline.setStyleSheet("font-size: 28px; font-weight: bold;")
+        central_panel_layout.addWidget(headline, 0, 0, 1, 2)
 
-        wm_group = QGroupBox("Window Manager")
-        wm_group.setFixedSize(300, 200)
-        wm_group.setLayout(QVBoxLayout())
-        wm_group.layout().addWidget(QLabel("Open windows here"))
-        self.box2_layout.addWidget(wm_group)
+        self.calculator_panel = CalculatorPanel()
+        self.last_used_panel = LastUsedPanel()
+        self.favorites_panel = FavoritesPanel()
+        self.window_manager_panel = WindowManagerPanel()
+        central_panel_layout.addWidget(self.last_used_panel,      1, 0)
+        central_panel_layout.addWidget(self.favorites_panel,      1, 1)
+        central_panel_layout.addWidget(self.window_manager_panel, 2, 0)
+        central_panel_layout.addWidget(self.calculator_panel,     2, 1)
 
-        pm_group = QGroupBox("Profile Manager")
-        pm_group.setFixedSize(300, 200)
-        self.box2_layout.addWidget(pm_group)
-        
-        self.box3_layout = QVBoxLayout()
-        self.box3_widget = QWidget()
-        self.box3_widget.setLayout(self.box3_layout)
-        self.body_layout.addWidget(self.box3_widget)
+        credits = QLabel("Science Hub by Pablo Oeffner Ferreira")
+        credits.setStyleSheet("color: #bbb; font-size: 12px; margin-top: 40px;")
+        central_panel_layout.addWidget(credits, 3, 0, 1, 2)
 
-        calc_box = QGroupBox("Calculator")
-        calc_box.setFixedSize(300, 200)
-        calc_layout = QVBoxLayout()
-        calc_layout.addWidget(CalcWidget())
-        calc_box.setLayout(calc_layout)
-        self.box3_layout.addWidget(calc_box)
 
-        lu_group = QGroupBox("Last Used Tool")
-        lu_group.setFixedSize(300, 100)
-        self.box3_layout.addWidget(pm_group)
+        central_panel_frame = QFrame()
+        central_panel_frame.setLayout(central_panel_layout)
+        central_panel_frame.setSizePolicy(QSizePolicy.Policy.Expanding, QSizePolicy.Policy.Expanding)
+        main_layout.addWidget(sidebar_frame)
+        main_layout.addWidget(central_panel_frame)
+    def update_launch_btn_state(self):
+        selected_items = self.category_list.selectedItems()
+        self.launch_btn.setEnabled(len(selected_items) > 0)
+    def launch_toolkit(self):
+        selected_items = self.category_list.selectedItems()
+        if selected_items:
+            selected_category = selected_items[0].text()
+            print(f"Launching toolkit for {selected_category}...")
 
-        vft_group = QGroupBox("View Favourite Tools")
-        vft_group.setFixedSize(300, 200)
-        self.box3_layout.addWidget(vft_group)
-
-        vf_group = QGroupBox("View Favourites")
-        vf_group.setFixedSize(300, 200)
-        self.box3_layout.addWidget(vf_group)
-
-        self.box4_layout = QVBoxLayout()
-        self.box4_widget = QWidget()
-        self.box4_widget.setLayout(self.box4_layout)
-        self.body_layout.addWidget(self.box4_widget)
-
-        log_group = QGroupBox("Log Output")
-        log_group.setFixedSize(300, 200)
-        log_group.setLayout(QVBoxLayout())
-        log_group.layout().addWidget(QLabel("Logs go here"))
-        self.box4_layout.addWidget(log_group)
-
-class CalcWidget(QWidget): 
-    def __init__(self):
-        super().__init__()
-        layout = QVBoxLayout(self)
-        layout.addWidget(QLabel("Enter expression:"))
-        self.expr = QLineEdit()
-        layout.addWidget(self.expr)
-        self.result = QLabel()
-        layout.addWidget(self.result)
-        btn = QPushButton("Calculate")
-        btn.clicked.connect(self.compute)
-        layout.addWidget(btn)
-
-    def compute(self):
-        try:
-            res = eval(self.expr.text())
-            self.result.setText(f"Result: {res}")
-        except:
-            self.result.setText("Invalid expression.")
+def main():
+    app = QApplication(sys.argv)
+    win = ScienceHub()
+    win.showFullScreen()
+    sys.exit(app.exec())
 
 if __name__ == "__main__":
-    app = QApplication(sys.argv)
-    window = MainWindow()
-    window.showFullScreen()
-    sys.exit(app.exec())
+    main()
