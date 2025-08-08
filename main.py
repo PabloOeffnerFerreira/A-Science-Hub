@@ -1,5 +1,14 @@
-from UI.ui_config import APP_TITLE
+from PyQt6.QtWidgets import QApplication
+import sys
+
+# Import the main window
+from UI.main_window import MainWindow
+
 def main():
-    print(APP_TITLE)
+    app = QApplication(sys.argv)
+    window = MainWindow()
+    window.show()
+    sys.exit(app.exec())
+
 if __name__ == "__main__":
     main()
