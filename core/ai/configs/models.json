@@ -1,0 +1,12 @@
+{
+  "default": "qwen2.5",
+  "available": [
+    "tinyllama",
+    "phi4",
+    "qwen2.5",
+    "gemma3",
+    "mistral-small",
+    "mathstral",
+    "deepseek-r1"
+  ]
+}

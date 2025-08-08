@@ -1,0 +1,1 @@
+# Placeholder window manager API

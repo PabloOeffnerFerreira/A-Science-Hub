@@ -1,0 +1,7 @@
+PyQt6
+matplotlib
+numpy
+scipy
+sympy
+pandas
+sqlite3-bro
