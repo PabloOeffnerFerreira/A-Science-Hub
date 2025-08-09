@@ -1,5 +1,6 @@
 from PyQt6.QtWidgets import QWidget, QVBoxLayout, QLabel, QFrame
 from PyQt6.QtCore import Qt
+from UI.integrated_panels.unit_converter_panel import UnitConverterWidget
 
 
 class SimpleToolsPanel(QWidget):
@@ -20,7 +21,7 @@ class SimpleToolsPanel(QWidget):
         # Sections (in planned order)
         layout.addWidget(placeholder("Welcome Section", min_height=80))
         layout.addWidget(placeholder("Simple Calculator", min_height=120))
-        layout.addWidget(placeholder("Unit Converter", min_height=160))
+        layout.addWidget(UnitConverterWidget())
         layout.addWidget(placeholder("Scientific Notation ↔ Decimal Converter"))
         layout.addWidget(placeholder("Significant Figures Tool"))
         layout.addWidget(placeholder("Logarithmic Calculator"))
