@@ -12,22 +12,42 @@ class UnitConverter:
         return []
 
     def get_si_units_for_category(self, category):
-        """Return SI base units for this category"""
         if category in self.data and "SI" in self.data[category]:
             return self.data[category]["SI"]
         return []
 
     def convert(self, value, from_unit, to_unit, category):
-        """Convert between two units in the same category"""
         if category not in self.data:
             raise ValueError(f"Unknown category: {category}")
 
-        cat_data = self.data[category]["units"]
+        if category == "Temperature":
+            return self._convert_temperature(value, from_unit, to_unit)
 
+        cat_data = self.data[category]["units"]
         if from_unit not in cat_data or to_unit not in cat_data:
             raise ValueError(f"Units not found in category {category}")
 
-        # Convert to base unit
         base_value = value * cat_data[from_unit]
-        # Convert to target
         return base_value / cat_data[to_unit]
+
+    def _convert_temperature(self, v, fu, tu):
+        fu = fu.strip()
+        tu = tu.strip()
+
+        if fu == "K":
+            K = v
+        elif fu == "C":
+            K = v + 273.15
+        elif fu == "F":
+            K = (v - 32.0) * (5.0/9.0) + 273.15
+        else:
+            raise ValueError(f"Unsupported temperature unit: {fu}")
+
+        if tu == "K":
+            return K
+        elif tu == "C":
+            return K - 273.15
+        elif tu == "F":
+            return (K - 273.15) * (9.0/5.0) + 32.0
+        else:
+            raise ValueError(f"Unsupported temperature unit: {tu}")
