@@ -9,6 +9,7 @@ from UI.integrated_panels.dec_time_conv_panel import DecimalTimeConverterWidget
 from UI.integrated_panels.si_prefix_combiner_splitter_panel import SiPrefixCombinerSplitter
 from UI.integrated_panels.sig_fig_panel import SignificantFiguresWidget
 from UI.integrated_panels.sci_cons_lookup_panel import ScientificConstantsLookupWidget
+from UI.integrated_panels.dim_eq_checker_panel import DimensionalEquationChecker
 
 def placeholder(title: str, min_height: int | None = None) -> QWidget:
     w = QFrame()
@@ -36,7 +37,7 @@ class SimpleToolsPanel(QWidget):
         layout.setAlignment(Qt.AlignmentFlag.AlignTop)
 
         layout.addWidget(placeholder("Welcome Section", min_height=80), 0, Qt.AlignmentFlag.AlignTop)
-        layout.addWidget(SimpleCalculatorWidget(), 0, Qt.AlignmentFlag.AlignTop)
+        
 
         uc_nc_layout = QHBoxLayout()
         uc_nc_layout.setContentsMargins(0, 0, 0, 0)
@@ -60,6 +61,18 @@ class SimpleToolsPanel(QWidget):
         sipcs_row.addWidget(ScientificConstantsLookupWidget(), 0, Qt.AlignmentFlag.AlignTop)
 
         layout.addLayout(sipcs_row)
-        #layout.addWidget(placeholder("Dimensional Equation Checker"), 0, Qt.AlignmentFlag.AlignTop)
+
+        dec_row = QHBoxLayout()
+        dec_row.setContentsMargins(0, 0, 0, 0)
+        dec_row.setSpacing(10)
+        dec_row.setAlignment(Qt.AlignmentFlag.AlignTop)
+
+
+        dec = DimensionalEquationChecker()
+        dec_row.addWidget(dec)
+        dec_row.addWidget(SimpleCalculatorWidget(), 0, Qt.AlignmentFlag.AlignTop)
+
+        layout.addLayout(dec_row)
+
         #layout.addWidget(placeholder("Physical Quantity Explainer (EU/UK/US/BR)"), 0, Qt.AlignmentFlag.AlignTop)
         #layout.addWidget(placeholder("Drag & Drop Import Area", min_height=120), 0, Qt.AlignmentFlag.AlignTop)

@@ -1,5 +1,3 @@
-# UI/integrated_panels/calculator_panel.py
-
 from PyQt6.QtWidgets import (
     QWidget, QVBoxLayout, QHBoxLayout, QLabel, QLineEdit, QTableWidget,
     QTableWidgetItem, QSizePolicy, QFormLayout, QMenu, QPushButton, QInputDialog, QMessageBox
