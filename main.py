@@ -3,7 +3,6 @@ import sys
 
 # Import the main window
 from UI.main_window import MainWindow
-
 def main():
     app = QApplication(sys.argv)
     window = MainWindow()
@@ -12,3 +11,4 @@ def main():
 
 if __name__ == "__main__":
     main()
+ 

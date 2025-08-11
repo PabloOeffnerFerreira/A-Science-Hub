@@ -4,7 +4,8 @@ from PyQt6.QtWidgets import (
 from PyQt6.QtCore import Qt
 from UI.integrated_panels.unit_converter_panel import UnitConverterWidget
 from UI.integrated_panels.notation_converter_panel import NotationConverterWidget
-
+from UI.integrated_panels.calculator_panel import SimpleCalculatorWidget
+from UI.integrated_panels.dec_time_conv_panel import DecimalTimeConverterWidget
 
 def placeholder(title: str, min_height: int | None = None) -> QWidget:
     w = QFrame()
@@ -32,7 +33,7 @@ class SimpleToolsPanel(QWidget):
         layout.setAlignment(Qt.AlignmentFlag.AlignTop)
 
         layout.addWidget(placeholder("Welcome Section", min_height=80), 0, Qt.AlignmentFlag.AlignTop)
-        layout.addWidget(placeholder("Simple Calculator", min_height=120), 0, Qt.AlignmentFlag.AlignTop)
+        layout.addWidget(SimpleCalculatorWidget(), 0, Qt.AlignmentFlag.AlignTop)
 
         uc_nc_layout = QHBoxLayout()
         uc_nc_layout.setContentsMargins(0, 0, 0, 0)
@@ -40,6 +41,7 @@ class SimpleToolsPanel(QWidget):
         uc_nc_layout.setAlignment(Qt.AlignmentFlag.AlignTop)
         uc_nc_layout.addWidget(UnitConverterWidget(), 0, Qt.AlignmentFlag.AlignTop)
         uc_nc_layout.addWidget(NotationConverterWidget(), 0, Qt.AlignmentFlag.AlignTop)
+        uc_nc_layout.addWidget(DecimalTimeConverterWidget(), 0, Qt.AlignmentFlag.AlignTop)
         uc_row = QFrame()
         uc_row.setFrameShape(QFrame.Shape.NoFrame)
         uc_row.setLayout(uc_nc_layout)
@@ -50,6 +52,5 @@ class SimpleToolsPanel(QWidget):
         layout.addWidget(placeholder("Scientific Constants Lookup"), 0, Qt.AlignmentFlag.AlignTop)
         layout.addWidget(placeholder("Dimensional Equation Checker"), 0, Qt.AlignmentFlag.AlignTop)
         layout.addWidget(placeholder("SI Prefix Combiner/Splitter"), 0, Qt.AlignmentFlag.AlignTop)
-        layout.addWidget(placeholder("Decimal Time Converter"), 0, Qt.AlignmentFlag.AlignTop)
         layout.addWidget(placeholder("Physical Quantity Explainer (EU/UK/US/BR)"), 0, Qt.AlignmentFlag.AlignTop)
         layout.addWidget(placeholder("Drag & Drop Import Area", min_height=120), 0, Qt.AlignmentFlag.AlignTop)
