@@ -10,6 +10,7 @@ from UI.integrated_panels.si_prefix_combiner_splitter_panel import SiPrefixCombi
 from UI.integrated_panels.sig_fig_panel import SignificantFiguresWidget
 from UI.integrated_panels.sci_cons_lookup_panel import ScientificConstantsLookupWidget
 from UI.integrated_panels.dim_eq_checker_panel import DimensionalEquationChecker
+from UI.integrated_panels.quantity_checker_panel import ScientificQuantityChecker
 
 def placeholder(title: str, min_height: int | None = None) -> QWidget:
     w = QFrame()
@@ -71,8 +72,7 @@ class SimpleToolsPanel(QWidget):
         dec = DimensionalEquationChecker()
         dec_row.addWidget(dec)
         dec_row.addWidget(SimpleCalculatorWidget(), 0, Qt.AlignmentFlag.AlignTop)
+        dec_row.addWidget(ScientificQuantityChecker(), 0, Qt.AlignmentFlag.AlignTop)
 
         layout.addLayout(dec_row)
-
-        #layout.addWidget(placeholder("Physical Quantity Explainer (EU/UK/US/BR)"), 0, Qt.AlignmentFlag.AlignTop)
         #layout.addWidget(placeholder("Drag & Drop Import Area", min_height=120), 0, Qt.AlignmentFlag.AlignTop)
