@@ -6,6 +6,9 @@ from UI.integrated_panels.unit_converter_panel import UnitConverterWidget
 from UI.integrated_panels.notation_converter_panel import NotationConverterWidget
 from UI.integrated_panels.calculator_panel import SimpleCalculatorWidget
 from UI.integrated_panels.dec_time_conv_panel import DecimalTimeConverterWidget
+from UI.integrated_panels.si_prefix_combiner_splitter_panel import SiPrefixCombinerSplitter
+from UI.integrated_panels.sig_fig_panel import SignificantFiguresWidget
+from UI.integrated_panels.sci_cons_lookup_panel import ScientificConstantsLookupWidget
 
 def placeholder(title: str, min_height: int | None = None) -> QWidget:
     w = QFrame()
@@ -46,11 +49,17 @@ class SimpleToolsPanel(QWidget):
         uc_row.setFrameShape(QFrame.Shape.NoFrame)
         uc_row.setLayout(uc_nc_layout)
         layout.addWidget(uc_row, 0, Qt.AlignmentFlag.AlignTop)
+        sipcs_row = QHBoxLayout()
+        sipcs_row.setContentsMargins(0, 0, 0, 0)
+        sipcs_row.setSpacing(10)
+        sipcs_row.setAlignment(Qt.AlignmentFlag.AlignTop)
 
-        layout.addWidget(placeholder("Significant Figures Tool"), 0, Qt.AlignmentFlag.AlignTop)
-        layout.addWidget(placeholder("Logarithmic Calculator"), 0, Qt.AlignmentFlag.AlignTop)
-        layout.addWidget(placeholder("Scientific Constants Lookup"), 0, Qt.AlignmentFlag.AlignTop)
-        layout.addWidget(placeholder("Dimensional Equation Checker"), 0, Qt.AlignmentFlag.AlignTop)
-        layout.addWidget(placeholder("SI Prefix Combiner/Splitter"), 0, Qt.AlignmentFlag.AlignTop)
-        layout.addWidget(placeholder("Physical Quantity Explainer (EU/UK/US/BR)"), 0, Qt.AlignmentFlag.AlignTop)
-        layout.addWidget(placeholder("Drag & Drop Import Area", min_height=120), 0, Qt.AlignmentFlag.AlignTop)
+        sipcs = SiPrefixCombinerSplitter()
+        sipcs_row.addWidget(sipcs)
+        sipcs_row.addWidget(SignificantFiguresWidget(), 0, Qt.AlignmentFlag.AlignTop)
+        sipcs_row.addWidget(ScientificConstantsLookupWidget(), 0, Qt.AlignmentFlag.AlignTop)
+
+        layout.addLayout(sipcs_row)
+        #layout.addWidget(placeholder("Dimensional Equation Checker"), 0, Qt.AlignmentFlag.AlignTop)
+        #layout.addWidget(placeholder("Physical Quantity Explainer (EU/UK/US/BR)"), 0, Qt.AlignmentFlag.AlignTop)
+        #layout.addWidget(placeholder("Drag & Drop Import Area", min_height=120), 0, Qt.AlignmentFlag.AlignTop)
