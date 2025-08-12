@@ -1,7 +1,7 @@
-import os, sqlite3, json
+import json, os, sqlite3
+from core.data.paths import SETTINGS_PATH
 
 DB_PATH = os.path.join("core","data","databases","intdatabases","tool_usage_log.sql")
-SETTINGS_PATH = os.path.join("core","data","databases","intdatabases","settings.json")
 
 def _fallback_last_tool():
     try:
@@ -25,3 +25,13 @@ def get_last_tool_opened():
         return _fallback_last_tool()
     except:
         return _fallback_last_tool()
+
+def set_last_tool_opened(name: str):
+    try:
+        with open(SETTINGS_PATH,"r",encoding="utf-8") as f:
+            s = json.load(f)
+    except:
+        s = {}
+    s["last_tool_opened"] = name
+    with open(SETTINGS_PATH,"w",encoding="utf-8") as f:
+        json.dump(s, f, ensure_ascii=False, indent=2)

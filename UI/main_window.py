@@ -3,6 +3,8 @@ from PyQt6.QtCore import Qt
 from core.utils.app_info import APP_NAME
 from UI.integrated_panels.log_panel import LogPanel
 from UI.integrated_panels.simple_tools_panel import SimpleToolsPanel
+from UI.integrated_panels.category_sidebar import CategorySidebar
+from UI.integrated_panels.window_manager_panel import WindowManagerPanel
 
 class MainWindow(QMainWindow):
     def __init__(self):
@@ -37,11 +39,9 @@ class MainWindow(QMainWindow):
 
     def _build_dashboard(self):
         grid = self.layout
-        sidebar = QLabel("Category Sidebar")
-        sidebar.setSizePolicy(QSizePolicy.Policy.Fixed, QSizePolicy.Policy.Expanding)
-        sidebar.setMaximumWidth(260)
+        sidebar = CategorySidebar()
         grid.addWidget(sidebar, 0, 0, 2, 1)
-        wm = QLabel("Window Manager")
+        wm = WindowManagerPanel()
         wm.setSizePolicy(QSizePolicy.Policy.Expanding, QSizePolicy.Policy.Expanding)
         log = LogPanel()
         log.setSizePolicy(QSizePolicy.Policy.Expanding, QSizePolicy.Policy.Expanding)
