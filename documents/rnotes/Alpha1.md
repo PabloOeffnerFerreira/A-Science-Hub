@@ -1,0 +1,14 @@
+- Add DnD placeholder, Window Manager, updated Welcome Panel, sidebar overhaul, and main window UI changes
+- in Simple Tools Panel with live system/app stats + multiple fixes and improvements
+- Add proper temperature conversion support to Unit Converter
+- Removed one uneccessary line
+- Add Scientific Quantity Checker panel with regional conventions and multi-mode search
+- Add SI Prefix Combiner/Splitter, Scientific Constants Lookup, Significant Figures Tool, and Dimensional Equation Checker to Simple Tools Panel
+- Add new Scientific Constants Lookup, SI Prefix Combiner/Splitter, and Significant Figures tools; improve layout handling and data integration
+- Add Decimal Time Converter tool and variable storage feature to Simple Calculator
+- Refactor Simple Tools Panel layout for compact top-aligned arrangement
+- Implemented Unit Converter Panel (UI + Logic) with SI Prefix Support and Bug Fixes
+- Implemented initial log system and main window structure
+- Added README.md to root so that it works on GitHub
+- Initial ASH scaffold
+- Initial commit
