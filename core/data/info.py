@@ -1,8 +1,8 @@
 APP_NAME = "A Science Hub"
 DEVELOPER = "Pablo Oeffner Ferreira"
 GITHUB_REPO = "https://github.com/YourUsername/YourRepo"
-BUILD = "dev"  # or "alpha"
-VERSION = None  # No version yet
+BUILD = "alpha"
+VERSION = "Alpha I: A New World"
 STAGE = "Pre-release"
 DESCRIPTION = "Scientific exploration and computation platform"
 CATEGORIES = ["Mechanics", "Electricity", "Chemistry", "Biology", "Geology", "Math"]
