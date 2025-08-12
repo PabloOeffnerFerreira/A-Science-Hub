@@ -1,107 +1,64 @@
-from PyQt6.QtWidgets import QWidget, QVBoxLayout, QFormLayout, QLabel, QLineEdit, QSizePolicy
-from PyQt6.QtCore import Qt, QRegularExpression
-from PyQt6.QtGui import QDoubleValidator, QRegularExpressionValidator
+from PyQt6.QtWidgets import QWidget, QVBoxLayout, QFormLayout, QLabel, QLineEdit, QPushButton, QHBoxLayout
+from PyQt6.QtCore import Qt
+from tools.panel_tools.decimal_time_converter import to_decimal, from_decimal
 
 class DecimalTimeConverterWidget(QWidget):
     def __init__(self):
         super().__init__()
-
-        self._updating = False
-        self.setSizePolicy(QSizePolicy.Policy.Preferred, QSizePolicy.Policy.Fixed)
-
         root = QVBoxLayout(self)
-        root.setContentsMargins(6, 6, 6, 6)
-        root.setSpacing(4)
+        root.setContentsMargins(6,6,6,6)
+        root.setSpacing(6)
 
-        form = QFormLayout()
-        form.setLabelAlignment(Qt.AlignmentFlag.AlignRight | Qt.AlignmentFlag.AlignVCenter)
-        form.setFormAlignment(Qt.AlignmentFlag.AlignLeft | Qt.AlignmentFlag.AlignVCenter)
-        form.setHorizontalSpacing(6)
-        form.setVerticalSpacing(2)
+        form1 = QFormLayout()
+        form1.setLabelAlignment(Qt.AlignmentFlag.AlignRight | Qt.AlignmentFlag.AlignVCenter)
+        form1.setHorizontalSpacing(6)
+        form1.setVerticalSpacing(2)
 
-        self.dec_input = QLineEdit()
-        self.dec_input.setPlaceholderText("Decimal hours")
-        dv = QDoubleValidator(0.0, 1e9, 6)
-        dv.setNotation(QDoubleValidator.Notation.StandardNotation)
-        self.dec_input.setValidator(dv)
-        self.dec_input.setFixedHeight(20)
-        form.addRow(QLabel("Decimal Time"), self.dec_input)
+        self.h_in = QLineEdit(); self.h_in.setPlaceholderText("Hours")
+        self.m_in = QLineEdit(); self.m_in.setPlaceholderText("Minutes")
+        self.s_in = QLineEdit(); self.s_in.setPlaceholderText("Seconds")
+        form1.addRow(QLabel("H:M:S"), self._row(self.h_in, self.m_in, self.s_in))
 
-        self.hms_input = QLineEdit()
-        self.hms_input.setPlaceholderText("HH:MM(:SS)") 
-        rx = QRegularExpression(r"^\d{1,6}:\d{2}(:\d{2})?$")
-        self.hms_input.setValidator(QRegularExpressionValidator(rx))
-        self.hms_input.setFixedHeight(20)
-        form.addRow(QLabel("HH:MM:SS"), self.hms_input)
+        self.dec_out = QLineEdit(); self.dec_out.setReadOnly(True)
+        form1.addRow(QLabel("→ Decimal hours"), self.dec_out)
 
-        root.addLayout(form)
+        root.addLayout(form1)
 
-        self.dec_input.textEdited.connect(self._on_decimal_edited)
-        self.hms_input.textEdited.connect(self._on_hms_edited)
+        form2 = QFormLayout()
+        form2.setLabelAlignment(Qt.AlignmentFlag.AlignRight | Qt.AlignmentFlag.AlignVCenter)
+        form2.setHorizontalSpacing(6)
+        form2.setVerticalSpacing(2)
 
-    def _on_decimal_edited(self, text: str):
-        if self._updating:
-            return
-        if not text:
-            self._set_hms("")
-            return
-        try:
-            dec_hours = float(text)
-            if dec_hours < 0:
-                self._set_hms("")
-                return
-        except ValueError:
-            self._set_hms("")
-            return
-        total_seconds = int(round(dec_hours * 3600))
-        h = total_seconds // 3600
-        m = (total_seconds % 3600) // 60
-        s = total_seconds % 60
-        self._set_hms(f"{h:02}:{m:02}:{s:02}")
+        self.dec_in = QLineEdit(); self.dec_in.setPlaceholderText("Decimal hours")
+        form2.addRow(QLabel("Decimal"), self.dec_in)
 
-    def _on_hms_edited(self, text: str):
-        if self._updating:
-            return
-        if not text:
-            self._set_dec("")
-            return
-        parts = text.split(":")
-        if len(parts) == 2:
-            h, m = parts
-            s = "00"
-        elif len(parts) == 3:
-            h, m, s = parts
-        else:
-            self._set_dec("")
-            return
-        try:
-            h = int(h)
-            m = int(m)
-            s = int(s)
-            if h < 0 or not (0 <= m < 60) or not (0 <= s < 60):
-                self._set_dec("")
-                return
-        except ValueError:
-            self._set_dec("")
-            return
-        total_seconds = h * 3600 + m * 60 + s
-        dec = total_seconds / 3600.0
-        self._set_dec(f"{dec:.6f}".rstrip("0").rstrip(".") if "." in f"{dec:.6f}" else f"{dec:.6f}")
+        self.h_out = QLineEdit(); self.h_out.setReadOnly(True)
+        self.m_out = QLineEdit(); self.m_out.setReadOnly(True)
+        self.s_out = QLineEdit(); self.s_out.setReadOnly(True)
+        form2.addRow(QLabel("→ H:M:S"), self._row(self.h_out, self.m_out, self.s_out))
 
-    def _set_hms(self, value: str):
-        self._updating = True
-        try:
-            self.hms_input.blockSignals(True)
-            self.hms_input.setText(value)
-        finally:
-            self.hms_input.blockSignals(False)
-            self._updating = False
+        root.addLayout(form2)
 
-    def _set_dec(self, value: str):
-        self._updating = True
-        try:
-            self.dec_input.blockSignals(True)
-            self.dec_input.setText(value)
-        finally:
-            self.dec_input.blockSignals(False)
-            self._updating = False
+        self.h_in.textEdited.connect(self._recompute_dec)
+        self.m_in.textEdited.connect(self._recompute_dec)
+        self.s_in.textEdited.connect(self._recompute_dec)
+        self.dec_in.textEdited.connect(self._recompute_hms)
+
+    def _row(self, a, b, c):
+        w = QWidget()
+        l = QHBoxLayout(w)
+        l.setContentsMargins(0,0,0,0)
+        l.setSpacing(6)
+        l.addWidget(a); l.addWidget(b); l.addWidget(c)
+        return w
+
+    def _recompute_dec(self):
+        r = to_decimal(self.h_in.text(), self.m_in.text(), self.s_in.text())
+        self.dec_out.setText("" if r is None else r)
+
+    def _recompute_hms(self):
+        r = from_decimal(self.dec_in.text())
+        if r is None:
+            self.h_out.clear(); self.m_out.clear(); self.s_out.clear(); return
+        h, m, s = r
+        self.h_out.setText(h); self.m_out.setText(m); self.s_out.setText(s)

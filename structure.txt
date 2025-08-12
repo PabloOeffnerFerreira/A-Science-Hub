@@ -1,0 +1,219 @@
+C:.
+|   .gitignore
+|   LICENSE
+|   main.py
+|   README.md
+|   requirements.txt
+|   structure.txt
+|   
++---.vscode
+|       launch.json
+|       
++---core
+|   +---ai
+|   |   |   ai_manager.py
+|   |   |   mode_handler.py
+|   |   |   ollama_wrapper.py
+|   |   |   
+|   |   \---configs
+|   |           models.json
+|   |           modes.json
+|   |           prompts.json
+|   |           
+|   +---data
+|   |   |   info.py
+|   |   |   paths.py
+|   |   |   
+|   |   +---databases
+|   |   |   |   codon_table.json
+|   |   |   |   constants_data.py
+|   |   |   |   minerals.json
+|   |   |   |   periodic_table.json
+|   |   |   |   quantities.json
+|   |   |   |   reactions.db
+|   |   |   |   
+|   |   |   \---intdatabases
+|   |   |           favourites.sql
+|   |   |           gallery_metadata.db
+|   |   |           settings.json
+|   |   |           tags.json
+|   |   |           tool_usage_log.sql
+|   |   |           
+|   |   +---functions
+|   |   |       chemistry.py
+|   |   |       constants_tools.py
+|   |   |       image_export.py
+|   |   |       log.py
+|   |   |       log_signals.py
+|   |   |       log_writer.py
+|   |   |       physics.py
+|   |   |       quantities.py
+|   |   |       sigfigs.py
+|   |   |       si_prefix_tools.py
+|   |   |       time_tools.py
+|   |   |       units.py
+|   |   |       window_api.py
+|   |   |       __init__.py
+|   |   |       
+|   |   +---tools
+|   |   |   \---qs
+|   |   |           quicksearch.py
+|   |   |           
+|   |   \---units
+|   |           conversion_data.py
+|   |           si_prefixes.py
+|   |           
+|   \---utils
+|           app_info.py
+|           debug.py
+|           image_helpers.py
+|           math_helpers.py
+|           num_format.py
+|           session_state.py
+|           settings_store.py
+|           string_format.py
+|           style.py
+|           system_info.py
+|           usage_stats.py
+|           wm_events.py
+|           
++---documents
+|   |   documentation.de.md
+|   |   documentation.md
+|   |   documentation.pt-BR.md
+|   |   install.de.md
+|   |   install.md
+|   |   install.pt-BR.md
+|   |   README.de.md
+|   |   README.pt-BR.md
+|   |   
+|   \---rnotes
+|           alpha-i.md
+|           
++---misc
+|   +---helpers
+|   |   |   convert_db_to_json.py
+|   |   |   create_tool.py
+|   |   |   export_gallery_as_zip.py
+|   |   |   
+|   |   \---templates
+|   |           tool_template.py
+|   |           
+|   \---tests
+|           test_speed_calc.py
+|           
++---storage
+|   +---favourites
+|   |       .keep
+|   |       
+|   +---formulas
+|   |       .keep
+|   |       
+|   +---images
+|   |       .keep
+|   |       
+|   +---logs
+|   |       .keep
+|   |       logs.json
+|   |       
+|   \---results
+|           .keep
+|           
++---tools
+|   +---biology
+|   |       dna_translation.py
+|   |       gc_content_tool.py
+|   |       reverse_complement.py
+|   |       transcription_tool.py
+|   |       
+|   +---chemistry
+|   |       element_viewer.py
+|   |       isotopic_notation.py
+|   |       mol_weight_calc.py
+|   |       reaction_balancer.py
+|   |       
+|   +---electricity
+|   |       electric_field.py
+|   |       ohms_law.py
+|   |       power_calc.py
+|   |       
+|   +---geology
+|   |       mineral_explorer.py
+|   |       plate_velocity.py
+|   |       radioactive_dating.py
+|   |       
+|   +---math
+|   |       quadratic_solver.py
+|   |       triangle_solver.py
+|   |       vector_calculator.py
+|   |       
+|   +---mechanics
+|   |       force_calculator.py
+|   |       kinetic_energy.py
+|   |       projectile_motion.py
+|   |       speed_calculator.py
+|   |       terminal_velocity.py
+|   |       
+|   +---misc
+|   |       settings.py
+|   |       
+|   \---panel_tools
+|       |   calc_service.py
+|       |   decimal_time_converter.py
+|       |   log.py
+|       |   notation_converter.py
+|       |   quantity_checker.py
+|       |   quicksearch.py
+|       |   region_switcher.py
+|       |   scientific_constants_lookup.py
+|       |   session_info.py
+|       |   settings.py
+|       |   simple_calc.py
+|       |   si_prefix_combiner_splitter.py
+|       |   unit_converter.py
+|       |   welcome.py
+|       |   
+|       \---wm
+|               window_manager.py
+|               
+\---UI
+    |   main_window.py
+    |   ui_config.py
+    |   
+    +---assets
+    |       pin.png
+    |       pin_empty.png
+    |       
+    +---common
+    |       layout_helpers.py
+    |       titled_card.py
+    |       var_chip.py
+    |       
+    +---integrated_panels
+    |       calculator_panel.py
+    |       category_sidebar.py
+    |       dec_time_conv_panel.py
+    |       dim_eq_checker_panel.py
+    |       dnd_placeholder_panel.py
+    |       log_panel.py
+    |       notation_converter_panel.py
+    |       quantity_checker_panel.py
+    |       quicksearch_overlay.py
+    |       region_switcher_panel.py
+    |       sci_cons_lookup_panel.py
+    |       session_info_panel.py
+    |       settings_panel.py
+    |       sig_fig_panel.py
+    |       simple_tools_panel.py
+    |       si_prefix_combiner_splitter_panel.py
+    |       unit_converter_panel.py
+    |       welcome_panel.py
+    |       window_manager_panel.py
+    |       
+    +---tools
+    |   \---qs
+    |           quicksearch_ui.py
+    |           
+    \---windows
+            tool_window.py
+            

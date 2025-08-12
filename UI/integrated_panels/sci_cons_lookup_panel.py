@@ -1,11 +1,10 @@
 from PyQt6.QtWidgets import QWidget, QVBoxLayout, QFormLayout, QLabel, QComboBox, QLineEdit, QSizePolicy
 from PyQt6.QtCore import Qt
-from core.data.databases.constants_data import constants_data
+from tools.panel_tools import scientific_constants_lookup as scl
 
 class ScientificConstantsLookupWidget(QWidget):
     def __init__(self):
         super().__init__()
-
         self.setSizePolicy(QSizePolicy.Policy.Fixed, QSizePolicy.Policy.Fixed)
         self.setFixedSize(360, 200)
 
@@ -18,7 +17,7 @@ class ScientificConstantsLookupWidget(QWidget):
         form.setVerticalSpacing(2)
 
         self.category = QComboBox()
-        self.category.addItems(list(constants_data.keys()))
+        self.category.addItems(scl.list_categories())
 
         self.constant = QComboBox()
         self._refill_constants(self.category.currentText())
@@ -35,12 +34,11 @@ class ScientificConstantsLookupWidget(QWidget):
         self.desc.setWordWrap(True)
         self.desc.setAlignment(Qt.AlignmentFlag.AlignLeft | Qt.AlignmentFlag.AlignTop)
 
-        # Labels with explicit alignment
-        form.addRow(self._aligned_label("Category"), self.category)
-        form.addRow(self._aligned_label("Constant"), self.constant)
-        form.addRow(self._aligned_label("Value"), self.value)
-        form.addRow(self._aligned_label("Unit"), self.unit)
-        form.addRow(self._aligned_label("About"), self.desc)
+        form.addRow(self._lbl("Category"), self.category)
+        form.addRow(self._lbl("Constant"), self.constant)
+        form.addRow(self._lbl("Value"), self.value)
+        form.addRow(self._lbl("Unit"), self.unit)
+        form.addRow(self._lbl("About"), self.desc)
 
         root.addLayout(form)
 
@@ -49,35 +47,37 @@ class ScientificConstantsLookupWidget(QWidget):
 
         self._on_constant_changed(self.constant.currentText())
 
-    def _aligned_label(self, text):
-        lbl = QLabel(text)
-        lbl.setAlignment(Qt.AlignmentFlag.AlignRight | Qt.AlignmentFlag.AlignVCenter)
-        return lbl
+    def _lbl(self, text):
+        l = QLabel(text)
+        l.setAlignment(Qt.AlignmentFlag.AlignRight | Qt.AlignmentFlag.AlignVCenter)
+        return l
 
     def _refill_constants(self, cat: str):
+        names = [r["name"] for r in scl.list_constants(cat)]
         self.constant.blockSignals(True)
         self.constant.clear()
-        self.constant.addItems(list(constants_data.get(cat, {}).keys()))
+        self.constant.addItems(names)
         self.constant.blockSignals(False)
 
     def _on_category_changed(self, cat: str):
         self._refill_constants(cat)
         self._on_constant_changed(self.constant.currentText())
 
+    def _fmt_val(self, v):
+        try:
+            return f"{float(v):.12g}"
+        except Exception:
+            return str(v)
+
     def _on_constant_changed(self, name: str):
         cat = self.category.currentText()
-        d = constants_data.get(cat, {}).get(name, None)
-        if not d:
+        rec = scl.get(cat, name)
+        if not rec:
             self.value.clear()
             self.unit.clear()
             self.desc.clear()
             return
-        val = d.get("value", "")
-        try:
-            sval = f"{float(val):.12g}"
-        except Exception:
-            sval = str(val)
-        self.value.setText(sval)
-        self.unit.setText(d.get("unit", ""))
-        exact = "Yes" if d.get("exact", False) else "No"
-        self.desc.setText(f"{d.get('description','')} — Exact: {exact}")
+        self.value.setText(self._fmt_val(rec["value"]))
+        self.unit.setText(rec.get("unit") or "")
+        exact = "Yes" if rec.get("exact") else "No"
+        self.desc.setText(f"{rec.get('description') or ''} — Exact: {exact}")

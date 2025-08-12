@@ -1,0 +1,142 @@
+[
+  {
+    "id": "length",
+    "names": {"en": "Length"},
+    "unit_name": "metre",
+    "unit_symbol": "m",
+    "regions": {"EU": {"Q": "l"}, "UK/US": {"Q": "l"}, "BR": {"Q": "l"}}
+  },
+  {
+    "id": "mass",
+    "names": {"en": "Mass"},
+    "unit_name": "kilogram",
+    "unit_symbol": "kg",
+    "regions": {"EU": {"Q": "m"}, "UK/US": {"Q": "m"}, "BR": {"Q": "m"}}
+  },
+  {
+    "id": "time",
+    "names": {"en": "Time"},
+    "unit_name": "second",
+    "unit_symbol": "s",
+    "regions": {"EU": {"Q": "t"}, "UK/US": {"Q": "t"}, "BR": {"Q": "t"}}
+  },
+  {
+    "id": "electric_current",
+    "names": {"en": "Electric current"},
+    "unit_name": "ampere",
+    "unit_symbol": "A",
+    "regions": {"EU": {"Q": "I"}, "UK/US": {"Q": "I"}, "BR": {"Q": "I"}}
+  },
+  {
+    "id": "thermodynamic_temperature",
+    "names": {"en": "Thermodynamic temperature"},
+    "unit_name": "kelvin",
+    "unit_symbol": "K",
+    "regions": {"EU": {"Q": "T"}, "UK/US": {"Q": "T"}, "BR": {"Q": "T"}}
+  },
+  {
+    "id": "amount_of_substance",
+    "names": {"en": "Amount of substance"},
+    "unit_name": "mole",
+    "unit_symbol": "mol",
+    "regions": {"EU": {"Q": "n"}, "UK/US": {"Q": "n"}, "BR": {"Q": "n"}}
+  },
+  {
+    "id": "luminous_intensity",
+    "names": {"en": "Luminous intensity"},
+    "unit_name": "candela",
+    "unit_symbol": "cd",
+    "regions": {"EU": {"Q": "I_v"}, "UK/US": {"Q": "I_v"}, "BR": {"Q": "I_v"}}
+  },
+  {
+    "id": "electric_potential_difference",
+    "names": {"en": "Electric potential difference"},
+    "unit_name": "volt",
+    "unit_symbol": "V",
+    "regions": {"EU": {"Q": "U"}, "UK/US": {"Q": "V"}, "BR": {"Q": "v"}}
+  },
+  {
+    "id": "electric_charge",
+    "names": {"en": "Electric charge"},
+    "unit_name": "coulomb",
+    "unit_symbol": "C",
+    "regions": {"EU": {"Q": "Q"}, "UK/US": {"Q": "Q"}, "BR": {"Q": "Q"}}
+  },
+  {
+    "id": "magnetic_flux_density",
+    "names": {"en": "Magnetic flux density"},
+    "unit_name": "tesla",
+    "unit_symbol": "T",
+    "regions": {"EU": {"Q": "B"}, "UK/US": {"Q": "B"}, "BR": {"Q": "B"}}
+  },
+  {
+    "id": "magnetic_field_strength",
+    "names": {"en": "Magnetic field strength"},
+    "unit_name": "ampere per metre",
+    "unit_symbol": "A/m",
+    "regions": {"EU": {"Q": "H"}, "UK/US": {"Q": "H"}, "BR": {"Q": "H"}}
+  },
+  {
+    "id": "resistance",
+    "names": {"en": "Electrical resistance"},
+    "unit_name": "ohm",
+    "unit_symbol": "Ω",
+    "regions": {"EU": {"Q": "R"}, "UK/US": {"Q": "R"}, "BR": {"Q": "R"}}
+  },
+  {
+    "id": "capacitance",
+    "names": {"en": "Capacitance"},
+    "unit_name": "farad",
+    "unit_symbol": "F",
+    "regions": {"EU": {"Q": "C"}, "UK/US": {"Q": "C"}, "BR": {"Q": "C"}}
+  },
+  {
+    "id": "inductance",
+    "names": {"en": "Inductance"},
+    "unit_name": "henry",
+    "unit_symbol": "H",
+    "regions": {"EU": {"Q": "L"}, "UK/US": {"Q": "L"}, "BR": {"Q": "L"}}
+  },
+  {
+    "id": "power",
+    "names": {"en": "Power"},
+    "unit_name": "watt",
+    "unit_symbol": "W",
+    "regions": {"EU": {"Q": "P"}, "UK/US": {"Q": "P"}, "BR": {"Q": "P"}}
+  },
+  {
+    "id": "energy",
+    "names": {"en": "Energy"},
+    "unit_name": "joule",
+    "unit_symbol": "J",
+    "regions": {"EU": {"Q": "E"}, "UK/US": {"Q": "E"}, "BR": {"Q": "E"}}
+  },
+  {
+    "id": "work",
+    "names": {"en": "Work"},
+    "unit_name": "joule",
+    "unit_symbol": "J",
+    "regions": {"EU": {"Q": "W"}, "UK/US": {"Q": "W"}, "BR": {"Q": "W"}}
+  },
+  {
+    "id": "force",
+    "names": {"en": "Force"},
+    "unit_name": "newton",
+    "unit_symbol": "N",
+    "regions": {"EU": {"Q": "F"}, "UK/US": {"Q": "F"}, "BR": {"Q": "F"}}
+  },
+  {
+    "id": "pressure",
+    "names": {"en": "Pressure"},
+    "unit_name": "pascal",
+    "unit_symbol": "Pa",
+    "regions": {"EU": {"Q": "p"}, "UK/US": {"Q": "p"}, "BR": {"Q": "p"}}
+  },
+  {
+    "id": "frequency",
+    "names": {"en": "Frequency"},
+    "unit_name": "hertz",
+    "unit_symbol": "Hz",
+    "regions": {"EU": {"Q": "f"}, "UK/US": {"Q": "f"}, "BR": {"Q": "f"}}
+  }
+]
