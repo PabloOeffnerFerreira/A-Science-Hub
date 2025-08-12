@@ -1,5 +1,8 @@
 from PyQt6.QtWidgets import QApplication
 import sys
+from core.utils.session_state import initialize_session
+
+initialize_session()
 
 # Import the main window
 from UI.main_window import MainWindow

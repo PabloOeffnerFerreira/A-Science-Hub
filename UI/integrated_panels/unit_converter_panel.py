@@ -21,7 +21,7 @@ class UnitConverterWidget(QWidget):
         super().__init__()
 
         self.setSizePolicy(QSizePolicy.Policy.Fixed, QSizePolicy.Policy.Fixed)
-        self.setFixedSize(360, 220)
+        self.setFixedSize(360, 120)
 
         self.converter = UnitConverter()
         self._categories = getattr(conversion_data, "conversion_data", {})
