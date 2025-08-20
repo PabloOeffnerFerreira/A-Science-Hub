@@ -1,12 +1,16 @@
 from PyQt6.QtWidgets import QWidget, QVBoxLayout, QPushButton, QScrollArea, QFrame, QComboBox
-from PyQt6.QtCore import Qt
-from core.data.info import CATEGORIES, CATEGORY_TOOLS
+from PyQt6.QtCore import Qt, pyqtSignal
+from core.data.functions.tool_registry import discover_categories_and_tools
 
 class CategorySidebar(QFrame):
+    openTool = pyqtSignal(str, str)
+
     def __init__(self):
         super().__init__()
         self.setObjectName("CategorySidebar")
         self.setFixedWidth(240)
+
+        self.categories, self.category_tools = discover_categories_and_tools()
 
         outer = QVBoxLayout(self)
         outer.setContentsMargins(0, 0, 0, 0)
@@ -21,7 +25,8 @@ class CategorySidebar(QFrame):
         self.cat_layout.setSpacing(6)
 
         self.category_buttons = []
-        for cat in CATEGORIES:
+        self._current_category = None
+        for cat in self.categories:
             b = QPushButton(cat)
             b.setObjectName("CategoryButton")
             b.setCursor(Qt.CursorShape.PointingHandCursor)
@@ -36,6 +41,7 @@ class CategorySidebar(QFrame):
 
         self.tool_dropdown = QComboBox()
         self.tool_dropdown.setObjectName("ToolDropdown")
+        self.tool_dropdown.activated.connect(self._on_tool_selected)
         outer.addWidget(self.tool_dropdown)
 
         self.setStyleSheet("""
@@ -99,7 +105,14 @@ QComboBox QAbstractItemView {
 """)
 
     def _on_category_clicked(self, category):
+        self._current_category = category
         for btn in self.category_buttons:
             btn.setChecked(btn.text() == category)
         self.tool_dropdown.clear()
-        self.tool_dropdown.addItems(CATEGORY_TOOLS.get(category, []))
+        for item in self.category_tools.get(category, []):
+            self.tool_dropdown.addItem(item["label"], item["key"])
+
+    def _on_tool_selected(self, index):
+        key = self.tool_dropdown.itemData(index)
+        if self._current_category and key:
+            self.openTool.emit(self._current_category, key)

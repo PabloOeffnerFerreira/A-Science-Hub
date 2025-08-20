@@ -1,6 +1,7 @@
 {
+  "region": "UK",
+  "quantity_mode": "u_symbol",
   "language": "en",
-  "region": "EU",
   "theme": "dark",
   "panels": {},
   "session_start": "2025-08-12T09:45:41.328878+00:00"
