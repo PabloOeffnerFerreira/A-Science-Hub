@@ -110,20 +110,26 @@ class Tool(QDialog):
         self.canvas.draw_idle()
 
     def _refresh_scatter(self):
-        # Render magnet markers
         if self._scatter is not None:
-            self._scatter.remove()
+            try:
+                self._scatter.remove()
+            except NotImplementedError:
+                if self._scatter in self.ax.collections:
+                    self.ax.collections.remove(self._scatter)
             self._scatter = None
+
         if not self.magnets:
             self.canvas.draw_idle()
             return
+
         xs = [m["x"] for m in self.magnets]
         ys = [m["y"] for m in self.magnets]
         colours = ["red" if m["strength"] > 0 else "blue" for m in self.magnets]
+
         self._scatter = self.ax.scatter(xs, ys, s=60, marker="o", edgecolors="k", zorder=3)
-        # Colour set on face after creation to keep pick math precise
         self._scatter.set_facecolors(colours)
         self.canvas.draw_idle()
+
 
     def _on_motion(self, event):
         if self._scatter is None or event.inaxes != self.ax:
