@@ -1,14 +1,3 @@
-C:.
-|   .gitignore
-|   LICENSE
-|   main.py
-|   README.md
-|   requirements.txt
-|   structure.txt
-|   
-+---.vscode
-|       launch.json
-|       
 +---core
 |   +---ai
 |   |   |   ai_manager.py
@@ -27,8 +16,10 @@ C:.
 |   |   +---databases
 |   |   |   |   codon_table.json
 |   |   |   |   constants_data.py
+|   |   |   |   minerals.csv
 |   |   |   |   minerals.json
-|   |   |   |   periodic_table.json
+|   |   |   |   o_states.json
+|   |   |   |   ptable.json
 |   |   |   |   quantities.json
 |   |   |   |   reactions.db
 |   |   |   |   
@@ -38,19 +29,28 @@ C:.
 |   |   |           settings.json
 |   |   |           tags.json
 |   |   |           tool_usage_log.sql
+|   |   |           wm.json
 |   |   |           
 |   |   +---functions
+|   |   |       biology_utils.py
+|   |   |       bio_utils.py
 |   |   |       chemistry.py
+|   |   |       chemistry_utils.py
 |   |   |       constants_tools.py
+|   |   |       geo_utils.py
 |   |   |       image_export.py
 |   |   |       log.py
 |   |   |       log_signals.py
 |   |   |       log_writer.py
 |   |   |       physics.py
+|   |   |       ptable_utils.py
 |   |   |       quantities.py
+|   |   |       settings_io.py
 |   |   |       sigfigs.py
 |   |   |       si_prefix_tools.py
 |   |   |       time_tools.py
+|   |   |       tool_loader.py
+|   |   |       tool_registry.py
 |   |   |       units.py
 |   |   |       window_api.py
 |   |   |       __init__.py
@@ -89,6 +89,7 @@ C:.
 |   |   
 |   \---rnotes
 |           alpha-i.md
+|           alpha-ii.md
 |           
 +---misc
 |   +---helpers
@@ -105,6 +106,7 @@ C:.
 +---storage
 |   +---favourites
 |   |       .keep
+|   |       geo_favs.json
 |   |       
 |   +---formulas
 |   |       .keep
@@ -121,35 +123,59 @@ C:.
 |           
 +---tools
 |   +---biology
-|   |       dna_translation.py
-|   |       gc_content_tool.py
+|   |       codon_lookup.py
+|   |       frame_translation.py
+|   |       gc_content.py
+|   |       molecular_weight_calculator.py
+|   |       osmosis_tonicity.py
+|   |       pairwise_align.py
+|   |       ph_calculator.py
+|   |       population_growth_calculator.py
 |   |       reverse_complement.py
-|   |       transcription_tool.py
+|   |       seq_parser.py
+|   |       transcription_translation.py
 |   |       
 |   +---chemistry
+|   |       element_comparator.py
+|   |       element_property_grapher.py
 |   |       element_viewer.py
-|   |       isotopic_notation.py
-|   |       mol_weight_calc.py
+|   |       isotope_notation.py
+|   |       molar_mass.py
+|   |       molecule_library.py
+|   |       phase_predictor.py
 |   |       reaction_balancer.py
+|   |       shell_visualiser.py
 |   |       
 |   +---electricity
-|   |       electric_field.py
+|   |       coulomb_force_calculator.py
+|   |       electric_field_visualiser.py
+|   |       ferromagnetism_helper.py
+|   |       magnetic_field_calculator.py
+|   |       magnetic_flux_induction.py
+|   |       magnoline_tool.py
 |   |       ohms_law.py
-|   |       power_calc.py
+|   |       rc_circuit_helper.py
 |   |       
 |   +---geology
+|   |       half_life_calculator.py
 |   |       mineral_explorer.py
+|   |       mineral_identifier.py
+|   |       plate_boundary_designer.py
 |   |       plate_velocity.py
 |   |       radioactive_dating.py
 |   |       
 |   +---math
+|   |       algebraic_calculator.py
+|   |       function_plotter.py
 |   |       quadratic_solver.py
 |   |       triangle_solver.py
 |   |       vector_calculator.py
 |   |       
 |   +---mechanics
-|   |       force_calculator.py
-|   |       kinetic_energy.py
+|   |       acceleration_calculator.py
+|   |       drag_force_calculator.py
+|   |       kinetic_energy_calculator.py
+|   |       lens_mirror_equation.py
 |   |       projectile_motion.py
 |   |       speed_calculator.py
 |   |       terminal_velocity.py
@@ -211,9 +237,9 @@ C:.
     |       window_manager_panel.py
     |       
     +---tools
-    |   \---qs
-    |           quicksearch_ui.py
+    |   +---biology
+    |   \---misc
+    |           settings.py
     |           
     \---windows
             tool_window.py
-            

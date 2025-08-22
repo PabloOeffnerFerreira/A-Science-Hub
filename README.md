@@ -1,77 +1,38 @@
 # A Science Hub (ASH)
 
-A modular offline-first science application for exploration, computation, and visualization.
+## Overview
+
+A Science Hub is a desktop application that provides tools for physics, chemistry, biology, geology, and mathematics. It includes calculators, converters, simulators, and reference utilities. The interface is built with PyQt6.
 
 ## Features
 
-- **Main Window**
-  - Integrated panels for quick tools and information
-  - Simple Tools Panel with mini utilities
-  - Welcome Panel with live system and application statistics
-  - Session Info Panel with action count and last tool used
-  - Window Manager for opening, closing, and managing tool windows
-  - Category Sidebar for browsing tools by discipline
-
-- **Tool Categories**
-  - Mechanics
-  - Electricity
-  - Chemistry
-  - Biology
-  - Geology
-  - Math
-
-- **Mini Tools**
-  - Unit Converter
-  - Notation Converter
-  - Decimal Time Converter
-  - SI Prefix Combiner/Splitter
-  - Significant Figures Tool
-  - Scientific Constants Lookup
-  - Dimensional Equation Checker
-  - Simple Calculator
-  - Scientific Quantity Checker
-
-- **System**
-  - Offline-first operation
-  - Persistent settings and layout storage
-  - Live CPU load, RAM, disk usage, uptime, and process memory stats
-  - Automatic session start tracking
-  - Path management through centralized `paths.py`
+* **Biology**: codon lookup, GC content, frame translation, transcription/translation, sequence tools, population growth, pH calculator, osmosis tonicity
+* **Chemistry**: element explorer, property grapher, isotope notation, molar mass, molecule library with 3D viewer, phase predictor, reaction balancer, shell visualiser
+* **Electricity**: Coulomb force, electric and magnetic field calculators/visualisers, RC circuit helper, Ohm’s law, induction tools
+* **Mechanics**: speed, acceleration, kinetic energy, drag force, projectile motion, terminal velocity, lens/mirror equation
+* **Geology**: mineral explorer, mineral identifier, radioactive dating, half-life calculator, plate boundary designer, plate velocity
+* **Math**: algebraic calculator, function plotter, quadratic solver, triangle solver, vector calculator
+* **Panel Tools**: unit converter, SI prefix combiner/splitter, sig figs, notation converter, constants lookup, quantity checker, scientific calculator, log viewer, quick search, window manager
 
 ## Structure
 
-- `core/` — Core logic, utilities, and data handling
-- `UI/` — User interface panels, windows, and styles
-- `tools/` — Tool logic, grouped by scientific category
-- `storage/` — Logs, images, results, formulas, and favourites
-- `documents/` — Documentation and release notes
-- `misc/` — Tests and helper scripts
+```
+core/        # Core logic, data, databases, functions
+UI/          # Panels, windows, assets
+tools/       # Scientific tools by category
+storage/     # User data: logs, results, images, formulas, favourites
+documents/   # Documentation and release notes
+misc/        # Tests, helpers, templates
+```
 
-## Requirements
+## Installation
 
-- Python 3.11+
-- PyQt6
-- psutil
-
-
-Install dependencies:
 ```bash
 pip install -r requirements.txt
-Running
-bash
-Copy
-Edit
+```
+
+## Running
+
+```bash
 python main.py
 ```
-Current Status
-Stage: Alpha I
-
-Version: Pre-release
-
-Build: dev
-
-Tools functional with visual integration
-
-Window Manager fully operational
-
-Sidebar functional visually, tool launching integration planned
