@@ -114,4 +114,6 @@ Full documentation is available in the `documents/` directory:
 
 ## Screenshots
 
-(Insert images here to illustrate features and interface)
+#### Main Window
+<img width="1920" height="1080" alt="image" src="https://github.com/user-attachments/assets/5d3b6e45-3164-4e8a-ae39-5598ef29c41d" />
+
