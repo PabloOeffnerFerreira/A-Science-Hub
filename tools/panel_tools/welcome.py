@@ -35,8 +35,8 @@ def get_welcome_stats():
             "CPU count": sysinfo["cpu_count"],
             "CPU load %": f'{sysinfo["cpu_load_percent"]:.1f}%' if sysinfo["cpu_load_percent"] is not None else "N/A",
             "RAM total": human_bytes(sysinfo["ram_total_bytes"]),
-            "Disk total": human_bytes(sysinfo["disk_total_bytes"]),
-            "Disk free": human_bytes(sysinfo["disk_free_bytes"]),
+            "Disk total (C:)": human_bytes(sysinfo["disk_total_bytes"]),
+            "Disk free (C:)": human_bytes(sysinfo["disk_free_bytes"]),
             "Uptime": sysinfo["uptime_human"],
             "Process memory": human_bytes(sysinfo["process_mem_bytes"])
         }

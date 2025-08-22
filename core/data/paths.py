@@ -22,4 +22,13 @@ INTDATABASES_DIR = DATABASES_DIR / "intdatabases"
 TOOLS_DIR = BASE_DIR / "tools"
 
 SETTINGS_PATH = INTDATABASES_DIR / "settings.json"
+SETTINGS_DIR = SETTINGS_PATH.parent
+
+WM_FILE = SETTINGS_DIR / "wm.json"
+
 QUANTITIES_JSON_PATH = DATABASES_DIR / "quantities.json"
+LOG_FILE = LOGS_DIR / "logs.json"
+PTABLE_JSON_PATH = DATABASES_DIR / "ptable.json"
+
+MINERALS_CSV = DATABASES_DIR / "minerals.csv"
+GEO_FAVS_PATH = FAVOURITES_DIR / "geo_favs.json"

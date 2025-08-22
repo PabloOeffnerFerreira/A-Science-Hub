@@ -1,5 +1,6 @@
 import importlib
 from core.data.functions.tool_registry import humanize_tool_key
+import PyQt6.QtWebEngineWidgets
 
 def create_tool_factory(category: str, key: str):
     modname = f"tools.{category}.{key}"

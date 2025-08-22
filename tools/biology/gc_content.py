@@ -1,10 +1,10 @@
 
 from PyQt6.QtWidgets import QDialog, QVBoxLayout, QLabel, QLineEdit, QPushButton
-from Bio.Seq import Seq
+from Bio.SeqUtils import gc_fraction
 from core.data.functions.log import add_log_entry
 
 class Tool(QDialog):
-    TITLE = "Reverse Complement"
+    TITLE = "GC Content Calculator"
 
     def __init__(self):
         super().__init__()
@@ -22,12 +22,13 @@ class Tool(QDialog):
     def compute(self):
         seq = self.seq_entry.text().strip().upper()
         try:
-            rc = str(Seq(seq).reverse_complement())
-            self.result.setText(f"Reverse Complement: {rc}")
-            add_log_entry("Reverse Complement", action="Compute",
-                          data={"input": seq, "result": rc},
+            gc = gc_fraction(seq) * 100
+            msg = f"GC Content: {gc:.2f}%"
+            self.result.setText(msg)
+            add_log_entry("GC Content", action="Compute",
+                          data={"input": seq, "gc_percent": gc},
                           tags=["bio", "dna"])
         except Exception as e:
             self.result.setText(f"Error: {e}")
-            add_log_entry("Reverse Complement", action="Error",
+            add_log_entry("GC Content", action="Error",
                           data={"input": seq, "error": str(e)})

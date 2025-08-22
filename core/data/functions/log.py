@@ -1,11 +1,8 @@
 import os
 import json
 import time
-from core.data.paths import LOGS_DIR
 from core.data.functions.log_signals import log_bus
-
-LOG_FILE = os.path.join(LOGS_DIR, "logs.json")
-
+from core.data.paths import LOGS_DIR, LOG_FILE
 def _load_logs():
     try:
         with open(LOG_FILE, "r", encoding="utf-8") as f:

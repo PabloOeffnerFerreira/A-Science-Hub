@@ -4,7 +4,8 @@ from UI.integrated_panels.category_sidebar import CategorySidebar
 from UI.integrated_panels.log_panel import LogPanel
 from UI.integrated_panels.simple_tools_panel import SimpleToolsPanel
 from UI.integrated_panels.window_manager_panel import WindowManagerPanel
-from tools.panel_tools.wm.window_manager import WM
+from tools.panel_tools.wm.window_manager import wm
+
 
 class MainWindow(QMainWindow):
     def __init__(self):
@@ -20,7 +21,7 @@ class MainWindow(QMainWindow):
         self.layout.setContentsMargins(8, 8, 8, 8)
         self.layout.setSpacing(8)
         self._floating_windows = []
-        
+
     def _build_dashboard(self):
         self.sidebar = CategorySidebar()
         self.layout.addWidget(self.sidebar, 0, 0, 2, 1)
@@ -54,42 +55,12 @@ class MainWindow(QMainWindow):
         factory, title = create_tool_factory(category, key)
 
         try:
-            from tools.panel_tools.wm.window_manager import WM
+            # Always go through WM so the panel gets updates
+            wm.open(title=title, widget_factory=factory)
         except Exception:
+            # Fallback: open directly if WM fails
             w = factory()
             w.setWindowTitle(title)
             w.show()
             self._floating_windows.append(w)
             w.destroyed.connect(lambda *_, win=w: self._floating_windows.remove(win))
-            return
-
-        try:
-            WM.open(widget_factory=factory, title=title)
-            return
-        except Exception:
-            pass
-        try:
-            WM.open(factory, title)
-            return
-        except Exception:
-            pass
-
-        if hasattr(WM, "open_window"):
-            w = factory()
-            WM.open_window(w, title)
-            self._floating_windows.append(w)
-            w.destroyed.connect(lambda *_, win=w: self._floating_windows.remove(win))
-            return
-
-        if hasattr(WM, "register_window"):
-            w = factory()
-            WM.register_window(w, title)
-            self._floating_windows.append(w)
-            w.destroyed.connect(lambda *_, win=w: self._floating_windows.remove(win))
-            return
-
-        w = factory()
-        w.setWindowTitle(title)
-        w.show()
-        self._floating_windows.append(w)
-        w.destroyed.connect(lambda *_, win=w: self._floating_windows.remove(win))

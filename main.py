@@ -1,6 +1,7 @@
 from PyQt6.QtWidgets import QApplication
 import sys
 from core.utils.session_state import initialize_session
+import PyQt6.QtWebEngineWidgets
 
 initialize_session()
 
