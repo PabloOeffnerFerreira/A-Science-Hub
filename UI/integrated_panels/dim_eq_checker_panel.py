@@ -131,9 +131,12 @@ class DimensionalEquationChecker(QWidget):
             j=i
             while j<len(s) and (s[j].isalnum() or s[j] in ["μ","Ω","_"]):
                 j+=1
-            out.append(("SYM", s[i:j]))
-            i=j
+            if j>i:
+                out.append(("SYM", s[i:j])); i=j; continue
+            # 🚨 catch-all for bad characters:
+            raise ValueError(f"Invalid character: {s[i]}")
         return out
+
 
     def _parse_expr(self):
         d = self._parse_term()
@@ -179,13 +182,11 @@ class DimensionalEquationChecker(QWidget):
         s = sym
         if s in self._dims:
             return dict(self._dims[s])
-        # strip SI prefix if present
         if len(s) >= 2:
             if s[:2] in {"da"} and s[2:] in self._dims:
                 return dict(self._dims[s[2:]])
             if s[0] in self._prefixes and s[1:] in self._dims:
                 return dict(self._dims[s[1:]])
-        # special: grams map to mass
         if s.endswith("g") and s != "kg":
             return dict(self._dims.get("g", {}))
         raise ValueError(f"Unknown unit: {sym}")
