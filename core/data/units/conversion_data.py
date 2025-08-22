@@ -44,9 +44,9 @@ conversion_data = {
     "Temperature": {
         "SI": [],
         "units": {
-            "C": None,
-            "K": None,
-            "F": None,
+            "C": 1,
+            "K": 1,
+            "F": 1,
         }
     },
     "Area": {
