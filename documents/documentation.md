@@ -1021,70 +1021,95 @@ Search molecules in PubChem by name, CID, SMILES, InChI, or InChIKey. Displays m
 ---
 
 ### Tool: Shell Visualiser
-**Category:** Chemistry  
-**Version:** v1.0 (2025-08-22)
 
-**Purpose**  
-Visualize the electron shell structure of an element. Draws concentric shells with electrons placed evenly around them. Useful for teaching atomic structure or quickly checking shell configurations.
+**Category:** Chemistry
+**Version:** v2.0 (2025-08-22)
 
-**Inputs**  
-- **Element Symbol**: text input (e.g., `H`, `He`, `Fe`)  
+**Purpose**
+Visualize electron shell structures of atoms in both 2D and 3D. Provides an illustrative view of electrons, shells, and nucleus composition. Useful for teaching atomic structure, ion formation, and general chemistry visualization.
 
-**Outputs**  
-- Visual plot of electron shells with electrons marked as dots  
-- Nucleus labeled with element symbol  
-- Status message showing save path of exported image  
+**Inputs**
 
-**UI & Interaction**:contentReference[oaicite:2]{index=2}  
-- Text entry for element symbol  
-- “Draw & Save” button → generates plot and saves image  
-- Canvas area shows the drawn structure  
-- Status label displays saved file path or error message  
+* **Element Symbol**: text input (e.g., `H`, `He`, `Fe`)
+* **Charge**: optional integer (e.g., `+3`, `-2`)
 
-**Algorithm / Implementation**  
-- Uses `load_element_data()` to load periodic table data (with `shells` list for each element):contentReference[oaicite:3]{index=3}  
-- Radii calculation: scaled by `sqrt(n)` to fit higher-Z atoms  
-- Each shell drawn as a circle (`matplotlib.patches.Circle`)  
-- Electrons placed evenly around shell circumference  
-- Nucleus labeled with symbol at center  
-- Figure auto-scaled to fit shells (up to ~8.0 units radius)  
-- Colours assigned per shell (cycled from predefined palette)  
+**Outputs**
 
-**Units & Conversion**  
-- Purely illustrative (not to physical scale)  
+* 2D schematic of electron shells (electrons as dots, shells as circles, nucleus labeled)
+* 3D interactive model with rotating camera, nucleus cluster (protons in red, neutrons in grey), electron rings, and moving electrons
+* Status message confirming rendering or saved export
 
-**Edge Cases & Validation**  
-- Unknown element symbol or no `shells` data → warning popup (“No shell data for element…”)  
-- Large-Z elements auto-scaled to fit figure  
-- Minimum 1 electron drawn even if count = 0 (ensures shell visible)  
+**UI & Interaction**
 
-**Data Sources**  
-- Periodic table JSON via `chemistry_utils.load_element_data()`:contentReference[oaicite:4]{index=4}  
-- Keys: `shells` (list of electron counts per shell)  
+* Text entry for element symbol and charge
+* Buttons:
 
-**Logging & Export**  
-- Image exported as PNG via `export_figure()`  
-- Log entry added:  
-  - Tool = `"Shell Visualiser"`  
-  - Action = `"Draw"`  
-  - Data = `{symbol, shells, image path}`  
+  * **Draw** → render shells in both 2D and 3D
+  * **Export Image** → save snapshot of current tab (2D figure or 3D render)
+  * **Start/Stop Animation** → toggle orbiting electrons and rotating camera
+* Tabs:
 
-**Chaining**  
-- Output image and shell data could be reused by teaching tools or chain mode  
+  * **2D View** (matplotlib with navigation toolbar)
+  * **3D View** (PyQtGraph OpenGL; shown if available)
+* Status label shows rendering info or save path
 
-**Tests**  
-- Example 1: `H` → 1 electron on first shell  
-- Example 2: `He` → 2 electrons on first shell  
-- Example 3: `Ne` → 2 electrons (K shell), 8 electrons (L shell)  
-- Example 4: `Fe` → shells from periodic table JSON (2, 8, 14, 2)  
+**Algorithm / Implementation**
 
-**Known Limitations / TODO**  
-- Requires JSON file with `shells` data present  
-- Strict text match (case-sensitive correction applied with `.capitalize()`)  
-- No 3D orbital visualization (2D shells only)  
-- Could add option to export SVG or higher-resolution images  
+* Loads element data via `load_element_data()`
+* Electron shells adjusted for ionic charge (`adjust_shells_for_charge`)
+* Proton and neutron counts derived from JSON data (`get_protons`, `get_atomic_mass`)
+* **2D rendering**: matplotlib circles for shells and electrons, nucleus labeled
+* **3D rendering**:
+
+  * Protons and neutrons as shaded spheres clustered in nucleus
+  * Shell rings drawn as line plots
+  * Electrons as spheres positioned along rings
+  * Label rendered above nucleus with formatted ion symbol
+  * Optional animation updates electron positions and rotates camera
+
+**Units & Conversion**
+
+* Illustrative only (not to physical scale)
+
+**Edge Cases & Validation**
+
+* Invalid element symbol → warning popup
+* Missing shell data → warning popup
+* Charge adjustment gracefully handles anions/cations
+* If 3D stack unavailable, tool still functions in 2D
+
+**Data Sources**
+
+* Periodic table JSON via `chemistry_utils.load_element_data()`
+* Keys used: `shells`, `atomicNumber`, `atomicMass`
+
+**Logging & Export**
+
+* 2D exports via `export_figure()`
+* 3D exports via OpenGL framebuffer capture + `imageio`
+* Log entries record symbol, charge, shells, and image path
+
+**Chaining**
+
+* Provides shell data and saved images for reuse in teaching tools or chain mode
+
+**Tests**
+
+* `H` → single electron
+* `He` → 2 electrons in first shell
+* `Ne` → 2 + 8 distribution
+* `Fe³⁺` → adjusted electron shells with 3 fewer electrons
+* Large-Z atoms scaled automatically to fit view
+
+**Known Limitations / TODO**
+
+* Depends on external JSON database for element data
+* 3D visualization requires `pyqtgraph.opengl` (falls back to 2D if unavailable)
+* Nucleus distribution randomized (not physically accurate)
+* Future work: export SVG, higher-res 3D, or orbital hybridization models
 
 ---
+
 
 ### Tool: Element Comparator
 **Category:** Chemistry  
@@ -4208,87 +4233,91 @@ Calculate the average speed from a given distance and travel time, with flexible
 
 ---
 
-### Tool: Terminal Velocity
-**Category:** Mechanics  
-**Version:** v1.0 (2025-08-22)
+### Tool: Terminal Velocity Calculator
 
-**Purpose**  
-Calculate the terminal velocity of a falling object with drag, simulate descent via Euler integration, and compare fall time with and without drag:contentReference[oaicite:0]{index=0}.
+**Category:** Mechanics
+**Version:** v2.0 (2025-08-23)
 
-**Inputs**  
-- **Mass (m)**: numeric value:contentReference[oaicite:1]{index=1}  
-  - Units: kg, lb  
-- **Cross-sectional area (A)**: numeric value:contentReference[oaicite:2]{index=2}  
-  - Units: m², cm², in²  
-- **Height (h₀)**: numeric value:contentReference[oaicite:3]{index=3}  
-  - Units: m, ft  
-- **Air density / altitude**: selectable mode:contentReference[oaicite:4]{index=4}  
-  - *Air Density*: uses ρ=1.225 kg/m³  
-  - *Altitude*: converts altitude (m) into density using ISA model (valid <11 km)  
-  - *Custom*: user enters ρ directly  
-- **Drag coefficient (Cd)**: selectable preset or custom:contentReference[oaicite:5]{index=5}  
-  - Presets: Sphere (0.47), Flat Plate (1.28), Cylinder (1.2), Streamlined Body (0.04)  
+**Purpose**
+Simulate the motion of a falling object under gravity and air resistance. The tool provides both 2D plots and interactive 3D visualizations of free fall until terminal velocity is reached. It is designed for teaching mechanics concepts such as drag force, acceleration, and velocity-time relationships.
 
-**Outputs**  
-- Terminal velocity in m/s  
-- Fall time with drag (s)  
-- Fall time without drag (s):contentReference[oaicite:6]{index=6}  
-- Velocity vs. time plot (saved to central `images/` directory)  
+**Inputs**
 
-**UI & Interaction**  
-- Input rows for mass, area, height, air mode, Cd  
-- **Calculate** button → runs simulation:contentReference[oaicite:7]{index=7}  
-- Result displayed in label  
-- Embedded plot panel showing velocity vs. time curve  
+* **Mass (kg)**: numeric input
+* **Cross-sectional Area (m²)**: numeric input
+* **Drag Coefficient (dimensionless)**: numeric input
+* **Air Density (kg/m³)**: numeric input (default ≈ 1.225)
+* **Initial Height (m)**: numeric input
 
-**Algorithm / Implementation**  
-- Converts inputs to SI (kg, m², m)  
-- Density:  
-  - ISA model below 11 km:  
-    \[
-    \rho = \frac{pM}{RT}, \quad p=p₀\left(\tfrac{T}{T₀}\right)^{gM/(RL)}
-    \]  
-  - Else: fixed ρ=0.364 kg/m³  
-- Terminal velocity formula:  
-  \[
-  v_t = \sqrt{\frac{2mg}{\rho A C_d}}
-  \]  
-- Numerical descent: Euler integration with dt=0.01 s until y=0:contentReference[oaicite:8]{index=8}  
+**Outputs**
 
-**Units & Conversion**  
-- Mass: lb ×0.45359237  
-- Area: cm² ×1e-4, in² ×0.00064516  
-- Height: ft ×0.3048  
-- Density via ISA or manual  
+* **2D Mode**: velocity vs time, displacement vs time plots
+* **3D Mode**: interactive simulation of the falling body
+* **HUD Overlay**: live display of time, velocity, and position in corner of simulation view
+* **Terminal Velocity Value**: displayed numerically
 
-**Edge Cases & Validation**  
-- Invalid input → `"Please enter valid numbers."`  
-- Negative altitude set to 0  
-- Simulation capped at 10 hours to prevent infinite loop:contentReference[oaicite:9]{index=9}  
+**UI & Interaction**
 
-**Data Sources**  
-- Classical drag equation and ISA atmosphere model  
-- Logging via `core.data.functions.log.add_log_entry`:contentReference[oaicite:10]{index=10}
+* Input fields for parameters (mass, area, Cd, density, height)
+* Mode toggle: **2D plots / 3D simulation**
+* **Run Simulation** button → starts/resets simulation
+* **Export Data**: option to save simulation results (CSV, PNG of plots)
+* **HUD** in 3D view shows:
 
-**Logging & Export**  
-- Logs under tool = `"Terminal Velocity"`:  
-  - Action = `"Compute"` with `{mass, area, height, Cd, rho, v_terminal, fall_time}`  
-  - Saves plot path in log:contentReference[oaicite:11]{index=11}  
-- Export of velocity vs time plot via `export_figure`  
+  * Time elapsed (s)
+  * Velocity (m/s)
+  * Height (m)
 
-**Chaining**  
-- Output can feed into impact force or energy tools  
+**Algorithm / Implementation**
 
-**Tests**  
-- Example 1: m=80 kg, A=0.7 m², Cd=1.0, ρ=1.225 → v_t≈42.7 m/s  
-- Example 2: altitude=5000 m, same body → lower density, v_t≈60 m/s  
-- Example 3: h₀=100 m vs h₀=1000 m → same v_t, different fall times  
-- Example 4: invalid Cd input (“abc”) → error  
+* Governing equation:
 
-**Known Limitations / TODO**  
-- Euler integration only; no adaptive step  
-- ISA density model simplified (break at 11 km)  
-- Flat ground assumption (no terrain)  
+  $$
+  m \frac{dv}{dt} = mg - \frac{1}{2}\rho C_d A v^2
+  $$
+* Numerical integration (Euler/Runge-Kutta) for velocity and displacement updates
+* In **2D mode**: matplotlib plots of velocity-time and position-time
+* In **3D mode**: PyQtGraph OpenGL visualization with animated sphere
 
----
+  * Sphere moves downward with simulated acceleration
+  * Camera controls allow rotation and zoom
+  * HUD text rendered in scene (no background box)
 
+**Units & Conversion**
+
+* SI units enforced (kg, m, s)
+* Input validation ensures numeric fields are > 0
+
+**Edge Cases & Validation**
+
+* Invalid or missing parameters → warning message
+* Very high drag or zero mass → capped with safety checks
+* Object constrained to stop at ground level (y ≥ 0)
+
+**Data Sources**
+
+* Constants: g = 9.81 m/s²
+* Default air density: 1.225 kg/m³ (sea level, 15°C)
+
+**Logging & Export**
+
+* Results (parameters, terminal velocity, simulation data) stored in log system
+* Optional CSV export with (t, v, y)
+* Image export (plots and/or 3D snapshots)
+
+**Chaining**
+
+* Outputs (terminal velocity value, time series data) can be chained into other mechanics tools (e.g., kinetic energy calculator, drag force visualizer)
+
+**Tests**
+
+* Example 1: Mass = 80 kg, Area = 0.7 m², Cd = 1.0 → vₜ ≈ 47 m/s
+* Example 2: Steel ball (m = 5 kg, A = 0.01 m², Cd = 0.47) → vₜ ≈ 32 m/s
+* Example 3: Feather-like body (Cd = 1.3, A = 0.05, m = 0.02) → very low vₜ
+
+**Known Limitations / TODO**
+
+* Currently assumes vertical fall only (no horizontal wind component)
+* No deformation modeling (e.g., parachutes opening mid-flight)
+* HUD shows only t, v, y — could expand to include acceleration a(t)
+* Could add particle trails or velocity vectors in 3D for enhanced visualization

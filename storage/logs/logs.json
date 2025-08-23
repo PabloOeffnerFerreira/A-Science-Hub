@@ -1,1 +1,876 @@
-[]
+[
+  {
+    "timestamp": "2025-08-23 08:44:25",
+    "tool": "Terminal Velocity",
+    "action": "Compute",
+    "data": {
+      "inputs": {
+        "mass_kg": 1.0,
+        "area_m2": 0.5,
+        "height_m": 100.0,
+        "Cd": 0.47,
+        "rho": 1.225
+      },
+      "results": {
+        "v_terminal_m_s": 8.25557877930607,
+        "fall_time_with_drag_s": 12.689999999999774,
+        "fall_time_no_drag_s": 4.515236409857309
+      }
+    },
+    "tags": [
+      "physics",
+      "mechanics",
+      "drag"
+    ],
+    "pinned": false
+  },
+  {
+    "timestamp": "2025-08-23 08:40:51",
+    "tool": "Terminal Velocity",
+    "action": "Compute",
+    "data": {
+      "inputs": {
+        "mass_kg": 1.0,
+        "area_m2": 0.5,
+        "height_m": 100.0,
+        "Cd": 0.47,
+        "rho": 1.225
+      },
+      "results": {
+        "v_terminal_m_s": 8.25557877930607,
+        "fall_time_with_drag_s": 12.689999999999774,
+        "fall_time_no_drag_s": 4.515236409857309
+      }
+    },
+    "tags": [
+      "physics",
+      "mechanics",
+      "drag"
+    ],
+    "pinned": false
+  },
+  {
+    "timestamp": "2025-08-23 08:40:48",
+    "tool": "Terminal Velocity",
+    "action": "Compute",
+    "data": {
+      "inputs": {
+        "mass_kg": 1.0,
+        "area_m2": 0.5,
+        "height_m": 100.0,
+        "Cd": 0.47,
+        "rho": 1.225
+      },
+      "results": {
+        "v_terminal_m_s": 8.25557877930607,
+        "fall_time_with_drag_s": 12.689999999999774,
+        "fall_time_no_drag_s": 4.515236409857309
+      }
+    },
+    "tags": [
+      "physics",
+      "mechanics",
+      "drag"
+    ],
+    "pinned": false
+  },
+  {
+    "timestamp": "2025-08-23 08:40:36",
+    "tool": "Terminal Velocity",
+    "action": "Compute",
+    "data": {
+      "inputs": {
+        "mass_kg": 1.0,
+        "area_m2": 0.5,
+        "height_m": 100.0,
+        "Cd": 0.47,
+        "rho": 1.225
+      },
+      "results": {
+        "v_terminal_m_s": 8.25557877930607,
+        "fall_time_with_drag_s": 12.689999999999774,
+        "fall_time_no_drag_s": 4.515236409857309
+      }
+    },
+    "tags": [
+      "physics",
+      "mechanics",
+      "drag"
+    ],
+    "pinned": false
+  },
+  {
+    "timestamp": "2025-08-23 08:40:22",
+    "tool": "Terminal Velocity",
+    "action": "Compute",
+    "data": {
+      "inputs": {
+        "mass_kg": 1.0,
+        "area_m2": 0.5,
+        "height_m": 100.0,
+        "Cd": 0.47,
+        "rho": 1.225
+      },
+      "results": {
+        "v_terminal_m_s": 8.25557877930607,
+        "fall_time_with_drag_s": 12.689999999999774,
+        "fall_time_no_drag_s": 4.515236409857309
+      }
+    },
+    "tags": [
+      "physics",
+      "mechanics",
+      "drag"
+    ],
+    "pinned": false
+  },
+  {
+    "timestamp": "2025-08-23 08:37:13",
+    "tool": "Terminal Velocity",
+    "action": "Compute",
+    "data": {
+      "inputs": {
+        "mass_kg": 1.0,
+        "area_m2": 0.5,
+        "height_m": 500.0,
+        "Cd": 0.04,
+        "rho": 1.225
+      },
+      "results": {
+        "v_terminal_m_s": 28.298698318661447,
+        "fall_time_with_drag_s": 19.670000000000275,
+        "fall_time_no_drag_s": 10.096375546923044
+      }
+    },
+    "tags": [
+      "physics",
+      "mechanics",
+      "drag"
+    ],
+    "pinned": false
+  },
+  {
+    "timestamp": "2025-08-23 08:36:50",
+    "tool": "Terminal Velocity",
+    "action": "Compute",
+    "data": {
+      "inputs": {
+        "mass_kg": 1.0,
+        "area_m2": 0.5,
+        "height_m": 500.0,
+        "Cd": 0.47,
+        "rho": 1.225
+      },
+      "results": {
+        "v_terminal_m_s": 8.25557877930607,
+        "fall_time_with_drag_s": 61.1499999999964,
+        "fall_time_no_drag_s": 10.096375546923044
+      }
+    },
+    "tags": [
+      "physics",
+      "mechanics",
+      "drag"
+    ],
+    "pinned": false
+  },
+  {
+    "timestamp": "2025-08-23 08:36:33",
+    "tool": "Terminal Velocity",
+    "action": "Compute",
+    "data": {
+      "inputs": {
+        "mass_kg": 1.0,
+        "area_m2": 0.5,
+        "height_m": 100.0,
+        "Cd": 0.47,
+        "rho": 1.225
+      },
+      "results": {
+        "v_terminal_m_s": 8.25557877930607,
+        "fall_time_with_drag_s": 12.689999999999774,
+        "fall_time_no_drag_s": 4.515236409857309
+      }
+    },
+    "tags": [
+      "physics",
+      "mechanics",
+      "drag"
+    ],
+    "pinned": false
+  },
+  {
+    "timestamp": "2025-08-23 08:33:23",
+    "tool": "Terminal Velocity",
+    "action": "Compute",
+    "data": {
+      "inputs": {
+        "mass_kg": 1.0,
+        "area_m2": 0.5,
+        "height_m": 100.0,
+        "Cd": 0.47,
+        "rho": 1.225
+      },
+      "results": {
+        "v_terminal_m_s": 8.25557877930607,
+        "fall_time_with_drag_s": 12.689999999999774,
+        "fall_time_no_drag_s": 4.515236409857309
+      }
+    },
+    "tags": [
+      "physics",
+      "mechanics",
+      "drag"
+    ],
+    "pinned": false
+  },
+  {
+    "timestamp": "2025-08-23 08:30:18",
+    "tool": "Terminal Velocity",
+    "action": "Compute",
+    "data": {
+      "inputs": {
+        "mass_kg": 1.0,
+        "area_m2": 0.5,
+        "height_m": 100.0,
+        "Cd": 0.47,
+        "rho": 1.225
+      },
+      "results": {
+        "v_terminal_m_s": 8.25557877930607,
+        "fall_time_with_drag_s": 12.689999999999774,
+        "fall_time_no_drag_s": 4.515236409857309
+      }
+    },
+    "tags": [
+      "physics",
+      "mechanics",
+      "drag"
+    ],
+    "pinned": false
+  },
+  {
+    "timestamp": "2025-08-22 21:39:05",
+    "tool": "Terminal Velocity",
+    "action": "Compute",
+    "data": {
+      "inputs": {
+        "mass_kg": 1.0,
+        "area_m2": 0.5,
+        "height_m": 400.0,
+        "Cd": 0.47,
+        "rho": 1.225
+      },
+      "results": {
+        "v_terminal_m_s": 8.25557877930607,
+        "fall_time_with_drag_s": 49.029999999998815,
+        "fall_time_no_drag_s": 9.030472819714618
+      }
+    },
+    "tags": [
+      "physics",
+      "mechanics",
+      "drag"
+    ],
+    "pinned": false
+  },
+  {
+    "timestamp": "2025-08-22 21:38:52",
+    "tool": "Terminal Velocity",
+    "action": "Compute",
+    "data": {
+      "inputs": {
+        "mass_kg": 1.0,
+        "area_m2": 0.5,
+        "height_m": 100.0,
+        "Cd": 0.47,
+        "rho": 1.225
+      },
+      "results": {
+        "v_terminal_m_s": 8.25557877930607,
+        "fall_time_with_drag_s": 12.689999999999774,
+        "fall_time_no_drag_s": 4.515236409857309
+      }
+    },
+    "tags": [
+      "physics",
+      "mechanics",
+      "drag"
+    ],
+    "pinned": false
+  },
+  {
+    "timestamp": "2025-08-22 21:31:30",
+    "tool": "Terminal Velocity",
+    "action": "Compute",
+    "data": {
+      "inputs": {
+        "mass_kg": 1.0,
+        "area_m2": 0.5,
+        "height_m": 100.0,
+        "Cd": 0.47,
+        "rho": 1.225
+      },
+      "results": {
+        "v_terminal_m_s": 8.25557877930607,
+        "fall_time_with_drag_s": 12.689999999999774,
+        "fall_time_no_drag_s": 4.515236409857309
+      }
+    },
+    "tags": [
+      "physics",
+      "mechanics",
+      "drag"
+    ],
+    "pinned": false
+  },
+  {
+    "timestamp": "2025-08-22 21:27:46",
+    "tool": "Terminal Velocity",
+    "action": "Compute",
+    "data": {
+      "inputs": {
+        "mass_kg": 1.0,
+        "area_m2": 0.5,
+        "height_m": 100.0,
+        "Cd": 0.47,
+        "rho": 1.225
+      },
+      "results": {
+        "v_terminal_m_s": 8.25557877930607,
+        "fall_time_with_drag_s": 12.689999999999774,
+        "fall_time_no_drag_s": 4.515236409857309
+      }
+    },
+    "tags": [
+      "physics",
+      "mechanics",
+      "drag"
+    ],
+    "pinned": false
+  },
+  {
+    "timestamp": "2025-08-22 21:18:54",
+    "tool": "Shell Visualiser",
+    "action": "Draw",
+    "data": {
+      "symbol": "Og",
+      "charge": 3,
+      "shells": [
+        2,
+        8,
+        18,
+        32,
+        32,
+        18,
+        5
+      ]
+    },
+    "tags": [],
+    "pinned": false
+  },
+  {
+    "timestamp": "2025-08-22 21:18:51",
+    "tool": "Shell Visualiser",
+    "action": "Draw",
+    "data": {
+      "symbol": "Og",
+      "charge": 0,
+      "shells": [
+        2,
+        8,
+        18,
+        32,
+        32,
+        18,
+        8
+      ]
+    },
+    "tags": [],
+    "pinned": false
+  },
+  {
+    "timestamp": "2025-08-22 21:18:43",
+    "tool": "Shell Visualiser",
+    "action": "Draw",
+    "data": {
+      "symbol": "Lv",
+      "charge": 0,
+      "shells": [
+        2,
+        8,
+        18,
+        32,
+        32,
+        18,
+        6
+      ]
+    },
+    "tags": [],
+    "pinned": false
+  },
+  {
+    "timestamp": "2025-08-22 21:18:37",
+    "tool": "Shell Visualiser",
+    "action": "Draw",
+    "data": {
+      "symbol": "Og",
+      "charge": 0,
+      "shells": [
+        2,
+        8,
+        18,
+        32,
+        32,
+        18,
+        8
+      ]
+    },
+    "tags": [],
+    "pinned": false
+  },
+  {
+    "timestamp": "2025-08-22 21:18:32",
+    "tool": "Shell Visualiser",
+    "action": "Draw",
+    "data": {
+      "symbol": "Fe",
+      "charge": 0,
+      "shells": [
+        2,
+        8,
+        14,
+        2
+      ]
+    },
+    "tags": [],
+    "pinned": false
+  },
+  {
+    "timestamp": "2025-08-22 21:17:37",
+    "tool": "Shell Visualiser",
+    "action": "Draw",
+    "data": {
+      "symbol": "Fe",
+      "shells": [
+        2,
+        8,
+        14,
+        2
+      ],
+      "delta_e": 0,
+      "charge": 0
+    },
+    "tags": [],
+    "pinned": false
+  },
+  {
+    "timestamp": "2025-08-22 21:12:19",
+    "tool": "Shell Visualiser",
+    "action": "Draw",
+    "data": {
+      "symbol": "Fe",
+      "mode": "Delta e⁻ (+ adds)",
+      "value": 0,
+      "shells": [
+        2,
+        8,
+        14,
+        2
+      ]
+    },
+    "tags": [],
+    "pinned": false
+  },
+  {
+    "timestamp": "2025-08-22 20:55:06",
+    "tool": "Shell Visualiser",
+    "action": "Draw",
+    "data": {
+      "symbol": "Fe",
+      "mode": "Delta e⁻ (+ adds)",
+      "value": 0,
+      "shells": [
+        2,
+        8,
+        14,
+        2
+      ]
+    },
+    "tags": [],
+    "pinned": false
+  },
+  {
+    "timestamp": "2025-08-22 20:54:57",
+    "tool": "Shell Visualiser",
+    "action": "Draw",
+    "data": {
+      "symbol": "He",
+      "mode": "Delta e⁻ (+ adds)",
+      "value": 0,
+      "shells": [
+        2
+      ]
+    },
+    "tags": [],
+    "pinned": false
+  },
+  {
+    "timestamp": "2025-08-22 20:54:30",
+    "tool": "Shell Visualiser",
+    "action": "Draw",
+    "data": {
+      "symbol": "Fe",
+      "mode": "Delta e⁻ (+ adds)",
+      "value": 4,
+      "shells": [
+        2,
+        8,
+        14,
+        6
+      ]
+    },
+    "tags": [],
+    "pinned": false
+  },
+  {
+    "timestamp": "2025-08-22 20:54:26",
+    "tool": "Shell Visualiser",
+    "action": "Draw",
+    "data": {
+      "symbol": "Fe",
+      "mode": "Delta e⁻ (+ adds)",
+      "value": 3,
+      "shells": [
+        2,
+        8,
+        14,
+        5
+      ]
+    },
+    "tags": [],
+    "pinned": false
+  },
+  {
+    "timestamp": "2025-08-22 20:54:24",
+    "tool": "Shell Visualiser",
+    "action": "Draw",
+    "data": {
+      "symbol": "Fe",
+      "mode": "Delta e⁻ (+ adds)",
+      "value": 3,
+      "shells": [
+        2,
+        8,
+        14,
+        5
+      ]
+    },
+    "tags": [],
+    "pinned": false
+  },
+  {
+    "timestamp": "2025-08-22 20:54:20",
+    "tool": "Shell Visualiser",
+    "action": "Draw",
+    "data": {
+      "symbol": "Fe",
+      "mode": "Charge (+ removes)",
+      "value": 0,
+      "shells": [
+        2,
+        8,
+        14,
+        2
+      ]
+    },
+    "tags": [],
+    "pinned": false
+  },
+  {
+    "timestamp": "2025-08-22 20:54:12",
+    "tool": "Shell Visualiser",
+    "action": "Draw",
+    "data": {
+      "symbol": "Fe",
+      "mode": "Delta e⁻ (+ adds)",
+      "value": 0,
+      "shells": [
+        2,
+        8,
+        14,
+        2
+      ]
+    },
+    "tags": [],
+    "pinned": false
+  },
+  {
+    "timestamp": "2025-08-22 20:54:12",
+    "tool": "Shell Visualiser",
+    "action": "Draw",
+    "data": {
+      "symbol": "Fe",
+      "mode": "Delta e⁻ (+ adds)",
+      "value": 0,
+      "shells": [
+        2,
+        8,
+        14,
+        2
+      ]
+    },
+    "tags": [],
+    "pinned": false
+  },
+  {
+    "timestamp": "2025-08-22 20:54:11",
+    "tool": "Shell Visualiser",
+    "action": "Draw",
+    "data": {
+      "symbol": "Fe",
+      "mode": "Delta e⁻ (+ adds)",
+      "value": 0,
+      "shells": [
+        2,
+        8,
+        14,
+        2
+      ]
+    },
+    "tags": [],
+    "pinned": false
+  },
+  {
+    "timestamp": "2025-08-22 20:54:11",
+    "tool": "Shell Visualiser",
+    "action": "Draw",
+    "data": {
+      "symbol": "Fe",
+      "mode": "Delta e⁻ (+ adds)",
+      "value": 0,
+      "shells": [
+        2,
+        8,
+        14,
+        2
+      ]
+    },
+    "tags": [],
+    "pinned": false
+  },
+  {
+    "timestamp": "2025-08-22 20:54:07",
+    "tool": "Shell Visualiser",
+    "action": "Draw",
+    "data": {
+      "symbol": "Fe",
+      "mode": "Delta e⁻ (+ adds)",
+      "value": 0,
+      "shells": [
+        2,
+        8,
+        14,
+        2
+      ]
+    },
+    "tags": [],
+    "pinned": false
+  },
+  {
+    "timestamp": "2025-08-22 20:54:01",
+    "tool": "Shell Visualiser",
+    "action": "Draw",
+    "data": {
+      "symbol": "He",
+      "mode": "Delta e⁻ (+ adds)",
+      "value": 0,
+      "shells": [
+        2
+      ]
+    },
+    "tags": [],
+    "pinned": false
+  },
+  {
+    "timestamp": "2025-08-22 20:53:55",
+    "tool": "Shell Visualiser",
+    "action": "Draw",
+    "data": {
+      "symbol": "He",
+      "mode": "Delta e⁻ (+ adds)",
+      "value": 0,
+      "shells": [
+        2
+      ]
+    },
+    "tags": [],
+    "pinned": false
+  },
+  {
+    "timestamp": "2025-08-22 20:53:38",
+    "tool": "Shell Visualiser",
+    "action": "Draw",
+    "data": {
+      "symbol": "H",
+      "mode": "Delta e⁻ (+ adds)",
+      "value": 0,
+      "shells": [
+        1
+      ]
+    },
+    "tags": [],
+    "pinned": false
+  },
+  {
+    "timestamp": "2025-08-22 20:53:08",
+    "tool": "Shell Visualiser",
+    "action": "Draw",
+    "data": {
+      "symbol": "Fe",
+      "mode": "Charge (+ removes)",
+      "value": 0,
+      "shells": [
+        2,
+        8,
+        14,
+        2
+      ]
+    },
+    "tags": [],
+    "pinned": false
+  },
+  {
+    "timestamp": "2025-08-22 20:52:55",
+    "tool": "Shell Visualiser",
+    "action": "Draw",
+    "data": {
+      "symbol": "Fe",
+      "mode": "Delta e⁻ (+ adds)",
+      "value": 0,
+      "shells": [
+        2,
+        8,
+        14,
+        2
+      ]
+    },
+    "tags": [],
+    "pinned": false
+  },
+  {
+    "timestamp": "2025-08-22 20:44:26",
+    "tool": "Shell Visualiser",
+    "action": "Draw",
+    "data": {
+      "symbol": "He",
+      "charge": 0,
+      "shells": [
+        2
+      ]
+    },
+    "tags": [],
+    "pinned": false
+  },
+  {
+    "timestamp": "2025-08-22 20:44:19",
+    "tool": "Shell Visualiser",
+    "action": "Draw",
+    "data": {
+      "symbol": "He",
+      "charge": 0,
+      "shells": [
+        2
+      ]
+    },
+    "tags": [],
+    "pinned": false
+  },
+  {
+    "timestamp": "2025-08-22 20:44:10",
+    "tool": "Shell Visualiser",
+    "action": "Draw",
+    "data": {
+      "symbol": "H",
+      "charge": -1,
+      "shells": [
+        2
+      ]
+    },
+    "tags": [],
+    "pinned": false
+  },
+  {
+    "timestamp": "2025-08-22 20:44:03",
+    "tool": "Shell Visualiser",
+    "action": "Draw",
+    "data": {
+      "symbol": "H",
+      "charge": 1,
+      "shells": []
+    },
+    "tags": [],
+    "pinned": false
+  },
+  {
+    "timestamp": "2025-08-22 20:39:20",
+    "tool": "Shell Visualiser",
+    "action": "Draw",
+    "data": {
+      "symbol": "H",
+      "charge": 3,
+      "shells": []
+    },
+    "tags": [],
+    "pinned": false
+  },
+  {
+    "timestamp": "2025-08-22 20:39:08",
+    "tool": "Shell Visualiser",
+    "action": "Draw",
+    "data": {
+      "symbol": "H",
+      "charge": 0,
+      "shells": [
+        1
+      ]
+    },
+    "tags": [],
+    "pinned": false
+  },
+  {
+    "timestamp": "2025-08-22 20:12:16",
+    "tool": "Shell Visualiser",
+    "action": "Draw",
+    "data": {
+      "symbol": "Fe",
+      "shells": [
+        2,
+        8,
+        14,
+        2
+      ]
+    },
+    "tags": [],
+    "pinned": false
+  },
+  {
+    "timestamp": "2025-08-22 20:12:05",
+    "tool": "Shell Visualiser",
+    "action": "Draw",
+    "data": {
+      "symbol": "Og",
+      "shells": [
+        2,
+        8,
+        18,
+        32,
+        32,
+        18,
+        8
+      ]
+    },
+    "tags": [],
+    "pinned": false
+  }
+]

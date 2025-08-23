@@ -18,6 +18,7 @@ venv/
 
 # Logs and runtime data
 *.log
+*.wm
 
 # Storage contents (keep folders, ignore files inside)
 storage/images/*
@@ -36,3 +37,4 @@ storage/results/*
 # OS-specific files
 .DS_Store
 Thumbs.db
+core/data/databases/intdatabases/wm.json
