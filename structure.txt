@@ -1,3 +1,5 @@
+Folder PATH listing
+Volume serial number is 7EB5-2AA1
 C:.
 |   .gitignore
 |   LICENSE
@@ -6,6 +8,8 @@ C:.
 |   requirements.txt
 |   structure.txt
 |   
++---.vscode
+|       launch.json
 |       
 +---core
 |   +---ai
@@ -25,6 +29,7 @@ C:.
 |   |   +---databases
 |   |   |   |   codon_table.json
 |   |   |   |   constants_data.py
+|   |   |   |   dna_sequences.json
 |   |   |   |   minerals.csv
 |   |   |   |   minerals.json
 |   |   |   |   o_states.json
@@ -159,6 +164,38 @@ C:.
 |   |       
 |   +---images
 |   |       .keep
+|   |       image_20250822_161440.png
+|   |       image_20250822_163527.png
+|   |       image_20250822_163758.png
+|   |       image_20250822_164957.png
+|   |       image_20250822_212746.png
+|   |       image_20250822_213130.png
+|   |       image_20250822_213852.png
+|   |       image_20250822_213905.png
+|   |       image_20250823_083018.png
+|   |       image_20250823_083323.png
+|   |       image_20250823_083633.png
+|   |       image_20250823_083650.png
+|   |       image_20250823_083713.png
+|   |       image_20250823_084021.png
+|   |       image_20250823_084036.png
+|   |       image_20250823_084048.png
+|   |       image_20250823_084050.png
+|   |       image_20250823_084425.png
+|   |       image_20250823_084938.png
+|   |       image_20250823_085637.png
+|   |       image_20250823_091936.png
+|   |       image_20250823_091952.png
+|   |       image_20250823_103244.png
+|   |       image_20250823_112526.png
+|   |       image_20250823_113411.png
+|   |       image_20250823_120651.png
+|   |       image_20250823_120659.png
+|   |       image_20250823_121822.png
+|   |       image_20250823_121853.png
+|   |       image_20250823_121903.png
+|   |       image_20250823_141145.png
+|   |       image_20250823_183601.png
 |   |       
 |   +---logs
 |   |       .keep
@@ -172,20 +209,50 @@ C:.
 |               electricity_lab_notes.txt
 |               
 +---tools
+|   +---astronomy
+|   |       blackbody_peak_wien.py
+|   |       escape_velocity.py
+|   |       exoplanet_transit_depth.py
+|   |       habitable_zone_estimator.py
+|   |       magnitude_distance_modulus.py
+|   |       orbital_period_kepler3.py
+|   |       parallax_distance.py
+|   |       redshift_calculator.py
+|   |       rocket_equation_tsiolkovsky.py
+|   |       stellar_luminosity_sb.py
+|   |       surface_gravity.py
+|   |       
 |   +---biology
+|   |       amino_acid_composition.py
+|   |       crispr_guide_finder.py
 |   |       dna_lab.py
+|   |       dna_melting_temp.py
+|   |       enzyme_kinetics_michaelis_menten.py
+|   |       hardy_weinberg.py
 |   |       osmosis_tonicity.py
 |   |       ph_calculator.py
 |   |       population_growth_calculator.py
+|   |       restriction_site_mapper.py
 |   |       
 |   +---chemistry
+|   |       buffer_ph_henderson.py
 |   |       element_lab.py
+|   |       equilibbrium_from_dG.py
+|   |       ideal_gas_solver.py
 |   |       molar_mass.py
 |   |       molecule_library.py
+|   |       nernst_equation.py
 |   |       reaction_balancer.py
+|   |       reaction_rate_arrhenius.py
+|   |       titration_curve.py
 |   |       
 |   +---electricity
-|   |       electricity_lab.py
+|   |       biot_savart_straight_wire.py
+|   |       electricity_&_magnetism_lab.py
+|   |       lorentz_force.py
+|   |       rlc_resonance.py
+|   |       skin_depth_calculator.py
+|   |       transmission_line_calculator.py
 |   |       
 |   +---geology
 |   |       geo_lab.py
@@ -198,32 +265,71 @@ C:.
 |   |       vector_calculator.py
 |   |       
 |   +---mechanics
+|   |       angular_momentum.py
+|   |       centripetal_force.py
+|   |       collision_simulator.py
+|   |       impulse_momentum.py
 |   |       lens_mirror_equation.py
 |   |       mechanics_lab.py
+|   |       momentum_conversation.py
+|   |       oscillator_damping.py
+|   |       power_calculator.py
+|   |       rotational_kinematics.py
+|   |       shm_tool.py
 |   |       terminal_velocity.py
+|   |       uniform_circular_motion.py
+|   |       work_energy_theorem.py
+|   |       work_power.py
+|   |       
+|   +---microbiology
+|   |       agar_diffusion_demo.py
+|   |       alphafold.py
+|   |       bacterial_growth_logistic.py
+|   |       biofilm_growth_gompertz.py
+|   |       chemostat_steady_state.py
+|   |       monod_kinetics.py
+|   |       phylo_distance_hamming.py
+|   |       quorum_sensing_threshold.py
+|   |       shannon_simpson_diversity.py
+|   |       sir_epidemic_model.py
+|   |       wright_fisher_drift.py
 |   |       
 |   +---misc
 |   |       settings.py
 |   |       
-|   \---panel_tools
-|       |   calc_service.py
-|       |   decimal_time_converter.py
-|       |   log.py
-|       |   notation_converter.py
-|       |   quantity_checker.py
-|       |   quicksearch.py
-|       |   region_switcher.py
-|       |   scientific_constants_lookup.py
-|       |   session_info.py
-|       |   settings.py
-|       |   simple_calc.py
-|       |   si_prefix_combiner_splitter.py
-|       |   unit_converter.py
-|       |   welcome.py
-|       |   
-|       \---wm
-|               window_manager.py
-|               
+|   +---optics
+|   |       diffraction_grating.py
+|   |       polarization_malus.py
+|   |       single_slit_diffraction.py
+|   |       thin_film_interference.py
+|   |       thin_lens_combiner.py
+|   |       young_double_slit.py
+|   |       
+|   +---panel_tools
+|   |   |   calc_service.py
+|   |   |   decimal_time_converter.py
+|   |   |   log.py
+|   |   |   notation_converter.py
+|   |   |   quantity_checker.py
+|   |   |   quicksearch.py
+|   |   |   region_switcher.py
+|   |   |   scientific_constants_lookup.py
+|   |   |   session_info.py
+|   |   |   settings.py
+|   |   |   simple_calc.py
+|   |   |   si_prefix_combiner_splitter.py
+|   |   |   unit_converter.py
+|   |   |   welcome.py
+|   |   |   
+|   |   \---wm
+|   |           window_manager.py
+|   |           
+|   \---waves
+|           doppler_effect.py
+|           doppler_light.py
+|           standing_wave_air.py
+|           standing_wave_string.py
+|           
 \---UI
     |   main_window.py
     |   
