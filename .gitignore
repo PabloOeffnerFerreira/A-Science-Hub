@@ -52,3 +52,8 @@ storage/logs/*
 # Notes (add this)
 storage/notes/*
 !storage/notes/.gitkeep
+storage/ai/chats/*
+!storage/ai/chats/.gitkeep
+storage/ai/logs/*
+!storage/ai/logs/.gitkeep
+core/data/databases/dna_squences.json
