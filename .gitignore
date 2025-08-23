@@ -38,3 +38,5 @@ storage/results/*
 .DS_Store
 Thumbs.db
 core/data/databases/intdatabases/wm.json
+core/data/databases/intdatabases/wm.json
+storage/logs/logs.json
