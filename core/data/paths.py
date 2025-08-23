@@ -32,3 +32,5 @@ PTABLE_JSON_PATH = DATABASES_DIR / "ptable.json"
 
 MINERALS_CSV = DATABASES_DIR / "minerals.csv"
 GEO_FAVS_PATH = FAVOURITES_DIR / "geo_favs.json"
+
+NOTES_PATH = STORAGE_DIR / "storage" / "notes"

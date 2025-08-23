@@ -41,3 +41,14 @@ Thumbs.db
 core/data/databases/intdatabases/wm.json
 core/data/databases/intdatabases/wm.json
 storage/logs/logs.json
+
+# Runtime DBs (exact path)
+core/data/databases/intdatabases/wm.json
+
+# Logs (JSON or otherwise)
+storage/logs/*
+!storage/logs/.gitkeep
+
+# Notes (add this)
+storage/notes/*
+!storage/notes/.gitkeep

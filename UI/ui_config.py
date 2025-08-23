@@ -1,1 +1,0 @@
-# Global UI config (placeholder to avoid circular imports)
