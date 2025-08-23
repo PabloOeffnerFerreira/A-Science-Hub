@@ -1,3 +1,12 @@
+C:.
+|   .gitignore
+|   LICENSE
+|   main.py
+|   README.md
+|   requirements.txt
+|   structure.txt
+|   
+|       
 +---core
 |   +---ai
 |   |   |   ai_manager.py
@@ -34,7 +43,6 @@
 |   |   +---functions
 |   |   |       biology_utils.py
 |   |   |       bio_utils.py
-|   |   |       chemistry.py
 |   |   |       chemistry_utils.py
 |   |   |       constants_tools.py
 |   |   |       geo_utils.py
@@ -52,7 +60,6 @@
 |   |   |       tool_loader.py
 |   |   |       tool_registry.py
 |   |   |       units.py
-|   |   |       window_api.py
 |   |   |       __init__.py
 |   |   |       
 |   |   +---tools
@@ -91,18 +98,57 @@
 |           alpha-i.md
 |           alpha-ii.md
 |           
++---labs
+|   +---dna
+|   |       codon_lookup.py
+|   |       frame_translation.py
+|   |       gc_content.py
+|   |       molecular_weight_calculator.py
+|   |       pairwise_align.py
+|   |       reverse_complement.py
+|   |       seq_parser.py
+|   |       transcription_translation.py
+|   |       
+|   +---electricty
+|   |       coulomb_force_calculator.py
+|   |       electricity_minitools.py
+|   |       electric_field_visualiser.py
+|   |       ferromagnetism_helper.py
+|   |       magnetic_field_calculator.py
+|   |       magnetic_flux_induction.py
+|   |       magnoline_tool.py
+|   |       ohms_law.py
+|   |       rc_circuit_helper.py
+|   |       
+|   \---elements
+|           element_comparator.py
+|           element_property_grapher.py
+|           element_viewer.py
+|           isotope_notation.py
+|           phase_predictor.py
+|           shell_visualiser.py
+|           
 +---misc
+|   +---deprecated
+|   |       acceleration_calculator.py
+|   |       drag_force_calculator.py
+|   |       half_life_calculator.py
+|   |       kinetic_energy_calculator.py
+|   |       mineral_explorer.py
+|   |       mineral_identifier.py
+|   |       plate_boundary_designer.py
+|   |       plate_velocity.py
+|   |       projectile_motion.py
+|   |       radioactive_dating.py
+|   |       speed_calculator.py
+|   |       
 |   +---helpers
-|   |   |   convert_db_to_json.py
 |   |   |   create_tool.py
-|   |   |   export_gallery_as_zip.py
 |   |   |   
 |   |   \---templates
 |   |           tool_template.py
 |   |           
 |   \---tests
-|           test_speed_calc.py
-|           
 +---storage
 |   +---favourites
 |   |       .keep
@@ -118,51 +164,31 @@
 |   |       .keep
 |   |       logs.json
 |   |       
-|   \---results
-|           .keep
-|           
+|   +---results
+|   |       .keep
+|   |       
+|   \---storage
+|       \---notes
+|               electricity_lab_notes.txt
+|               
 +---tools
 |   +---biology
-|   |       codon_lookup.py
-|   |       frame_translation.py
-|   |       gc_content.py
-|   |       molecular_weight_calculator.py
+|   |       dna_lab.py
 |   |       osmosis_tonicity.py
-|   |       pairwise_align.py
 |   |       ph_calculator.py
 |   |       population_growth_calculator.py
-|   |       reverse_complement.py
-|   |       seq_parser.py
-|   |       transcription_translation.py
 |   |       
 |   +---chemistry
-|   |       element_comparator.py
-|   |       element_property_grapher.py
-|   |       element_viewer.py
-|   |       isotope_notation.py
+|   |       element_lab.py
 |   |       molar_mass.py
 |   |       molecule_library.py
-|   |       phase_predictor.py
 |   |       reaction_balancer.py
-|   |       shell_visualiser.py
 |   |       
 |   +---electricity
-|   |       coulomb_force_calculator.py
-|   |       electric_field_visualiser.py
-|   |       ferromagnetism_helper.py
-|   |       magnetic_field_calculator.py
-|   |       magnetic_flux_induction.py
-|   |       magnoline_tool.py
-|   |       ohms_law.py
-|   |       rc_circuit_helper.py
+|   |       electricity_lab.py
 |   |       
 |   +---geology
-|   |       half_life_calculator.py
-|   |       mineral_explorer.py
-|   |       mineral_identifier.py
-|   |       plate_boundary_designer.py
-|   |       plate_velocity.py
-|   |       radioactive_dating.py
+|   |       geo_lab.py
 |   |       
 |   +---math
 |   |       algebraic_calculator.py
@@ -172,12 +198,8 @@
 |   |       vector_calculator.py
 |   |       
 |   +---mechanics
-|   |       acceleration_calculator.py
-|   |       drag_force_calculator.py
-|   |       kinetic_energy_calculator.py
 |   |       lens_mirror_equation.py
-|   |       projectile_motion.py
-|   |       speed_calculator.py
+|   |       mechanics_lab.py
 |   |       terminal_velocity.py
 |   |       
 |   +---misc
@@ -204,7 +226,6 @@
 |               
 \---UI
     |   main_window.py
-    |   ui_config.py
     |   
     +---assets
     |       pin.png
@@ -220,15 +241,10 @@
     |       category_sidebar.py
     |       dec_time_conv_panel.py
     |       dim_eq_checker_panel.py
-    |       dnd_placeholder_panel.py
     |       log_panel.py
     |       notation_converter_panel.py
     |       quantity_checker_panel.py
-    |       quicksearch_overlay.py
-    |       region_switcher_panel.py
     |       sci_cons_lookup_panel.py
-    |       session_info_panel.py
-    |       settings_panel.py
     |       sig_fig_panel.py
     |       simple_tools_panel.py
     |       si_prefix_combiner_splitter_panel.py
@@ -236,10 +252,7 @@
     |       welcome_panel.py
     |       window_manager_panel.py
     |       
-    +---tools
-    |   +---biology
-    |   \---misc
-    |           settings.py
-    |           
-    \---windows
-            tool_window.py
+    \---tools
+        \---misc
+                settings.py
+                
