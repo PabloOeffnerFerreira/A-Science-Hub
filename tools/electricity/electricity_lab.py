@@ -21,6 +21,7 @@ from labs.electricty.magnetic_field_calculator import Tool as MagFieldCalcTool
 from labs.electricty.magnetic_flux_induction import Tool as MagFluxInductionTool
 from labs.electricty.magnoline_tool import Tool as MagnolineTool
 from labs.electricty.ferromagnetism_helper import Tool as FerromagnetismTool
+from labs.electricty.electricity_minitools import Tool as MiniToolsTool
 
 from core.data.paths import NOTES_PATH
 
@@ -49,6 +50,7 @@ class Tool(QDialog):
         # ----- Build pages (right stack) first -----
         self.stack = QStackedWidget()
         self.pages: Dict[str, _Embedded] = {
+            "Mini Tools":                 _Embedded(MiniToolsTool),   # ← add this line
             "Ohm's Law":                 _Embedded(OhmsLawTool),
             "RC Circuit Helper":         _Embedded(RcCircuitHelperTool),
             "Coulomb Force":             _Embedded(CoulombForceTool),
@@ -106,6 +108,7 @@ class Tool(QDialog):
         add_nav("RC Circuit Helper", "media-playlist-repeat")
         tb.addSeparator()
         add_nav("Ferromagnetism Helper", "preferences-desktop")
+        add_nav("Mini Tools", "applications-utilities")
 
         return tb
 
