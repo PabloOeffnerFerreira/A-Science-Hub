@@ -3022,429 +3022,133 @@ Visualize charging and discharging behavior of a capacitor in a simple RC circui
 
 ---
 
-### Tool: Half-life Calculator
+### Tool: Geo Lab
+
 **Category:** Geology
-**Version:** v1.0 (2025-08-22)
+**Version:** v1.0 (2025-08-23)
 
-**Purpose**  
-Simulate radioactive decay using half-life law. Plots the decay curve of a sample over a given time span and reports the final quantity.
-
-**Inputs**  
-- **Initial quantity (N₀)**: starting amount of substance:contentReference[oaicite:0]{index=0}  
-- **Half-life (t½)**: decay constant in same time units as simulation:contentReference[oaicite:1]{index=1}  
-- **Total time span (T)**: duration for simulation:contentReference[oaicite:2]{index=2}
-
-**Outputs**  
-- Line plot of N(t) vs. time  
-- X-axis: Time (user’s input units)  
-- Y-axis: Quantity remaining  
-- Label showing `N(T) = …` at the end of simulation:contentReference[oaicite:3]{index=3}
-
-**UI & Interaction**  
-- Input fields for N₀, t½, and T  
-- Button **Compute** → runs decay calculation and updates plot  
-- Embedded Matplotlib plot with navigation toolbar:contentReference[oaicite:4]{index=4}  
-- Result QLabel shows computed remaining amount
-
-**Algorithm / Implementation**  
-- Uses helper `half_life_decay(N0, t, hl)` from `core.data.functions.geo_utils`:contentReference[oaicite:5]{index=5}  
-- Build timeline: `t = np.linspace(0, T, 400)`  
-- Compute values: `y = [half_life_decay(N0, ti, hl) for ti in t]`  
-- Plot `y` vs. `t` with grid and tight layout  
-- Display final value at `t = T`  
-- Log success with `{"N0", "hl", "T", "NT"}`  
-
-**Units & Conversion**  
-- No explicit unit conversion (inputs interpreted consistently)  
-- Time units must be consistent between half-life and total span  
-- Quantity is unitless (scales with N₀)
-
-**Edge Cases & Validation**  
-- Half-life ≤ 0 or total time ≤ 0 → error raised:contentReference[oaicite:6]{index=6}  
-- Non-numeric input → error shown as `"Invalid input."`  
-- Handles both large and small values of N₀ correctly  
-
-**Data Sources**  
-- Physics: exponential decay law via half-life relation  
-- Logging via `core.data.functions.log.add_log_entry`:contentReference[oaicite:7]{index=7}
-
-**Logging & Export**  
-- Logs under tool = `"Half-life Calculator (Decay vs Time)"`:  
-  - Action = `"Compute"` with `{N0, hl, T, NT}`  
-  - Action = `"Error"` with `{msg}`:contentReference[oaicite:8]{index=8}  
-- No figure export implemented  
-
-**Chaining**  
-- Output curve could feed into radiation dose estimators or activity calculators  
-
-**Tests**  
-- Example 1: N₀=100, hl=5, T=20 → curve falls to ~6.25 at t=20  
-- Example 2: hl=10, T=10 → final N(T) ≈ N₀/2  
-- Example 3: hl ≤ 0 → error `"Invalid input."`  
-- Example 4: Non-numeric input → error  
-
-**Known Limitations / TODO**  
-- Only single decay process modeled (no chains or branching)  
-- No uncertainty or error propagation  
-- No export of computed curve data  
-- Could add option for multiple half-lives / parallel isotopes  
+**Purpose**
+Geo Lab is a comprehensive geology supertool that merges the functionality of several smaller calculators into one unified interface. It replaces the Mineral Explorer, Mineral Identifier, Half-life Calculator, Radioactive Dating, Plate Boundary Designer, and Plate Velocity Calculator. By consolidating overlapping tools, it reduces redundancy, ensures shared datasets, and provides a consistent interface for geoscientific exploration. The tool is designed for both educational and exploratory use, with emphasis on visualization and intuitive interaction.
 
 ---
 
-### Tool: Mineral Explorer
-**Category:** Geology
-**Version:** v1.0 (2025-08-22)
+**Inputs**
 
-**Purpose**  
-Browse, search, and filter a mineral database by name, formula, system, hardness, specific gravity, and type. Supports marking favourites and copying rows.
+* *Minerals Tab*
 
-**Inputs**  
-- Search query: free-text filter (matches name, formula, system, notes, type):contentReference[oaicite:0]{index=0}  
-- Type filter: dropdown (default “All Types”, populated dynamically from dataset):contentReference[oaicite:1]{index=1}  
-- Favourites only: checkbox to restrict to starred minerals:contentReference[oaicite:2]{index=2}
+  * **Explorer Subtab:**
 
-**Outputs**  
-- Table of minerals with 6 columns:  
-  - ★ (favourite toggle)  
-  - Name  
-  - Formula  
-  - Hardness (numeric, red if ≥7)  
-  - SG (specific gravity, blue if ≥4)  
-  - System (crystal system):contentReference[oaicite:3]{index=3}  
-- Status label showing “X / Y rows”:contentReference[oaicite:4]{index=4}
+    * Search query (text, matches name, formula, notes, system, type).
+    * Filter by mineral type (dropdown).
+    * Filter by favourites (checkbox).
+  * **Identifier Subtab:**
 
-**UI & Interaction**  
-- Top filter bar: search box, type dropdown, favourites checkbox, refresh button:contentReference[oaicite:5]{index=5}  
-- Table view: non-editable, row-select, sortable, with coloured hardness/SG cells:contentReference[oaicite:6]{index=6}  
-- Bottom bar:  
-  - **Toggle Favourite** button  
-  - **Copy Row** button (copies selected row to clipboard as tab-separated text)  
-  - Status label:contentReference[oaicite:7]{index=7}
+    * Mohs hardness (numeric).
+    * Specific gravity (numeric).
+    * Crystal system (text).
 
-**Algorithm / Implementation**  
-- Data loaded with `load_minerals()`; favourites loaded via `load_favs()`:contentReference[oaicite:8]{index=8}  
-- Debounced rebuild (200 ms) on text change to avoid lag:contentReference[oaicite:9]{index=9}  
-- `_match` checks query against multiple fields (name, formula, system, notes, type):contentReference[oaicite:10]{index=10}  
-- `_rebuild` applies filters and repopulates table with matching rows:contentReference[oaicite:11]{index=11}  
-- Favourites toggled via set + persisted with `save_favs()`:contentReference[oaicite:12]{index=12}  
-- Copy row grabs all columns and writes to clipboard:contentReference[oaicite:13]{index=13}
+* *Radioactivity Tab*
 
-**Units & Conversion**  
-- Hardness: Mohs scale (dimensionless)  
-- SG: dimensionless ratio (approximate density / water)  
-- No unit conversions—values taken directly from dataset:contentReference[oaicite:14]{index=14}
+  * Initial quantity N₀ (numeric).
+  * Half-life t½ (numeric, years).
+  * Time span T for decay curve plotting (numeric, years).
+  * Remaining % for age estimation (0–100).
+  * Presets for common isotopes (Carbon-14, Potassium-40, Uranium-235/238, Rubidium-87).
 
-**Edge Cases & Validation**  
-- Missing/empty values gracefully shown as blank:contentReference[oaicite:15]{index=15}  
-- Invalid floats handled with `_num()` (safe parse with `replace(",", ".")`):contentReference[oaicite:16]{index=16}  
-- Case-insensitive substring search  
-- If no rows match → table empty, status `0 / N rows`  
+* *Tectonics Tab*
 
-**Data Sources**  
-- Mineral database via `core.data.functions.geo_utils.load_minerals()`  
-- Favourites persisted via `load_favs()` / `save_favs()`:contentReference[oaicite:17]{index=17}
-
-**Logging & Export**  
-- No explicit logging in this tool  
-- No image export  
-
-**Chaining**  
-- Designed as a database browser, not computation output  
-- Could feed selected minerals into related chemistry or crystallography tools  
-
-**Tests**  
-- Example 1: Search “quartz” → filters to quartz row, shows SG≈2.65, Hardness=7 (red)  
-- Example 2: Enable “Favourites only” after starring one mineral → only that mineral remains  
-- Example 3: Select a row → Copy Row → tab-separated text in clipboard  
-- Example 4: Change Type dropdown to “Silicate” → filters to silicate minerals  
-
-**Known Limitations / TODO**  
-- No direct link to external databases (offline only)  
-- Favourites stored by name only (case-sensitive match)  
-- No sorting persistence across sessions  
-- No advanced filters (e.g., numeric ranges for SG/hardness)  
+  * Distance between points (km).
+  * Time interval (Myr).
+  * Boundary type (Convergent, Divergent, Transform).
 
 ---
 
-### Tool: Mineral Identifier
-**Category:** Geology
-**Version:** v1.0 (2025-08-22)
+**Outputs**
 
-**Purpose**  
-Assist with identifying unknown minerals by comparing input hardness, specific gravity, and crystal system against a mineral database. Provides a ranked list of candidate minerals and visual scatter plot.
-
-**Inputs**  
-- **Hardness (Mohs)**: numeric input (float, optional):contentReference[oaicite:0]{index=0}  
-- **Specific Gravity (SG / Density)**: numeric input (float, optional):contentReference[oaicite:1]{index=1}  
-- **Crystal system**: text input (partial match, e.g. “hexagonal”):contentReference[oaicite:2]{index=2}  
-
-**Outputs**  
-- Table of up to 200 best matches, with columns:  
-  - Name  
-  - Formula  
-  - Hardness (red if ≥7)  
-  - SG (blue if ≥4)  
-  - Crystal system:contentReference[oaicite:3]{index=3}  
-- Scatter plot of Hardness vs. SG for candidate minerals:contentReference[oaicite:4]{index=4}  
-- Top ~10% highlighted in the scatter plot (larger markers with outline):contentReference[oaicite:5]{index=5}
-
-**UI & Interaction**  
-- Filter row with input fields and “Find matches” button:contentReference[oaicite:6]{index=6}  
-- Non-editable, sortable table view with selectable rows:contentReference[oaicite:7]{index=7}  
-- Embedded Matplotlib scatter plot with navigation toolbar:contentReference[oaicite:8]{index=8}  
-- On launch, shows all minerals with at least one numeric property so interface is never empty:contentReference[oaicite:9]{index=9}
-
-**Algorithm / Implementation**  
-- `_parse_float`: safely parse float, handling commas:contentReference[oaicite:10]{index=10}  
-- `_score_row`: scoring function combining similarity to input hardness, SG, and partial match of system:contentReference[oaicite:11]{index=11}  
-  - Hardness/SG score = 1 / (1 + abs(diff))  
-  - System adds +0.5 if prefix matches (case-insensitive)  
-- Sort candidates by descending score, keep top 200:contentReference[oaicite:12]{index=12}  
-- Highlight mask marks best 10% of matches in plot:contentReference[oaicite:13]{index=13}
-
-**Units & Conversion**  
-- Hardness: Mohs scale (dimensionless)  
-- SG: dimensionless ratio (relative density)  
-- Crystal system: string label  
-- No conversions beyond float parsing of numeric values:contentReference[oaicite:14]{index=14}
-
-**Edge Cases & Validation**  
-- If no filters → display all minerals with numeric values:contentReference[oaicite:15]{index=15}  
-- Non-numeric input ignored (treated as None):contentReference[oaicite:16]{index=16}  
-- Missing dataset values shown as blank  
-- If no matches → empty table and blank plot message  
-
-**Data Sources**  
-- Mineral dataset loaded via `core.data.functions.geo_utils.load_minerals()`:contentReference[oaicite:17]{index=17}  
-- Logging via `core.data.functions.log.add_log_entry`:contentReference[oaicite:18]{index=18}
-
-**Logging & Export**  
-- Logs under tool = `"Mineral Identifier"`:  
-  - Action = `"BrowseAll"` with `{rows}` when showing all minerals  
-  - Action = `"Identify"` with `{filters, matched}` when filtering:contentReference[oaicite:19]{index=19}  
-- No export feature  
-
-**Chaining**  
-- Output candidates could be linked into Mineral Explorer for deeper lookup  
-- Not directly chainable to numerical calculators  
-
-**Tests**  
-- Example 1: Hardness=7, SG≈2.65, System=“hex” → Quartz among top matches  
-- Example 2: Only SG=5 entered → dense minerals like magnetite and galena appear  
-- Example 3: No inputs → all rows with hardness or SG shown  
-- Example 4: Invalid input “abc” in hardness → ignored  
-
-**Known Limitations / TODO**  
-- Scoring is approximate; does not handle compositional ranges well  
-- No option to combine multiple crystal systems  
-- No direct links to mineral images or external resources  
-- Could enhance with probabilistic scoring or error bars  
+* *Minerals Explorer:* searchable table with mineral name, formula, hardness, SG, system, and favourite marker.
+* *Minerals Identifier:* table of likely matches with scores; scatter plot of hardness vs. SG with highlighted best candidates.
+* *Radioactivity:* decay curve plot of N(t); text outputs for N(T), half-life used, and estimated age from remaining %.
+* *Tectonics:* computed plate velocity (mm/yr); schematic boundary diagrams showing ridges, trenches, arrows, volcanoes, or faults depending on type.
 
 ---
 
-### Tool: Plate Boundary Designer
-**Category:** Geology
-**Version:** v1.0 (2025-08-22)
+**Algorithms & Implementation**
 
-**Purpose**  
-Provide schematic diagrams of different plate boundary types (convergent, divergent, transform). Intended for quick visualisation and teaching reference.
+* *Minerals:*
 
-**Inputs**  
-- **Boundary Type**: dropdown selector with options:  
-  - Convergent  
-  - Divergent  
-  - Transform:contentReference[oaicite:0]{index=0}  
+  * Data loaded from local JSON/CSV.
+  * Explorer uses substring match with debounce for performance.
+  * Identifier scores rows with weighted similarity on hardness, SG, and system. Top results shown and plotted.
 
-**Outputs**  
-- Diagram showing two tectonic plates and characteristic features for the selected boundary type:  
-  - Convergent: trench and volcanic arc:contentReference[oaicite:1]{index=1}  
-  - Divergent: mid-ocean ridge:contentReference[oaicite:2]{index=2}  
-  - Transform: fault with opposing arrows:contentReference[oaicite:3]{index=3}  
+* *Radioactivity:*
 
-**UI & Interaction**  
-- Dropdown to select boundary type  
-- **Draw** button → generates and displays the schematic:contentReference[oaicite:4]{index=4}  
-- **Export Diagram…** button → saves current figure via export utility:contentReference[oaicite:5]{index=5}  
-- Embedded Matplotlib figure with navigation toolbar  
+  * Decay curve computed with $N(t) = N₀ \times 0.5^{t/t_{½}}$.
+  * Age from remaining %: $t = \frac{\ln(r)}{\ln(0.5)} \times t_{½}$.
 
-**Algorithm / Implementation**  
-- Base plates represented as coloured rectangles:contentReference[oaicite:6]{index=6}  
-- Arrows drawn with `FancyArrow` to indicate motion direction  
-- Labels (e.g., “Volcano”, “Ridge”, “Fault”) added with `ax.text`  
-- Layout adjusted with `tight_layout()`, then canvas redrawn:contentReference[oaicite:7]{index=7}  
-- Export handled by `core.data.functions.image_export.export_figure`  
+* *Tectonics:*
 
-**Units & Conversion**  
-- Not applicable (schematic only, no numeric scale)  
-
-**Edge Cases & Validation**  
-- If export fails, error logged via `add_log_entry` with message:contentReference[oaicite:8]{index=8}  
-- No input validation required beyond dropdown selection  
-
-**Data Sources**  
-- Static schematic templates defined in code  
-- Logging via `core.data.functions.log.add_log_entry`:contentReference[oaicite:9]{index=9}  
-
-**Logging & Export**  
-- Logs under tool = `"Plate Boundary Designer"`:  
-  - Action = `"Draw"` with `{kind}`  
-  - Action = `"ExportImage"` with `{path}`  
-  - Action = `"ExportError"` with `{msg}`:contentReference[oaicite:10]{index=10}  
-
-**Chaining**  
-- None (visual-only reference tool)  
-
-**Tests**  
-- Example 1: Select “Convergent” → trench and volcano drawn, “Draw” logged  
-- Example 2: Select “Divergent” → ridge drawn, “Draw” logged  
-- Example 3: Select “Transform” → fault line drawn, “Draw” logged  
-- Example 4: Export → file saved, log entry with path  
-- Example 5: Simulated export error → error logged with message  
-
-**Known Limitations / TODO**  
-- Schematic only; not to scale and lacks quantitative data  
-- No user control over plate size, colour, or annotations  
-- Could be expanded with more boundary types (e.g. oblique, triple junctions)  
+  * Plate velocity: $v = \frac{d\,[km]}{t\,[Myr]}$ in mm/yr.
+  * Boundary diagrams drawn using Matplotlib patches (rectangles, arrows, text labels).
 
 ---
 
-### Tool: Plate Velocity Calculator
-**Category:** Geology  
-**Version:** v1.0 (2025-08-22)
+**UI & Interaction**
 
-**Purpose**  
-Compute average plate velocity from distance travelled and elapsed geological time. Provides quick conversion into standard unit of mm/yr.
-
-**Inputs**  
-- **Distance (km)**: separation or displacement in kilometres:contentReference[oaicite:0]{index=0}  
-- **Time (million years)**: geological timescale in Myr:contentReference[oaicite:1]{index=1}
-
-**Outputs**  
-- Single result: `Velocity: … mm/yr`:contentReference[oaicite:2]{index=2}  
-
-**UI & Interaction**  
-- Two input fields: distance (km) and time (Myr)  
-- **Compute** button → calculates and displays velocity:contentReference[oaicite:3]{index=3}  
-- Result label shows velocity in mm/yr, 3 significant figures  
-- Errors displayed as `"Invalid input."`  
-
-**Algorithm / Implementation**  
-- Parse floats from text boxes  
-- Formula:  
-  - \( v_{mm/yr} = \frac{d_{km}}{t_{Myr}} \)  
-  - Conversion: 1 km / 1 Myr = 1 mm/yr:contentReference[oaicite:4]{index=4}  
-- Handles division by zero → returns `inf`  
-- Logs success with `{d_km, t_ma, v_mm_yr}`  
-
-**Units & Conversion**  
-- Distance: kilometres (km)  
-- Time: million years (Myr)  
-- Output velocity: millimetres per year (mm/yr):contentReference[oaicite:5]{index=5}
-
-**Edge Cases & Validation**  
-- Non-numeric input → error message and error logged:contentReference[oaicite:6]{index=6}  
-- Time = 0 → velocity = ∞ (infinite)  
-- Negative values accepted, though geologically nonsensical  
-
-**Data Sources**  
-- Simple unit conversion principle: 1 km / 1 Myr = 1 mm/yr  
-- Logging via `core.data.functions.log.add_log_entry`:contentReference[oaicite:7]{index=7}
-
-**Logging & Export**  
-- Logs under tool = `"Plate Velocity Calculator"`:  
-  - Action = `"Compute"` with `{d_km, t_ma, v_mm_yr}`  
-  - Action = `"Error"` with `{msg}`:contentReference[oaicite:8]{index=8}  
-- No export or plotting  
-
-**Chaining**  
-- Could chain into tectonics visualisation tools or seismic models  
-
-**Tests**  
-- Example 1: d=1000 km, t=50 Myr → v=20 mm/yr  
-- Example 2: d=4500 km, t=90 Myr → v=50 mm/yr  
-- Example 3: t=0 → ∞ mm/yr  
-- Example 4: invalid input (“abc”) → “Invalid input.”  
-
-**Known Limitations / TODO**  
-- No error bars or uncertainty handling  
-- No support for multiple stages of motion  
-- No plot of velocity vs. time  
-- Could add direct conversion into cm/yr for alternative convention  
+* Top-level tabs for **Minerals**, **Radioactivity**, and **Tectonics**.
+* Minerals tab has **Explorer** and **Identifier** subtabs.
+* Toolbar integration for all figures, allowing zoom/pan.
+* Export buttons for saving figures/diagrams as PNG.
+* Prefill button provides debug/demo values.
 
 ---
 
-### Tool: Radioactive Dating
-**Category:** Geology  
-**Version:** v1.0 (2025-08-22)
+**Logging & Export**
 
-**Purpose**  
-Estimate the age of rocks or fossils from radioactive isotope data. Provides both direct numerical age estimation and a plotted decay curve for visualisation.
+* Log entries include:
 
-**Inputs**  
-- **Half-life (years)**: numeric input, may be entered manually or set via preset button:contentReference[oaicite:0]{index=0}  
-- **Remaining (%) [0–100]**: proportion of parent isotope still present:contentReference[oaicite:1]{index=1}  
-- **Presets**: quick buttons with standard isotopes:  
-  - Carbon-14 (5730 y)  
-  - Potassium-40 (1.248×10⁹ y)  
-  - Uranium-235 (7.038×10⁸ y)  
-  - Uranium-238 (4.468×10⁹ y)  
-  - Rubidium-87 (4.88×10¹⁰ y):contentReference[oaicite:2]{index=2}
+  * Mineral Explorer queries and matches count.
+  * Identifier inputs and number of results.
+  * Radioactivity: N₀, t½, T, and final N(T).
+  * Tectonics: distance, time, velocity, boundary type.
+* Figures exported using `export_figure()`.
 
-**Outputs**  
-- Estimated age in years, formatted with 3 significant figures and comma separators:contentReference[oaicite:3]{index=3}  
-- Decay curve plot showing fractional parent isotope vs. time:contentReference[oaicite:4]{index=4}
+---
 
-**UI & Interaction**  
-- Input boxes for half-life and percentage remaining  
-- **Estimate Age** button → computes and displays numerical age:contentReference[oaicite:5]{index=5}  
-- **Plot Decay Curve** button → generates exponential decay plot:contentReference[oaicite:6]{index=6}  
-- Preset isotope buttons insert half-life values into field for quick setup  
-- Embedded Matplotlib plot with toolbar  
+**Testing**
 
-**Algorithm / Implementation**  
-- Age estimation via `estimate_age_from_remaining(fraction, half_life)`:contentReference[oaicite:7]{index=7}  
-- Fraction = percentage / 100  
-- Decay curve:  
-  - `t = np.linspace(0, 10 * half_life, 400)`  
-  - `y = (0.5) ** (t / half_life)`:contentReference[oaicite:8]{index=8}  
-- Plot: labelled axes, grid, title “Exponential Decay”  
+* *Minerals:*
 
-**Units & Conversion**  
-- Half-life input and time axis in years  
-- Percentage converted to fraction (0–1) internally  
-- Output age in years  
+  * Example 1: Search “Quartz” → returns SiO₂ with hardness \~7.
+  * Example 2: Identifier hardness=3, SG=2.7, sys=“hexagonal” → matches Calcite, Dolomite.
 
-**Edge Cases & Validation**  
-- Invalid or missing input → “Invalid input.” displayed, error logged:contentReference[oaicite:9]{index=9}  
-- Plotting requires valid half-life; otherwise warning shown:contentReference[oaicite:10]{index=10}  
-- No handling for uncertainty or multiple decay chains  
+* *Radioactivity:*
 
-**Data Sources**  
-- Isotope half-lives: hard-coded presets  
-- Age calculation from decay law via `geo_utils.estimate_age_from_remaining`:contentReference[oaicite:11]{index=11}  
-- Logging through `core.data.functions.log.add_log_entry`  
+  * Example 1: N₀=100, t½=5730, T=50000 → curve decays correctly, final N≈0.76.
+  * Example 2: rem=25%, hl=5730 → estimated age ≈11460 years.
 
-**Logging & Export**  
-- Logs under tool = `"Radioactive Dating"`:  
-  - Action = `"Estimate"` with `{half_life, remaining_pct, age}`  
-  - Action = `"Error"` with `{msg}`  
-  - Action = `"PlotDecay"` with `{half_life}`:contentReference[oaicite:12]{index=12}  
-- No image export  
+* *Tectonics:*
 
-**Chaining**  
-- Estimated age could be used in geological history modelling or cross-referenced with fossil records  
+  * Example 1: d=100 km, t=2 Myr → v=50 mm/yr.
+  * Example 2: Boundary=Convergent → diagram shows trench + volcano arc.
 
-**Tests**  
-- Example 1: Half-life=5730 y, Remaining=50% → age ≈ 5730 y  
-- Example 2: Half-life=1.248e9 y, Remaining=25% → age ≈ 2.496e9 y  
-- Example 3: Invalid input (“abc”) → “Invalid input.” displayed, error logged  
-- Example 4: Press Plot without valid half-life → “Enter a valid half-life first.”  
+---
 
-**Known Limitations / TODO**  
-- No error propagation or confidence interval handling  
-- Only single isotope decay (no decay chains)  
-- Presets limited to five isotopes  
-- Could add support for inputting daughter/parent ratios directly  
+**Edge Cases & Validation**
+
+* Mineral filters with empty inputs → return all numeric rows.
+* Radioactivity: negative or zero half-life/time → error message.
+* Tectonics: zero time → velocity set to ∞.
+* Identifier: gracefully handles missing hardness/SG in dataset.
+
+---
+
+**Known Limitations / TODO**
+
+* Mineral identification uses heuristic matching, not full statistical inference.
+* Radioactivity assumes closed system, no contamination corrections.
+* Plate diagrams are schematic, not scaled to geological reality.
+* No 3D mineral crystal visualization yet.
+* Future: integration with external mineral DBs (e.g., Mindat API), isotope libraries, and GIS map overlays for tectonics.
 
 ---
 
@@ -3796,215 +3500,140 @@ Perform basic vector operations (dot product, cross product, angle between vecto
 
 ---
 
-### Tool: Acceleration Calculator
-**Category:** Mechanics  
-**Version:** v1.0 (2025-08-22)
+### Tool: Mechanics Lab
 
-**Purpose**  
-Compute average acceleration from change in velocity (Δv) and time (t).
+**Category:** Mechanics
+**Version:** v1.0 (2025-08-23)
 
-**Inputs**  
-- **Δv**: numeric value of velocity change:contentReference[oaicite:0]{index=0}  
-- **Δv unit**: selectable → m/s, km/h, mph:contentReference[oaicite:1]{index=1}  
-- **t**: numeric value of elapsed time:contentReference[oaicite:2]{index=2}  
-- **t unit**: selectable → s, min, hr:contentReference[oaicite:3]{index=3}
-
-**Outputs**  
-- Acceleration displayed as `a = value m/s²` with 6 significant figures:contentReference[oaicite:4]{index=4}  
-- Error message `"Invalid input."` if input parsing or division fails:contentReference[oaicite:5]{index=5}
-
-**UI & Interaction**  
-- Two input rows: Δv with unit dropdown, t with unit dropdown  
-- **Compute** button → calculates acceleration:contentReference[oaicite:6]{index=6}  
-- Result shown in label  
-
-**Algorithm / Implementation**  
-- Convert Δv:  
-  - km/h → ÷3.6  
-  - mph → ×0.44704:contentReference[oaicite:7]{index=7}  
-- Convert t:  
-  - min → ×60  
-  - hr → ×3600:contentReference[oaicite:8]{index=8}  
-- Compute \(a = \frac{Δv}{t}\)  
-- If t=0 → raises error  
-- Logs both success and error states with input/output data:contentReference[oaicite:9]{index=9}
-
-**Units & Conversion**  
-- Standard SI output: m/s²  
-- Input supported in m/s, km/h, mph for Δv; s, min, hr for t  
-
-**Edge Cases & Validation**  
-- Non-numeric input → error displayed and logged  
-- t=0 → division error handled:contentReference[oaicite:10]{index=10}  
-- Empty input fields → error  
-
-**Data Sources**  
-- Standard conversion factors  
-- Logging via `core.data.functions.log.add_log_entry`:contentReference[oaicite:11]{index=11}
-
-**Logging & Export**  
-- Logs under tool = `"Acceleration"`:  
-  - Action = `"Compute"` with `{dv_ms, t_s, a}`  
-  - Action = `"Error"` with `{msg}`:contentReference[oaicite:12]{index=12}  
-- No export  
-
-**Chaining**  
-- Output acceleration can feed into motion or force calculators (e.g., Newton’s 2nd law)  
-
-**Tests**  
-- Example 1: Δv=10 m/s, t=5 s → a=2.0 m/s²  
-- Example 2: Δv=36 km/h, t=10 s → Δv=10 m/s, a=1.0 m/s²  
-- Example 3: Δv=22.37 mph, t=10 s → Δv≈10 m/s, a≈1.0 m/s²  
-- Example 4: Δv=10 m/s, t=0 → error  
-
-**Known Limitations / TODO**  
-- Only handles constant acceleration (average)  
-- No distance or velocity integration  
-- Limited input unit set  
-- Future expansion: include full kinematics solver (SUVAT)  
+**Purpose**
+Mechanics Lab is a consolidated mechanics supertool that unifies separate calculators for average speed, acceleration, kinetic energy, drag force, and projectile motion. It replaces multiple small, redundant tools by centralizing all inputs and providing tabbed analysis. This ensures consistency across computations, avoids re-entering the same values, and provides immediate visualizations that connect different mechanics concepts together. It is designed for students, educators, and self-learners who need both quick calculations and intuitive graphical representations.
 
 ---
 
-### Tool: Drag Force Calculator
-**Category:** Mechanics  
-**Version:** v1.0 (2025-08-22)
+**Inputs**
 
-**Purpose**  
-Calculate the aerodynamic drag force on an object using the drag equation:  
-\[
-F_d = \tfrac{1}{2} \, \rho \, v^2 \, C_d \, A
-\]  
+All core quantities are defined once in a centralized *Inputs Tab*.
 
-**Inputs**  
-- **ρ (air density)**: numeric value:contentReference[oaicite:0]{index=0}  
-  - Units: kg/m³, g/cm³  
-- **v (velocity)**: numeric value:contentReference[oaicite:1]{index=1}  
-  - Units: m/s, km/h, mph  
-- **C_d (drag coefficient)**: dimensionless:contentReference[oaicite:2]{index=2}  
-- **A (frontal area)**: numeric value:contentReference[oaicite:3]{index=3}  
-  - Units: m², cm², ft²  
+* Distance with unit selector (`m`, `km`, `mile`, `ft`)
+* Time with unit selector (`s`, `min`, `hr`)
+* Initial velocity $v₀$ with unit selector (`m/s`, `km/h`, `mph`)
+* Change in velocity Δv with unit selector (`m/s`, `km/h`, `mph`)
+* Mass with unit selector (`kg`, `g`, `lb`)
+* Fluid density ρ with unit selector (`kg/m³`, `g/cm³`)
+* Drag coefficient $C_d$
+* Reference area A with unit selector (`m²`, `cm²`, `ft²`)
+* Initial height h₀ with unit selector (`m`, `ft`)
+* Launch angle θ with unit selector (`degrees`, `radians`)
 
-**Outputs**  
-- Drag force displayed as `F_d = value N` with 6 significant figures:contentReference[oaicite:4]{index=4}  
-- Error message `"Invalid input."` if computation fails:contentReference[oaicite:5]{index=5}
+Additional interface options:
 
-**UI & Interaction**  
-- Four input rows (ρ, v, C_d, A) with optional unit dropdowns:contentReference[oaicite:6]{index=6}  
-- **Compute** button → evaluates drag force  
-- Result displayed in label  
-
-**Algorithm / Implementation**  
-- Converts units:  
-  - ρ: g/cm³ → ×1000 → kg/m³  
-  - v: km/h ÷3.6; mph ×0.44704  
-  - A: cm² ÷1e4; ft² ×0.09290304:contentReference[oaicite:7]{index=7}  
-- Applies drag equation: \(F_d = 0.5 \rho v^2 C_d A\)  
-- Logs results and errors via `core.data.functions.log.add_log_entry`:contentReference[oaicite:8]{index=8}
-
-**Units & Conversion**  
-- Output in newtons (N)  
-- Supported conversions for density, velocity, and area as above  
-
-**Edge Cases & Validation**  
-- Non-numeric inputs → error message logged  
-- Negative or nonsensical values allowed mathematically, but physically meaningless  
-- Missing values → error  
-
-**Data Sources**  
-- Physics drag equation  
-- Unit conversions embedded in code:contentReference[oaicite:9]{index=9}
-
-**Logging & Export**  
-- Logs under tool = `"Drag Force"`:  
-  - Action = `"Compute"` with `{rho, v, cd, A, Fd}`  
-  - Action = `"Error"` with `{msg}`:contentReference[oaicite:10]{index=10}  
-- No export  
-
-**Chaining**  
-- Output drag force can be reused in mechanics simulations (e.g., dynamics with resistance)  
-
-**Tests**  
-- Example 1: ρ=1.225 kg/m³, v=10 m/s, C_d=1, A=0.5 m² → F_d≈30.625 N  
-- Example 2: v=36 km/h → converted to 10 m/s, result same as above  
-- Example 3: v=22.37 mph → converted to ~10 m/s, result same  
-- Example 4: A=100 cm², other defaults → F_d≈0.306 N  
-- Example 5: invalid input (“abc”) → error  
-
-**Known Limitations / TODO**  
-- Limited to steady-state, incompressible flow  
-- No Reynolds number or Mach effects considered  
-- Area assumed flat projection, not shape-dependent  
-- No export or plot functionality yet  
+* Output speed unit for results (`m/s`, `km/h`, `mph`)
+* Time unit for acceleration denominator (`s`, `min`, `hr`)
+* Prefill button with debug/demo values.
+* Apply to Tabs button (updates all calculations simultaneously).
 
 ---
 
-### Tool: Kinetic Energy Calculator
-**Category:** Mechanics  
-**Version:** v1.0 (2025-08-22)
+**Outputs**
 
-**Purpose**  
-Compute the kinetic energy of an object using the classical equation:  
-\[
-E_k = \tfrac{1}{2} m v^2
-\]  
+Each tab provides both text results and a plot:
 
-**Inputs**  
-- **m (mass)**: numeric value:contentReference[oaicite:0]{index=0}  
-  - Units: kg, g, lb  
-- **v (speed)**: numeric value:contentReference[oaicite:1]{index=1}  
-  - Units: m/s, km/h, mph  
+* **Speed & Acceleration**
 
-**Outputs**  
-- Kinetic energy displayed as `E_k = value J` with 6 significant figures:contentReference[oaicite:2]{index=2}  
-- Error message `"Invalid input."` if computation fails:contentReference[oaicite:3]{index=3}
+  * Average speed from distance/time.
+  * Acceleration from Δv/time.
+  * Velocity–time graph using v₀, Δv, and t.
 
-**UI & Interaction**  
-- Two input rows: mass with unit dropdown, velocity with unit dropdown  
-- **Compute** button → evaluates kinetic energy  
-- Result displayed in label  
+* **Kinetic Energy**
 
-**Algorithm / Implementation**  
-- Mass conversions:  
-  - g → ÷1000  
-  - lb → ×0.45359237  
-- Velocity conversions:  
-  - km/h → ÷3.6  
-  - mph → ×0.44704:contentReference[oaicite:4]{index=4}  
-- Applies formula \(E_k = 0.5 m v^2\)  
-- Logs results and errors with input/output data  
+  * Kinetic energy at given m and v.
+  * Plot of $E_k(v) = 0.5mv²$.
 
-**Units & Conversion**  
-- Output always in joules (J)  
-- Inputs converted internally to SI units  
+* **Drag Force**
 
-**Edge Cases & Validation**  
-- Non-numeric inputs → error message logged  
-- Negative mass or velocity accepted mathematically, though non-physical  
-- Empty fields → error:contentReference[oaicite:5]{index=5}  
+  * Drag force at v₀.
+  * Plot of $F_d(v) = 0.5ρC_dAv²$.
 
-**Data Sources**  
-- Classical kinetic energy formula  
-- Logging via `core.data.functions.log.add_log_entry`:contentReference[oaicite:6]{index=6}
+* **Projectile Motion**
 
-**Logging & Export**  
-- Logs under tool = `"Kinetic Energy"`:  
-  - Action = `"Compute"` with `{m, v, KE}`  
-  - Action = `"Error"` with `{msg}`:contentReference[oaicite:7]{index=7}  
-- No export  
+  * Full kinematic analysis with gravity g = 9.81 m/s².
+  * Outputs: range, flight time, max height, impact velocity (with vx, vy).
+  * 2D trajectory plot.
 
-**Chaining**  
-- Kinetic energy results can feed into work-energy or mechanical energy balance tools  
+---
 
-**Tests**  
-- Example 1: m=1 kg, v=10 m/s → E_k=50 J  
-- Example 2: m=1000 g, v=10 m/s → E_k=50 J  
-- Example 3: m=1 lb, v=10 mph → m≈0.454 kg, v≈4.4704 m/s, E_k≈4.54 J  
-- Example 4: invalid input (“abc”) → error  
+**Algorithms & Implementation**
 
-**Known Limitations / TODO**  
-- Only handles scalar kinetic energy (no rotational KE)  
-- No relativistic correction for very high speeds  
-- Limited to one object at a time  
+* Average speed: $v = d/t$ after unit conversion.
+* Acceleration: $a = Δv / t$.
+* Kinetic energy: $E_k = 0.5mv²$.
+* Drag force: $F_d = 0.5ρC_dAv²$.
+* Projectile motion:
+
+  * Solve quadratic equation for flight time.
+  * Compute range R, flight time T, Hmax, and impact speed.
+  * Trajectory drawn as $y(x) = h₀ + x\tanθ - \frac{gx²}{2v²\cos²θ}$.
+
+---
+
+**UI & Interaction**
+
+* Centralized Inputs tab ensures consistency.
+* Prefill button auto-fills sensible defaults (e.g., d=100 m, t=10 s, v₀=20 m/s).
+* Apply to Tabs instantly updates every tab.
+* Export buttons available per-plot.
+* Velocity-time, energy, drag, and trajectory plots all interactive via Matplotlib toolbar.
+
+---
+
+**Logging & Export**
+
+* Logs include all inputs/outputs: speed, acceleration, energies, drag forces, projectile parameters.
+* Export system saves plots as PNG.
+* Each export and computation recorded in log for reproducibility.
+
+---
+
+**Testing**
+
+* *Speed & Acceleration*
+
+  * Example 1: d=100 m, t=10 s → v=10 m/s.
+  * Example 2: Δv=10 m/s, t=5 s → a=2 m/s².
+
+* *Kinetic Energy*
+
+  * Example: m=2 kg, v=10 m/s → Eₖ=100 J.
+  * Curve doubles quadratically with v.
+
+* *Drag Force*
+
+  * Example: ρ=1.225, Cd=1.0, A=0.5 m², v=10 m/s → F=30.6 N.
+  * Plot matches quadratic increase.
+
+* *Projectile Motion*
+
+  * Example: v=20 m/s, θ=45°, h₀=0 → range≈40.8 m, T≈2.88 s, Hmax≈10.2 m.
+  * Matches textbook equations.
+
+---
+
+**Edge Cases & Validation**
+
+* Division by zero (t=0) handled → “undefined” message.
+* Missing values → tab shows instructions instead of crash.
+* Projectile with θ=90° → vertical trajectory, zero range.
+* Projectile with h₀<0 → clamps to ground level.
+
+---
+
+**Known Limitations / TODO**
+
+* No air resistance in projectile motion.
+* Drag force assumes steady flow, no turbulence modeling.
+* Energy and drag plots use simple range scaling, not adaptive to extreme values.
+* Could add 3D projectile visualization (future extension).
+* Could add real-time recomputation on input change (currently manual Apply).
 
 ---
 
@@ -4079,160 +3708,6 @@ Solve the thin lens/mirror equation and display ray diagrams. Computes the missi
 - Simplified ray diagram (no scale correctness)  
 - No handling of sign conventions beyond simple mirror toggle  
 - Does not calculate image type (real/virtual, upright/inverted) explicitly  
-
----
-
-### Tool: Projectile Motion
-**Category:** Mechanics  
-**Version:** v1.0 (2025-08-22)
-
-**Purpose**  
-Simulate projectile trajectories under uniform gravity, compute flight characteristics, and plot the motion curve.
-
-**Inputs**  
-- **Initial speed (v₀)**: numeric value:contentReference[oaicite:0]{index=0}  
-  - Units: m/s, km/h, mph  
-- **Launch angle (θ)**: numeric value:contentReference[oaicite:1]{index=1}  
-  - Units: degrees, radians  
-- **Initial height (h₀)**: numeric value:contentReference[oaicite:2]{index=2}  
-  - Units: m, ft  
-
-**Outputs**  
-- Range (m)  
-- Flight time (s)  
-- Maximum height (m)  
-- Impact speed (m/s) with horizontal and vertical components:contentReference[oaicite:3]{index=3}  
-- Trajectory plot with x–y axes in metres  
-
-**UI & Interaction**  
-- Three input rows: v₀ with unit dropdown, θ with unit dropdown, h₀ with unit dropdown  
-- **Calculate** button → evaluates trajectory and displays results:contentReference[oaicite:4]{index=4}  
-- **Export Image…** button → saves trajectory plot via `export_figure`:contentReference[oaicite:5]{index=5}  
-- Result label shows computed values on two lines  
-- Embedded matplotlib figure with navigation toolbar  
-
-**Algorithm / Implementation**  
-- Converts units:  
-  - v₀: km/h ÷3.6, mph ×0.44704  
-  - θ: degrees → radians  
-  - h₀: ft ×0.3048:contentReference[oaicite:6]{index=6}  
-- Gravity constant g = 9.81 m/s²  
-- Solve quadratic for flight time:  
-  \[
-  y(t) = h₀ + v₀ \sinθ \cdot t - \tfrac{1}{2} g t^2
-  \]  
-  → discriminant used to find positive root  
-- Range: \(R = v₀ \cosθ \cdot T\)  
-- Max height: \(h₀ + \frac{(v₀ \sinθ)^2}{2g}\)  
-- Impact speed: \(\sqrt{v_x^2 + v_y^2}\)  
-- Generates trajectory with 600 points for smooth curve:contentReference[oaicite:7]{index=7}  
-
-**Units & Conversion**  
-- Input accepted in m/s, km/h, mph; degrees/radians; m/ft  
-- Output always in SI units (m, s, m/s)  
-
-**Edge Cases & Validation**  
-- Negative discriminant → `"No real impact (check inputs)."`  
-- Non-numeric input → `"Invalid input."`  
-- Initial height = 0 accepted (flat ground)  
-
-**Data Sources**  
-- Classical projectile motion equations  
-- Logging via `core.data.functions.log.add_log_entry`:contentReference[oaicite:8]{index=8}
-
-**Logging & Export**  
-- Logs under tool = `"Projectile Motion"`:  
-  - Action = `"Calculate"` with `{v, θ, h, R, T, Hmax, vimp}`  
-  - Action = `"Error"` with `{msg}`:contentReference[oaicite:9]{index=9}  
-- Export available for trajectory plot  
-
-**Chaining**  
-- Results can feed into mechanics energy or impact-related tools  
-
-**Tests**  
-- Example 1: v₀=20 m/s, θ=45°, h₀=0 m → R≈40.77 m, T≈2.88 s, Hmax≈10.20 m  
-- Example 2: v₀=72 km/h, θ=30°, h₀=0 m → R≈35.3 m  
-- Example 3: h₀=10 ft (~3.048 m), v₀=20 m/s, θ=45° → longer flight time and range  
-- Example 4: invalid angle input (“abc”) → error  
-
-**Known Limitations / TODO**  
-- Ignores air resistance and wind drag  
-- Flat ground only (no terrain modelling)  
-- No unit selection for outputs  
-- Does not compute landing angle explicitly  
-
----
-
-### Tool: Average Speed
-**Category:** Mechanics  
-**Version:** v1.0 (2025-08-22)
-
-**Purpose**  
-Calculate the average speed from a given distance and travel time, with flexible unit support for input and output.
-
-**Inputs**  
-- **Distance (d)**: numeric value:contentReference[oaicite:0]{index=0}  
-  - Units: m, km, mile, ft  
-- **Time (t)**: numeric value:contentReference[oaicite:1]{index=1}  
-  - Units: s, min, hr  
-- **Output unit**: dropdown selection:contentReference[oaicite:2]{index=2}  
-  - Options: m/s, km/h, mph  
-
-**Outputs**  
-- Average speed displayed as `Speed = value unit` with 6 significant figures:contentReference[oaicite:3]{index=3}  
-- Error message `"Invalid input."` if computation fails:contentReference[oaicite:4]{index=4}
-
-**UI & Interaction**  
-- Input row for distance with value + unit selector  
-- Input row for time with value + unit selector  
-- Dropdown for output speed unit  
-- **Compute** button → evaluates average speed:contentReference[oaicite:5]{index=5}  
-- Result displayed in label  
-
-**Algorithm / Implementation**  
-- Converts distance to metres:  
-  - km ×1000, mile ×1609.344, ft ×0.3048  
-- Converts time to seconds:  
-  - min ×60, hr ×3600  
-- Computes speed = d/t (in m/s)  
-- Converts result to chosen unit:  
-  - km/h ÷(1/3.6), mph ÷(1/2.23693629)  
-- Logs result or error via `core.data.functions.log.add_log_entry`:contentReference[oaicite:6]{index=6}  
-
-**Units & Conversion**  
-- Distance input: m, km, mile, ft  
-- Time input: s, min, hr  
-- Output selectable: m/s, km/h, mph  
-
-**Edge Cases & Validation**  
-- Time = 0 → error (`"t=0"`)  
-- Non-numeric inputs → `"Invalid input."`  
-- Negative values accepted mathematically but physically nonsensical  
-
-**Data Sources**  
-- Classical definition of average speed (d/t)  
-- Unit conversion constants embedded in code:contentReference[oaicite:7]{index=7}
-
-**Logging & Export**  
-- Logs under tool = `"Average Speed"`:  
-  - Action = `"Compute"` with `{d_m, t_s, v_out, unit}`  
-  - Action = `"Error"` with `{msg}`:contentReference[oaicite:8]{index=8}  
-- No export  
-
-**Chaining**  
-- Output average speed usable in mechanics energy or motion-related tools  
-
-**Tests**  
-- Example 1: d=100 m, t=10 s, output m/s → 10 m/s  
-- Example 2: d=1 km, t=2 min, output km/h → 30 km/h  
-- Example 3: d=1 mile, t=1 min, output mph → ~60 mph  
-- Example 4: d=100 ft, t=10 s, output m/s → ~3.048 m/s  
-- Example 5: invalid input (“abc”) → error  
-
-**Known Limitations / TODO**  
-- Only constant average speed, no instantaneous velocity  
-- No graphical or tabular output  
-- Limited unit set  
 
 ---
 
