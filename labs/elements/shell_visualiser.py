@@ -237,7 +237,9 @@ class Tool(QDialog):
         g_n = gl.MeshData.sphere(rows=12, cols=12, radius=0.25)
         for i in range(protons):
             x, y, z = (random.uniform(-0.7,0.7) for _ in range(3))
-            p = gl.GLMeshItem(meshdata=g_p, smooth=True, color=(0.9, 0.3, 0.3, 1.0), shader='shaded')
+            p = gl.GLMeshItem(meshdata=g_p, smooth=True,
+                  color=(0.9, 0.3, 0.3, 1.0),
+                  shader='shaded')
             p.translate(x, y, z)
             self.view3d.addItem(p)
             self._nucleus.append(p)

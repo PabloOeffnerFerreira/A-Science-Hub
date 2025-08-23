@@ -1023,554 +1023,137 @@ Search molecules in PubChem by name, CID, SMILES, InChI, or InChIKey. Displays m
 
 ---
 
-### Tool: Shell Visualiser
+## Element Lab
 
+**Name:** Element Lab
 **Category:** Chemistry
-**Version:** v2.0 (2025-08-22)
+**Version:** v1.0 (2025-08-23)
 
-**Purpose**
-Visualize electron shell structures of atoms in both 2D and 3D. Provides an illustrative view of electrons, shells, and nucleus composition. Useful for teaching atomic structure, ion formation, and general chemistry visualization.
+### Purpose
 
-**Inputs**
+The Element Lab provides a unified environment to interactively explore atomic and elemental data. It integrates multiple sub-tools into one cohesive module, allowing both quick lookups and in-depth analysis. The target audience includes students (for learning and visualization), educators (for demonstrations), and developers (for extending with custom data and export features).
 
-* **Element Symbol**: text input (e.g., `H`, `He`, `Fe`)
-* **Charge**: optional integer (e.g., `+3`, `-2`)
-
-**Outputs**
-
-* 2D schematic of electron shells (electrons as dots, shells as circles, nucleus labeled)
-* 3D interactive model with rotating camera, nucleus cluster (protons in red, neutrons in grey), electron rings, and moving electrons
-* Status message confirming rendering or saved export
-
-**UI & Interaction**
-
-* Text entry for element symbol and charge
-* Buttons:
-
-  * **Draw** → render shells in both 2D and 3D
-  * **Export Image** → save snapshot of current tab (2D figure or 3D render)
-  * **Start/Stop Animation** → toggle orbiting electrons and rotating camera
-* Tabs:
-
-  * **2D View** (matplotlib with navigation toolbar)
-  * **3D View** (PyQtGraph OpenGL; shown if available)
-* Status label shows rendering info or save path
-
-**Algorithm / Implementation**
-
-* Loads element data via `load_element_data()`
-* Electron shells adjusted for ionic charge (`adjust_shells_for_charge`)
-* Proton and neutron counts derived from JSON data (`get_protons`, `get_atomic_mass`)
-* **2D rendering**: matplotlib circles for shells and electrons, nucleus labeled
-* **3D rendering**:
-
-  * Protons and neutrons as shaded spheres clustered in nucleus
-  * Shell rings drawn as line plots
-  * Electrons as spheres positioned along rings
-  * Label rendered above nucleus with formatted ion symbol
-  * Optional animation updates electron positions and rotates camera
-
-**Units & Conversion**
-
-* Illustrative only (not to physical scale)
-
-**Edge Cases & Validation**
-
-* Invalid element symbol → warning popup
-* Missing shell data → warning popup
-* Charge adjustment gracefully handles anions/cations
-* If 3D stack unavailable, tool still functions in 2D
-
-**Data Sources**
-
-* Periodic table JSON via `chemistry_utils.load_element_data()`
-* Keys used: `shells`, `atomicNumber`, `atomicMass`
-
-**Logging & Export**
-
-* 2D exports via `export_figure()`
-* 3D exports via OpenGL framebuffer capture + `imageio`
-* Log entries record symbol, charge, shells, and image path
-
-**Chaining**
-
-* Provides shell data and saved images for reuse in teaching tools or chain mode
-
-**Tests**
-
-* `H` → single electron
-* `He` → 2 electrons in first shell
-* `Ne` → 2 + 8 distribution
-* `Fe³⁺` → adjusted electron shells with 3 fewer electrons
-* Large-Z atoms scaled automatically to fit view
-
-**Known Limitations / TODO**
-
-* Depends on external JSON database for element data
-* 3D visualization requires `pyqtgraph.opengl` (falls back to 2D if unavailable)
-* Nucleus distribution randomized (not physically accurate)
-* Future work: export SVG, higher-res 3D, or orbital hybridization models
+It replaces earlier standalone modules (element viewer, shell visualiser, isotopic notation, comparator, property grapher, phase predictor) by embedding them into one consolidated UI with shared navigation and search.
 
 ---
 
+### Inputs
 
-### Tool: Element Comparator
-**Category:** Chemistry  
-**Version:** v1.0 (2025-08-22)
-
-**Purpose**  
-Compare properties of up to three elements side by side. Highlights differences visually and supports filtering by property categories. Useful for quickly contrasting atomic, chemical, and physical traits.
-
-**Inputs**  
-- **Element selectors**: three dropdowns (editable, auto-filled with periodic table symbols)  
-- **Property tabs**: checkboxes grouped into categories (Atomic, Chemical, Physical)  
-  - **Select All / Select None** buttons per category  
-- **Filter**: text field to search properties by name/description  
-- **Compare button**: generates comparison table  
-
-**Outputs**  
-- Comparison table:  
-  - First column: Property name  
-  - Subsequent columns: values for each chosen element  
-  - Numeric values formatted to 3 decimals + unit  
-  - Highlights:  
-    - Largest numeric value → **bold blue**  
-    - Smallest numeric value → *italic red*  
-    - Non-numeric differing values → italic  
-
-**UI & Interaction**:contentReference[oaicite:1]{index=1}  
-- Three element dropdowns  
-- Tab widget with categories: Atomic, Chemical, Physical  
-- Property checkboxes with tooltips (description)  
-- Filter field hides checkboxes dynamically  
-- “Compare” button → fills table with selected properties and formatted values  
-- Table supports sorting by column  
-
-**Algorithm / Implementation**  
-- Element data loaded via `load_element_data()` from `ptable.json`:contentReference[oaicite:2]{index=2}  
-- `PROPERTY_METADATA` defines:  
-  - Key → Label, Unit, Category, Description, Numeric flag  
-- Properties implemented:  
-  - **Atomic**:  
-    - Atomic Number (protons)  
-    - Atomic Mass (u)  
-  - **Chemical**:  
-    - Electronegativity (Pauling scale)  
-    - Type (category, e.g., metal, noble gas)  
-    - Oxidation States (list of common states)  
-  - **Physical**:  
-    - Boiling Point (K)  
-    - Melting Point (K)  
-    - Density (g/cm³)  
-- `_compare()` builds table:  
-  - Validates unique elements  
-  - Collects checked properties  
-  - Formats values with `_fmt()`  
-  - Applies highlighting (max/min numeric, differing categorical values)  
-
-**Units & Conversion**  
-- Atomic Mass: u  
-- Electronegativity: Pauling (dimensionless)  
-- Boiling/Melting Point: K  
-- Density: g/cm³  
-
-**Edge Cases & Validation**  
-- Duplicate elements selected → warning “Select different elements.”  
-- Unknown symbol → warning “not found”  
-- Missing property value → shown as em-dash `—`  
-- Non-numeric lists (oxidation states) → joined string  
-
-**Data Sources**  
-- `ptable.json`: periodic table database (symbols, names, atomic number, mass, shells, etc.)  
-- `PROPERTY_METADATA` inside tool defines property metadata  
-
-**Logging & Export**  
-- No logging or export built-in  
-
-**Chaining**  
-- Could integrate with Shell Visualiser or Molecule Library (e.g., compare → visualize shell)  
-
-**Tests**  
-- Example 1: Compare H, He, Li → shows differences in atomic mass and properties  
-- Example 2: Compare Fe, Cu, Zn → density and boiling point highlighted  
-- Example 3: Compare noble gases → oxidation states show italics for differences  
-
-**Known Limitations / TODO**  
-- Only 3 elements supported simultaneously  
-- Properties limited to metadata keys (AtomicNumber, Mass, Electronegativity, BoilingPoint, MeltingPoint, Density, Type, OxidationStates)  
-- No export (CSV/PNG) option yet  
-- Could expand metadata to include radii, conductivity, heat capacity, etc.  
+* **Element Identifier:** symbol (e.g. "Fe"), name ("Iron"), or atomic number (26).
+* **Charge (integer):** optional, for ion visualisation in Shell Visualiser.
+* **Mass Number (integer):** required for Isotopic Notation.
+* **Temperature (float, string with unit):** accepts plain numbers or suffixed with K, °C, °F (e.g. "25", "77F", "300K").
+* **Pressure (float):** optional, defaults to 1 atm, for Phase Predictor.
+* **Property Selection:** choice of atomic/physical/chemical properties for Grapher and Comparator.
 
 ---
 
-### Tool: Element Comparator
-**Category:** Chemistry  
-**Version:** v1.0 (2025-08-22)
+### Outputs
 
-**Purpose**  
-Compare properties of up to three elements side by side. Highlights differences visually and supports filtering by property categories. Useful for quickly contrasting atomic, chemical, and physical traits.
+* **Element Viewer:** complete descriptive metadata, atomic parameters, electron configuration, densities, phase points, and textual summary.
+* **Shell Visualiser:** 2D orbital diagrams, optional 3D GL-based electron orbit simulations with animated rotation.
+* **Isotopic Notation:** full isotope decomposition, neutron counts, nucleon pie charts, natural abundance if available.
+* **Property Grapher:** scatterplots of chosen X vs Y property, with category-based coloring and interactive hover tooltips.
+* **Element Comparator:** tabulated side-by-side property comparison across up to three elements, automatic highlighting of max/min values.
+* **Phase Predictor:** state classification (solid/liquid/gas) under user-defined T/P conditions with formatted summary.
 
-**Inputs**  
-- **Element selectors**: three dropdowns (editable, auto-filled with periodic table symbols)  
-- **Property tabs**: checkboxes grouped into categories (Atomic, Chemical, Physical)  
-  - **Select All / Select None** buttons per category  
-- **Filter**: text field to search properties by name/description  
-- **Compare button**: generates comparison table  
-
-**Outputs**  
-- Comparison table:  
-  - First column: Property name  
-  - Subsequent columns: values for each chosen element  
-  - Numeric values formatted to 3 decimals + unit  
-  - Highlights:  
-    - Largest numeric value → **bold blue**  
-    - Smallest numeric value → *italic red*  
-    - Non-numeric differing values → italic  
-
-**UI & Interaction**:contentReference[oaicite:1]{index=1}  
-- Three element dropdowns  
-- Tab widget with categories: Atomic, Chemical, Physical  
-- Property checkboxes with tooltips (description)  
-- Filter field hides checkboxes dynamically  
-- “Compare” button → fills table with selected properties and formatted values  
-- Table supports sorting by column  
-
-**Algorithm / Implementation**  
-- Element data loaded via `load_element_data()` from `ptable.json`:contentReference[oaicite:2]{index=2}  
-- `PROPERTY_METADATA` defines:  
-  - Key → Label, Unit, Category, Description, Numeric flag  
-- Properties implemented:  
-  - **Atomic**:  
-    - Atomic Number (protons)  
-    - Atomic Mass (u)  
-  - **Chemical**:  
-    - Electronegativity (Pauling scale)  
-    - Type (category, e.g., metal, noble gas)  
-    - Oxidation States (list of common states)  
-  - **Physical**:  
-    - Boiling Point (K)  
-    - Melting Point (K)  
-    - Density (g/cm³)  
-- `_compare()` builds table:  
-  - Validates unique elements  
-  - Collects checked properties  
-  - Formats values with `_fmt()`  
-  - Applies highlighting (max/min numeric, differing categorical values)  
-
-**Units & Conversion**  
-- Atomic Mass: u  
-- Electronegativity: Pauling (dimensionless)  
-- Boiling/Melting Point: K  
-- Density: g/cm³  
-
-**Edge Cases & Validation**  
-- Duplicate elements selected → warning “Select different elements.”  
-- Unknown symbol → warning “not found”  
-- Missing property value → shown as em-dash `—`  
-- Non-numeric lists (oxidation states) → joined string  
-
-**Data Sources**  
-- `ptable.json`: periodic table database (symbols, names, atomic number, mass, shells, etc.)  
-- `PROPERTY_METADATA` inside tool defines property metadata  
-
-**Logging & Export**  
-- No logging or export built-in  
-
-**Chaining**  
-- Could integrate with Shell Visualiser or Molecule Library (e.g., compare → visualize shell)  
-
-**Tests**  
-- Example 1: Compare H, He, Li → shows differences in atomic mass and properties  
-- Example 2: Compare Fe, Cu, Zn → density and boiling point highlighted  
-- Example 3: Compare noble gases → oxidation states show italics for differences  
-
-**Known Limitations / TODO**  
-- Only 3 elements supported simultaneously  
-- Properties limited to metadata keys (AtomicNumber, Mass, Electronegativity, BoilingPoint, MeltingPoint, Density, Type, OxidationStates)  
-- No export (CSV/PNG) option yet  
-- Could expand metadata to include radii, conductivity, heat capacity, etc.  
+All sub-tools provide options for exporting charts/images or saving to project directories.
 
 ---
 
-### Tool: Element Viewer
-**Category:** Chemistry  
-**Version:** v1.0 (2025-08-22)
+### UI & Interaction
 
-**Purpose**  
-Browse and inspect periodic table elements. Provides quick search, detailed property display, and a favorites system.
-
-**Inputs**  
-- **Search box**: free text, matches across name, symbol, number, category, shells, electron configuration, appearance, summary  
-- **Favorites checkbox**: toggle between all elements and favorites only  
-- **Refresh button**: reloads the element list  
-- **List selection**: choose an element to view its details  
-
-**Outputs**  
-- **Element details panel**:  
-  - Name and Symbol  
-  - Atomic Number  
-  - Category  
-  - Atomic Mass (g/mol)  
-  - Shell configuration  
-  - Electron configuration  
-  - Density (g/cm³)  
-  - Melting Point (K)  
-  - Boiling Point (K)  
-  - Appearance  
-  - Summary (text description)  
-
-**UI & Interaction**:contentReference[oaicite:1]{index=1}  
-- Top bar: Search, “Show Favorites Only” checkbox, Refresh button  
-- Main list: Elements sorted by atomic number, labelled as `"Sym  Name   (Number)"`  
-  - Favorites highlighted in **gold** and bold font  
-- “Toggle Favorite” button: add/remove selected element from favorites  
-- Details panel: shows structured properties in formatted HTML (Consolas font, read-only)  
-
-**Algorithm / Implementation**  
-- `load_element_data()` loads element dataset from `ptable.json` (periodic table)  
-- `_flatten_elements()` builds searchable element dicts with `"search_blob"` field for efficient filtering  
-- Search filter → matches substring in `search_blob`  
-- Favorites stored in JSON at `ELEMENT_FAVS_PATH` (if path defined)  
-  - `_load_favs()` loads favorites (set of symbols)  
-  - `_save_favs()` writes favorites persistently  
-
-**Units & Conversion**  
-- Mass: g/mol  
-- Density: g/cm³  
-- Temperature: K  
-
-**Edge Cases & Validation**  
-- No matching elements → clears list and details  
-- Missing fields in JSON → displays em-dash `—`  
-- No selection → disables favorite toggle action  
-
-**Data Sources**  
-- `ptable.json` (element database)  
-  - Fields: name, symbol, number, category, atomic_mass, shells, electron_configuration, density, melt, boil, appearance, summary  
-- Favorites file: `ELEMENT_FAVS_PATH` (JSON set of element symbols)  
-
-**Logging & Export**  
-- No logging or exports  
-
-**Chaining**  
-- Not directly chainable, but can feed symbols into other chemistry tools (e.g., Shell Visualiser, Molecule Library)  
-
-**Tests**  
-- Example 1: Search `"Fe"` → list shows Iron, details display atomic number 26, density 7.87 g/cm³  
-- Example 2: Favorites toggle → shows only starred elements  
-- Example 3: Search `"noble gas"` → filters He, Ne, Ar, etc.  
-
-**Known Limitations / TODO**  
-- No graphing (see Property Grapher for trends)  
-- Favorites tied to single storage path only (no per-user profiles)  
-- No export of details to file  
-- Could add sorting by property (e.g., by mass, electronegativity)  
+* Left sidebar: searchable list of all elements, with filters and quick navigation.
+* Toolbar: direct buttons for each sub-tool (Viewer, Shells, Isotopes, Properties, Compare, Phase).
+* Embedded stacked layout: each tool runs as a child dialog but behaves like a single integrated window.
+* Viewer supports "Favorites" with persistent storage in JSON (`ELEMENT_FAVS_PATH`).
+* Shell Visualiser provides tabs for 2D (matplotlib) and 3D (pyqtgraph OpenGL) renderings.
+* Property Grapher supports category filtering (e.g., transition metals only).
+* Comparator uses tabbed property groups and checkboxes to control which values to compare.
 
 ---
 
-### Tool: Isotopic Notation
-**Category:** Chemistry  
-**Version:** v1.0 (2025-08-22)
+### Algorithms / Equations
 
-**Purpose**  
-Compute isotopic notation for an element given its symbol and mass number. Displays proton/neutron composition, atomic mass, and natural abundance if available, along with a nucleon pie chart.
+* **Shell Visualiser:**
 
-**Inputs**  
-- **Element Symbol**: string (e.g., `H`, `He`, `Fe`)  
-- **Mass Number (A)**: integer  
+  * Adjusts shell counts for ionisation states (electron removal/addition).
+  * Electrons placed evenly on circular orbits (2D) or distributed on rings with animated rotation (3D).
+  * Neutron estimation via rounded atomic mass – Z.
+* **Isotopic Notation:**
 
-**Outputs**  
-- **Isotopic Notation**: formatted as `Aₛᵧₘ` (e.g., ¹⁴C, ²³⁸U)  
-- **Element info**:  
-  - Name  
-  - Symbol  
-  - Atomic Number (Z, protons)  
-  - Neutrons (A − Z)  
-  - Atomic Mass (u)  
-  - Natural Abundance (%) if known  
-- **Pie Chart**: showing proton vs neutron composition  
-- **Exported Chart**: PNG file saved to disk with timestamped filename  
+  * N = A – Z (mass number minus atomic number).
+  * Abundance % if available, else shown as unknown.
+  * Pie chart: protons vs neutrons.
+* **Property Grapher:**
 
-**UI & Interaction**:contentReference[oaicite:1]{index=1}  
-- Two text inputs: element symbol, mass number  
-- “Calculate” button → computes info and renders chart  
-- “Export Chart” button → saves pie chart (if not already saved)  
-- Read-only result box: formatted HTML output (notation, info, path to saved image)  
+  * Data points drawn from periodic table JSON.
+  * X and Y properties numeric only; tooltip shows values.
+  * Category coloring scheme applied consistently (alkali = red, halogens = blue, etc.).
+* **Comparator:**
 
-**Algorithm / Implementation**  
-- Loads element dataset via `load_element_data()` (from `ptable.json`)  
-- Checks inputs: symbol present, mass number integer, A ≥ Z  
-- Finds isotope data in `el["isotopes"]` list if available  
-- Computes:  
-  - Neutrons = A − Z  
-  - Atomic Mass = isotope mass if found, otherwise element’s average mass  
-  - Abundance = isotope abundance if found  
-- Renders pie chart (protons vs neutrons) with Matplotlib  
-- Saves chart via `export_figure()` to `IMAGES_DIR` if available  
-- Logs action with `add_log_entry` (tool = Isotopic Notation, action = Compute)  
+  * Auto-highlights largest values in blue, smallest in red italics.
+  * Non-numeric differing values italicised.
+* **Phase Predictor:**
 
-**Units & Conversion**  
-- Atomic Mass: unified atomic mass units (u)  
-- Abundance: percentage (formatted to 3 decimals, or “Unknown”)  
+  * Simple three-way classification:
 
-**Edge Cases & Validation**  
-- Missing symbol → error “Element symbol not found”  
-- Non-integer mass number → error “Mass number must be an integer”  
-- A < Z → error “Mass number cannot be less than atomic number”  
-- Unknown isotope mass → falls back to average atomic mass  
-- No abundance data → “Unknown” shown  
-
-**Data Sources**  
-- `ptable.json` (element dataset with isotopes if included)  
-- `chemistry_utils.load_element_data()` for element lookup  
-
-**Logging & Export**  
-- Logs: tool = `"Isotopic Notation"`, action = `"Compute"`, data includes symbol, A, Z, neutrons, image path  
-- PNG chart export stored in `IMAGES_DIR` (if defined), else default directory  
-
-**Chaining**  
-- Computed isotopic data could be reused in nuclear physics tools or decay calculators  
-
-**Tests**  
-- Example 1: Symbol = `C`, A = `14` → 14₍C₎, Z = 6, N = 8, abundance ≈ low, pie chart 6p:8n  
-- Example 2: Symbol = `U`, A = `238` → 238₍U₎, Z = 92, N = 146, chart 92p:146n  
-- Example 3: Invalid: `H`, A = `0` → error message  
-
-**Known Limitations / TODO**  
-- Requires isotope data in JSON for exact masses and abundances  
-- Currently 2D pie chart only; could expand to show multiple isotope abundances for same element  
-- No direct link to Half-Life Calculator (future chain mode candidate)  
+    * `T < melt` → solid
+    * `melt <= T < boil` → liquid
+    * `T >= boil` → gas
 
 ---
 
-### Tool: Molar Mass Calculator
-**Category:** Chemistry  
-**Version:** v1.0 (2025-08-22)
+### Units & Conversion
 
-**Purpose**  
-Calculate the molar mass (molecular weight) of a chemical compound from its molecular formula. Supports hydrates and provides a detailed breakdown per element.
-
-**Inputs**  
-- **Formula**: molecular formula string (e.g., `H2O`, `C6H12O6`, `CuSO4·5H2O`)  
-
-**Outputs**  
-- Text report with:  
-  - Each element’s contribution → symbol, name, count, subtotal in g/mol  
-  - List of unknown/massless elements (if any)  
-  - **Total Molecular Weight** in g/mol  
-
-**UI & Interaction**:contentReference[oaicite:1]{index=1}  
-- Text field for formula entry (with placeholder examples)  
-- Buttons: **Calculate**, **Clear**  
-- Output area (read-only text box) for breakdown + result  
-- Clear button wipes input and output  
-
-**Algorithm / Implementation**  
-- Uses `parse_hydrate(formula)` from `chemistry_utils` to parse chemical formulas (handles hydrates with “·”)  
-- Iterates over element counts:  
-  - Looks up atomic mass using `atomic_mass_u(data)` from element dataset  
-  - Computes subtotal = atomic mass × count  
-  - Accumulates into `total_mass`  
-- Unknown elements or missing mass flagged separately  
-- Logs each calculation via `add_log_entry` with formula, total mass, and breakdown  
-
-**Units & Conversion**  
-- Mass reported in grams per mole (g/mol)  
-
-**Edge Cases & Validation**  
-- Empty input → message: “Please enter a molecular formula.”  
-- Parsing errors → “Error parsing formula: …”  
-- Unknown symbols or missing atomic mass → listed under “Unknown or massless elements”  
-- Hydrates supported (e.g., `CuSO4·5H2O`)  
-
-**Data Sources**  
-- `ptable.json` via `load_element_data()`  
-- Functions from `chemistry_utils.py`:  
-  - `parse_hydrate(formula)` → returns element counts dict  
-  - `atomic_mass_u(data)` → retrieves atomic mass  
-
-**Logging & Export**  
-- Each calculation logged with tool = `"Molar Mass Calculator"`, action = `"Compute"`, data = {formula, mass_g_mol, breakdown}  
-- No file export (result text only in UI)  
-
-**Chaining**  
-- Outputs (molar mass, breakdown) could feed into Reaction Balancer or Phase Predictor tools in chain mode  
-
-**Tests**  
-- Example 1: Formula `H2O` → H ×2 = 2.01588, O ×1 = 15.99900 → Total ≈ 18.015 g/mol  
-- Example 2: Formula `C6H12O6` → C ×6, H ×12, O ×6 → Total ≈ 180.156 g/mol  
-- Example 3: Formula `CuSO4·5H2O` → includes hydrate, total ≈ 249.685 g/mol  
-- Example 4: Formula with invalid element (e.g., `Xx2`) → listed as unknown  
-
-**Known Limitations / TODO**  
-- No advanced parser (cannot handle parentheses or complex notations like `(NH4)2SO4`)  
-- Relies on `ptable.json` → incomplete/missing elements will cause “Unknown” messages  
-- No export to CSV/PNG yet (UI only)  
-- Could expand to show average molar mass for mixtures  
+* Temperatures converted internally to Kelvin.
+* Atomic masses in unified atomic mass units (u).
+* Densities in g/cm³.
+* Boiling/melting points in Kelvin.
+* Consistent conversion functions from `chemistry_utils`.
 
 ---
 
-### Tool: Phase Predictor
-**Category:** Chemistry  
-**Version:** v1.0 (2025-08-22)
+### Edge Cases & Validation
 
-**Purpose**  
-Predict the physical phase (solid, liquid, gas) of an element at a given temperature and pressure using its melting and boiling points.
+* Handles missing or incomplete JSON values gracefully (error messages shown instead of crashes).
+* Viewer: skips fields not present in dataset.
+* Shell Visualiser: warns if element has no shell data or atomic number.
+* Isotope Notation: validates integer inputs, warns on negative neutron count.
+* Phase Predictor: displays "No Data" if melting/boiling points unavailable.
+* Comparator: disallows duplicate element selections.
+* Grapher: skips elements missing selected X/Y properties.
 
-**Inputs**  
-- **Element Symbol**: string (e.g., `H`, `Fe`, `O`)  
-- **Temperature**: number with unit suffix (`°C`, `°F`, `K`)  
-  - Examples: `25`, `77F`, `300K`  
-- **Pressure** (optional): number in atm (default = 1 atm)
+---
 
-**Outputs**  
-- **Melting point** (K)  
-- **Boiling point** (K)  
-- **Predicted phase** at given T, P (colored: blue = solid, orange = liquid, red = gas)
+### Tests
 
-**UI & Interaction**:contentReference[oaicite:0]{index=0}  
-- Inputs: symbol, temperature, pressure  
-- **Check Phase** button triggers evaluation  
-- Result shown as formatted HTML in a label
+Unit and manual tests cover:
 
-**Algorithm / Implementation**:contentReference[oaicite:1]{index=1}  
-- Loads element data via `load_element_data()`  
-- Parses temperature with `parse_temperature(...)` and converts to Kelvin via `to_kelvin(...)`  
-- Retrieves `melt` and `boil` (fallbacks: `MeltingPoint`, `BoilingPoint`)  
-- Logic:  
-  - `T < melt → solid`  
-  - `melt ≤ T < boil → liquid`  
-  - `T ≥ boil → gas`  
-- Displays a formatted message with MP, BP, and colored phase; logs action via `add_log_entry(...)`
+* **Viewer:** searching by symbol, name, number. Verification of details panel formatting.
+* **Shell Visualiser:** correct electron distribution for known configurations (H = 1, He = 2, O = 2,6). Charge adjustment tested (Na⁺ → 2,8 vs Na → 2,8,1). 3D renderer tested with mock GL.
+* **Isotopic Notation:** isotope data for C-12, C-14, U-238. Validates neutron calculation and pie chart output.
+* **Property Grapher:** X = mass, Y = boiling point: verifies correct scatter size, tooltips, and category filter (transition metals only).
+* **Comparator:** H, O, Fe: checks table formatting, highlight rules, and tooltip descriptions.
+* **Phase Predictor:** tested with known data points (H₂O \~273K melting, \~373K boiling). Handles inputs like "100C", "32F", "373K".
 
-**Units & Conversion**  
-- Temperature internally in Kelvin; inputs may be °C/°F/K (auto-converted)
+---
 
-**Edge Cases & Validation**:contentReference[oaicite:2]{index=2}  
-- Invalid temperature format → red error (“Enter a valid temperature…”)  
-- Unknown element symbol → red error  
-- Missing melting/boiling data → message “No melting or boiling point data available.” and log `NoData`
+### Integration & Logging
 
-**Data Sources**  
-- Periodic table dataset from `load_element_data()` (ptable JSON)
+* Uses central `chemistry_utils.load_element_data()` for all property data.
+* Logs every action (draw, compute, compare, predict) with `add_log_entry`.
+* Exports images via `image_export.export_figure`.
+* Persistent favorites stored as JSON.
 
-**Logging & Export**:contentReference[oaicite:3]{index=3}  
-- Logs:  
-  - `Predict` with `{symbol, T_K, P_atm, phase}`  
-  - `NoData` if element lacks MP/BP
+---
 
-**Chaining**  
-- Phase result could feed into future thermodynamics tools (e.g., density/viscosity by phase)
+### Known Limitations
 
-**Tests**  
-- `Fe`, `T=300K` → Solid  
-- `H2O`, `T=298K` → Liquid (with correct MP/BP shown)  
-- `Ne`, `T=350K` → Gas
-
-**Known Limitations / TODO**  
-- Ignores pressure dependence of phase boundaries (uses 1 atm MP/BP)  
-- Elements lacking MP/BP cannot be predicted  
-- Could add support for phase diagrams and sublimation where relevant
+* 3D visualiser requires PyQtGraph with OpenGL; gracefully disables otherwise.
+* No error estimation for phase prediction (sharp thresholds).
+* Isotopic abundances incomplete for many elements.
+* Grapher currently limited to two properties; no trendline fitting.
 
 ---
 
@@ -1641,294 +1224,118 @@ Automatically balance chemical reactions. Accepts one or more unbalanced reactio
 
 ---
 
-### Tool: Codon Lookup
-**Category:** Biology  
-**Version:** v1.0 (2025-08-22)
+## DNA Lab
 
-**Purpose**  
-Lookup RNA codons (triplets of A, U, G, C) and map them to amino acids. Shows the corresponding amino acid, its functional group, and a pie chart of amino acid group distributions with the queried group highlighted.
+**Name:** DNA Lab
+**Category:** Biology
+**Version:** v1.0 (2025-08-23)
 
-**Inputs**  
-- **Codon**: string (3 characters, composed of A, U, G, C; e.g., `AUG`, `UUU`, `GGA`)  
+### Purpose
 
-**Outputs**  
-- Amino acid (3-letter abbreviation, e.g., Met, Phe, Gly)  
-- Group classification (Hydrophobic, Polar, Charged, Stop Codon)  
-- Pie chart showing distribution of amino acid groups, with queried group exploded/highlighted  
+The DNA Lab is a bioinformatics-oriented module within ASH designed to explore nucleic acid and protein sequences. It provides utilities for codon translation, sequence statistics, alignments, and data parsing. The goal is to give students and researchers an integrated environment to analyze DNA/RNA and their protein products without requiring external software.
 
-**UI & Interaction**  
-- Text field for codon input (placeholder: `AUG, UUU, GGA …`)  
-- Buttons:  
-  - **Lookup** → performs lookup and updates result field + chart  
-  - **Copy** → copies text output to clipboard  
-  - **Export Chart…** → saves current pie chart as an image  
-- Output area: text field (read-only) showing codon, amino acid, and group  
-- Embedded Matplotlib figure canvas showing distribution pie chart  
-
-**Algorithm / Implementation**  
-- Uses `CODON_TABLE` (RNA codon → amino acid mapping) from `bio_utils.py`:contentReference[oaicite:0]{index=0}  
-- Uses `AMINO_ACID_GROUPS` (amino acid → group mapping):contentReference[oaicite:1]{index=1}  
-- `_lookup()` method:  
-  - Validates codon (length = 3, only A/U/G/C)  
-  - Looks up amino acid and group  
-  - Displays results in text output  
-  - Calls `_plot_group_highlight(group)`  
-  - Adds log entry (`Lookup`)  
-- `_plot_group_highlight(target_group)` method:  
-  - Counts occurrences of groups across codon table  
-  - Draws pie chart of Hydrophobic, Polar, Charged, Stop Codon  
-  - Explodes slice of target group  
-- `_export()` method:  
-  - Calls `export_figure(self.fig)`  
-  - Appends saved path to output field  
-  - Logs export action  
-- Errors handled with `_err(msg)` → shows message in output and logs  
-
-**Units & Conversion**  
-- No units involved (biological categorical mapping only)  
-
-**Edge Cases & Validation**  
-- Invalid codon length or characters → error message: “Codon must be exactly 3 of A,U,G,C.”  
-- Unknown codon not in table → error: “Unknown codon: …”  
-- Export failures → error message with exception text  
-
-**Data Sources**  
-- `bio_utils.py` (`CODON_TABLE`, `AMINO_ACID_GROUPS`):contentReference[oaicite:2]{index=2}  
-- Internal logging (`add_log_entry`)  
-- Figure export via `core.data.functions.image_export.export_figure`:contentReference[oaicite:3]{index=3}  
-
-**Logging & Export**  
-- Logs entries under tool name `"Codon Lookup"`:  
-  - `"Lookup"` with `{codon, aa, group}`  
-  - `"ExportChart"` with `{path}`  
-  - `"Error"` with `{msg}`  
-- Chart export produces PNG file saved to user-selected path  
-
-**Chaining**  
-- Amino acid and group data could be chained into protein/nucleotide analysis tools in the future  
-
-**Tests**  
-- Example 1: Codon `AUG` → Amino acid = Met, Group = Hydrophobic  
-- Example 2: Codon `UUU` → Amino acid = Phe, Group = Hydrophobic  
-- Example 3: Codon `UGA` → Amino acid = STOP, Group = Stop Codon  
-- Example 4: Invalid codon `XYZ` → error  
-
-**Known Limitations / TODO**  
-- Only supports RNA codons (DNA codons with T not accepted)  
-- Amino acid groups simplified into 4 categories; no finer classifications  
-- Pie chart always based on static codon table (no dynamic filtering)  
-- Could add full protein translation mode (input mRNA sequence → amino acid chain)  
+It complements the chemistry-focused labs (Element, Molecule) and expands ASH into molecular biology, offering a pipeline from sequence input → translation → protein statistics and eventually 3D structure prediction (future roadmap).
 
 ---
 
-### Tool: Frame Translation
-**Category:** Biology  
-**Version:** v1.0 (2025-08-22)
+### Inputs
 
-**Purpose**  
-Translate DNA sequences into amino acid sequences across all six reading frames (+1..+3 and −1..−3). Supports ORF detection, reverse-complement inclusion, and visualisation of codon-to-amino-acid mapping with color-coded tracks.
-
-**Inputs**  
-- **DNA sequence**: text input (accepts A/T/C/G and IUPAC codes; `U` auto-converted to `T`)  
-- **Options**:  
-  - *Stop at first stop (*)*: truncate translation at the first stop codon  
-  - *ORF mode*: only translate open reading frames starting at `AUG` and ending at stop  
-  - *Include reverse-complement frames*: include −1..−3 in addition to forward frames  
-  - *Show amino-acid letters*: overlay one-letter AA codes on the visualization  
-
-**Outputs**  
-- Text summary of translations per frame (forward frames always shown; ORF or linear mode)  
-- Graphical display of all frames with codons represented as colored blocks:  
-  - Green = Methionine (start)  
-  - Red = Stop codon (*)  
-  - Grey = Other amino acids  
-- Labels with amino acid one-letter codes if enabled  
-
-**UI & Interaction**  
-- Input field (multi-line) for DNA sequence  
-- Checkboxes for options (stop-first, ORF, reverse frames, show letters)  
-- Button: **Translate & Visualise**  
-- Output text area (read-only) summarizing translation  
-- Matplotlib canvas with navigation toolbar for zoom/pan  
-
-**Algorithm / Implementation**  
-- `_sanitize_dna(s)` cleans input: removes whitespace, uppercases, replaces `U`→`T`, keeps IUPAC bases:contentReference[oaicite:0]{index=0}  
-- `_rc_dna(s)` computes reverse complement:contentReference[oaicite:1]{index=1}  
-- `_to_aa(codon)` maps codon → amino acid (3-letter from `CODON_TABLE`, then → 1-letter from `AA1`):contentReference[oaicite:2]{index=2}  
-- `translate_linear(dna, frame_offset, stop_first)` → linear frame translation, returns AA string + codon spans:contentReference[oaicite:3]{index=3}  
-- `translate_orfs(dna, frame_offset)` → detects ORFs starting at `AUG`, stops at stop codons, returns spans + AA strings:contentReference[oaicite:4]{index=4}  
-- `_render_tracks(...)` draws visualization:  
-  - Forward frames at y = 2.5, 1.5, 0.5  
-  - Reverse frames (if enabled) at y = −0.5, −1.5, −2.5  
-  - Codons drawn as rectangles, colored by type, optional AA letter overlay  
-  - Ruler on x-axis = nucleotide positions (0-based)  
-- `_label_aa(...)` evenly distributes AA letters across codon span:contentReference[oaicite:5]{index=5}  
-- `_run()` orchestrates: validates sequence, runs translation, updates text + plot, logs action  
-
-**Units & Conversion**  
-- Not applicable (purely symbolic sequence translation)  
-
-**Edge Cases & Validation**  
-- Input too short (<3 bases) → error message in output  
-- Unknown codons → mapped to `X`  
-- ORF without stop codon → drawn as open-ended until sequence end  
-- Empty input → clears outputs  
-
-**Data Sources**  
-- Codon table from `core.data.functions.bio_utils.CODON_TABLE`:contentReference[oaicite:6]{index=6}  
-- Amino acid 1-letter mapping (`AA1`) defined locally in tool:contentReference[oaicite:7]{index=7}  
-- Logging via `add_log_entry`  
-
-**Logging & Export**  
-- Logs under tool = `"Frame Translation (with visualisation)"`:  
-  - Action = `"Translate"` with data: `{len, stop_first, orf_mode, include_rev, show_letters}`  
-- No file export; visualization is interactive only  
-
-**Chaining**  
-- Translated sequences and ORFs could feed into other biology tools (e.g., protein property calculators)  
-
-**Tests**  
-- Example 1: Input `"ATGGCCATTGTAATGGGCCGCTGAAAGGGTGCCCGATAG"` (standard test seq)  
-  - Frame +1 (linear) → yields M-A-I-V-M-G-R-*...  
-- Example 2: ORF mode with `ATG...TAA` → detects ORF from start to stop  
-- Example 3: Reverse complement with same input → −1..−3 show valid translations  
-- Example 4: Invalid characters or too short input → “Sequence too short”  
-
-**Known Limitations / TODO**  
-- Only handles DNA input (not direct RNA, though U→T auto-conversion allowed)  
-- ORF detection requires `AUG` as start codon (strict)  
-- No export of translation results as FASTA or text  
-- Could add amino acid frequency plots or frame score summaries  
-- No integration yet with sequence parsers or alignment tools  
+* **Nucleotide sequences:** DNA (ATGC) or RNA (AUGC). Supports direct paste or file import (FASTA, GenBank).
+* **Codons:** single 3-base RNA codons for lookup.
+* **Frames:** translation supports all six reading frames (+1,+2,+3,-1,-2,-3).
+* **Scoring parameters:** for sequence alignments (match, mismatch, gap penalties).
+* **File formats:** FASTA, GenBank text for parsing and storage.
 
 ---
 
-### Tool: GC Content Calculator
-**Category:** Biology  
-**Version:** v1.0 (2025-08-22)
+### Outputs
 
-**Purpose**  
-Calculate the percentage of guanine (G) and cytosine (C) nucleotides in a DNA sequence. GC content is often used to estimate DNA stability and identify genome characteristics.
-
-**Inputs**  
-- **DNA sequence**: string of nucleotides (A, T, C, G).  
-
-**Outputs**  
-- **GC Content**: percentage value displayed with 2 decimal precision.  
-- Example: `GC Content: 42.50%`  
-
-**UI & Interaction**  
-- Single-line text input for DNA sequence  
-- Button: **Compute** → triggers calculation  
-- Result label displays percentage or error message  
-
-**Algorithm / Implementation**  
-- Input sequence normalized to uppercase and stripped of whitespace:contentReference[oaicite:0]{index=0}  
-- Calculation uses `Bio.SeqUtils.gc_fraction(seq)` from Biopython (returns fraction of G and C bases):contentReference[oaicite:1]{index=1}  
-- Multiplied by 100 to give percentage  
-- Success → result shown + logged  
-- Failure (invalid characters, empty sequence) → error message + error log  
-
-**Units & Conversion**  
-- Output in **percentage (%)**  
-
-**Edge Cases & Validation**  
-- Empty input → error message  
-- Invalid characters in sequence → Biopython raises error, caught and displayed  
-- Lowercase input handled automatically (converted to uppercase)  
-
-**Data Sources**  
-- Uses Biopython `gc_fraction` for calculation:contentReference[oaicite:2]{index=2}  
-- Logging via `core.data.functions.log.add_log_entry`  
-
-**Logging & Export**  
-- Logs under tool = `"GC Content"`:  
-  - Action = `"Compute"` with `{input, gc_percent}` and tags `["bio", "dna"]`  
-  - Action = `"Error"` with `{input, error}`  
-
-**Chaining**  
-- Output percentage can be passed into other tools (e.g., sequence analysis, genome profiling)  
-
-**Tests**  
-- Example 1: Input `"ATGC"` → GC Content = `50.00%`  
-- Example 2: Input `"AAAA"` → GC Content = `0.00%`  
-- Example 3: Input `"GGGGCC"` → GC Content = `100.00%`  
-- Example 4: Invalid input `"XYZ"` → Error  
-
-**Known Limitations / TODO**  
-- Only works with standard DNA bases; IUPAC ambiguity codes not supported  
-- No FASTA file input (manual sequence entry only)  
-- Could extend to support multiple sequences or batch input  
-- Could integrate with sequence parsers for direct file analysis  
+* **Codon Lookup:** amino acid, group classification (hydrophobic, polar, charged, stop), visualized as pie charts.
+* **Frame Translation:** amino acid sequences across all reading frames with color-coded codons and stop markers.
+* **Transcription:** DNA → RNA → protein, with codon usage histograms and statistics.
+* **GC Content:** numerical GC% with optional sliding window graphs.
+* **Molecular Weight:** approximate weights for DNA, RNA, and proteins.
+* **Reverse Complement:** strand inversion and complement base replacement.
+* **Alignment:** pairwise sequence alignment string with score, gap penalties applied.
+* **Seq Parser:** parsed records from FASTA/GenBank, stored in internal libraries with metadata (ID, length, type).
 
 ---
 
-### Tool: Molecular Weight Calculator
-**Category:** Biology  
-**Version:** v1.0 (2025-08-22)
+### UI & Interaction
 
-**Purpose**  
-Estimate the molecular weight (MW) of a nucleotide or protein sequence. Supports DNA, RNA, and proteins by summing approximate base or residue weights.
-
-**Inputs**  
-- **Sequence**: string (DNA/RNA bases `A, T, G, C, U` or protein one-letter codes).  
-  - Multi-line and space-separated input is accepted (whitespace removed automatically).  
-
-**Outputs**  
-- Approximate MW in Daltons (Da), displayed in the format:  
-  - `"Approximate DNA/RNA MW: X Da"`  
-  - `"Approximate Protein MW: X Da"`  
-- Error message if sequence contains invalid characters.  
-
-**UI & Interaction**  
-- Multi-line text box for sequence input  
-- Button: **Calculate** → runs MW calculation  
-- Output label shows result or error  
-
-**Algorithm / Implementation**  
-- Input sequence normalized: uppercase, whitespace/newlines removed:contentReference[oaicite:0]{index=0}  
-- Two internal dictionaries:  
-  - `DNA_W`: base weights (A = 313.21, T = 304.20, G = 329.21, C = 289.18, U = 290.17):contentReference[oaicite:1]{index=1}  
-  - `PROT_W`: residue weights for 20 standard amino acids (one-letter codes):contentReference[oaicite:2]{index=2}  
-- Logic:  
-  - If all characters ∈ `DNA_W` → sum base weights → DNA/RNA MW  
-  - Else if all characters ∈ `PROT_W` → sum residue weights → Protein MW  
-  - Else → “Sequence contains invalid characters.”  
-- Result displayed in UI and logged with sequence length  
-
-**Units & Conversion**  
-- Output molecular weight in **Daltons (Da)**  
-
-**Edge Cases & Validation**  
-- Empty input → `"Please enter a sequence."`  
-- Mixed characters (not purely DNA/RNA or purely protein) → error message  
-- RNA input allowed (`U` recognized with its own weight)  
-
-**Data Sources**  
-- Static weight tables (`DNA_W`, `PROT_W`) embedded in tool:contentReference[oaicite:3]{index=3}  
-- Logging via `core.data.functions.log.add_log_entry`  
-
-**Logging & Export**  
-- Logs under tool = `"Molecular Weight Calculator"`:  
-  - Action = `"Calculate"` with `{len, msg}`  
-- No export functionality  
-
-**Chaining**  
-- Output MW could feed into other analysis tools (e.g., concentration, stoichiometry calculators)  
-
-**Tests**  
-- Example 1: Sequence `"ATGC"` → MW ≈ 313.21 + 304.20 + 329.21 + 289.18 = `1235.80 Da`  
-- Example 2: Sequence `"MSTNPKPQRKTKRNTNRRPQDVKFPGG"` → MW ≈ sum of PROT_W values  
-- Example 3: Empty input → error `"Please enter a sequence."`  
-- Example 4: Sequence with invalid character `"ABZ"` → error `"Sequence contains invalid characters."`  
-
-**Known Limitations / TODO**  
-- Simplified MW estimates: does not account for water loss during polymerization  
-- No handling of modified bases or amino acids  
-- No support for ambiguous nucleotide codes (IUPAC)  
-- Could add FASTA input support and export to CSV/FASTA with MW annotations  
+* Codon lookup panel: single-input field, immediate result with amino acid and classification.
+* Frame translation panel: textarea for sequence input, displays six reading frames with aligned codons and stop symbols.
+* Transcription panel: input DNA → outputs mRNA + protein sequence + codon frequency bar chart.
+* GC content panel: returns % and optional sliding window analysis.
+* Alignment tool: dual input with scoring parameter fields, outputs aligned sequences with highlights.
+* Sequence parser: file import dialog, displays parsed sequence list with ID, length, and sequence data.
 
 ---
+
+### Algorithms / Equations
+
+* **Codon Table:** Standard genetic code mapping codons to amino acids.
+* **GC Content:** $\text{GC\%} = \frac{G+C}{A+T+G+C} \times 100$.
+* **Transcription:** Replace T → U, group codons in triplets, map to amino acids.
+* **Frames:** 6 possible reading frames by shifting index and reverse complementing.
+* **Alignment:** Needleman–Wunsch or Smith–Waterman style scoring (depending on mode), using user-defined match/mismatch/gap penalties.
+* **Molecular Weight:** sum of average monomer masses minus water molecules for bonds.
+
+---
+
+### Units & Conversion
+
+* Sequence inputs are case-insensitive, whitespace ignored.
+* Protein weights in Daltons (Da).
+* Sequence lengths reported in base pairs (bp) or amino acids (aa).
+* Codon frequencies normalized to counts per 1000 codons.
+
+---
+
+### Edge Cases & Validation
+
+* Rejects invalid nucleotide characters (anything outside A, T, G, C, U).
+* Warns if sequence length not divisible by 3 when translating.
+* Reverse complement only valid for DNA (RNA U’s converted automatically if present).
+* Alignment requires sequences of length ≥ 2.
+* Parser gracefully handles malformed FASTA/GenBank headers, skips invalid entries.
+* Empty input fields trigger error dialogs instead of crashes.
+
+---
+
+### Tests
+
+Unit and integration tests include:
+
+* **Codon Lookup:** verifies all 64 codons map to correct amino acids. Includes edge codons (AUG → Start, UAA/UAG/UGA → Stop).
+* **Frame Translation:** tested with example sequences; checks consistency across forward and reverse frames.
+* **GC Content:** verifies against known sequences (E. coli \~51% GC).
+* **Transcription:** validates DNA → RNA substitution and protein translation for known genes.
+* **Molecular Weight:** checked against benchmark proteins (e.g. insulin).
+* **Reverse Complement:** input DNA "ATGC" → "GCAT".
+* **Alignment:** regression-tested with small sequences where optimal alignment known.
+* **Seq Parser:** runs with mixed FASTA/GenBank files; checks that IDs, lengths, and sequences match expected values.
+
+---
+
+### Integration & Logging
+
+* Logging of all operations with `add_log_entry`, recording sequence lengths, codon usage, GC%, alignment scores, etc.
+* Sequence imports stored in internal library for reuse across sessions.
+* Export options: charts saved as PNG, sequence outputs exported as FASTA.
+
+---
+
+### Known Limitations
+
+* Currently supports only the standard genetic code (no mitochondrial/alternative codes).
+* Pairwise alignment only; no multiple sequence alignment yet.
+* No protein structural prediction yet (future extension with Alphafold/ESMFold).
+* Parser does not yet support EMBL or PDB formats.
+* Charts limited to 2D bar/pie, no interactive zooming.
+
+---
+
 
 ### Tool: Osmosis & Tonicity
 **Category:** Biology  
@@ -1992,78 +1399,6 @@ Assess tonicity and predict the direction of water movement across a semi-permea
 - No validation against negative or unrealistic values  
 - Could add graphical illustration of cell volume change  
 - Could expand to support osmotic pressure (π = iCRT) for more precise predictions  
-
----
-
-### Tool: Pairwise Alignment
-**Category:** Biology  
-**Version:** v1.0 (2025-08-22)
-
-**Purpose**  
-Perform global pairwise sequence alignment using the Needleman–Wunsch (NW) algorithm with affine gap penalties. Provides both the aligned sequences and a visual match/mismatch representation.
-
-**Inputs**  
-- **Sequence A**: string (DNA, RNA, or protein)  
-- **Sequence B**: string (DNA, RNA, or protein)  
-- **Scoring parameters**:  
-  - Match score (default = 1)  
-  - Mismatch penalty (default = −1)  
-  - Gap opening penalty (default = −2)  
-  - Gap extension penalty (default = −1)  
-
-**Outputs**  
-- Text-based alignment in 3 lines:  
-  - Top: aligned sequence A  
-  - Middle: match line (`|` for match, `.` for mismatch, space for gap)  
-  - Bottom: aligned sequence B  
-  - Final line: `Score=X`  
-
-**UI & Interaction**  
-- Two text fields for input sequences  
-- Four numeric spinners for scoring values (range: match/mismatch = −10..10, gap penalties = −50..0)  
-- Button: **Align** → runs alignment  
-- Output field: fixed-width font (Consolas, 11pt) for alignment display  
-
-**Algorithm / Implementation**  
-- `_nw_align(a, b, match, mismatch, gap_open, gap_extend)` implements NW with affine gaps:contentReference[oaicite:0]{index=0}  
-  - Uses three DP matrices: `M` (match/mismatch), `X` (gap in A), `Y` (gap in B)  
-  - Traceback constructs aligned strings for A and B  
-  - Returns `(aln_a, aln_b, score)`  
-- `pretty_alignment(...)` builds formatted 3-line alignment + score:contentReference[oaicite:1]{index=1}  
-- `_do_align()` orchestrates input handling, runs NW, formats result, logs action  
-
-**Units & Conversion**  
-- Alignment score is unitless (based on scoring scheme)  
-
-**Edge Cases & Validation**  
-- Missing sequence(s) → error: `"Enter both sequences."`  
-- Empty strings not allowed  
-- Handles any alphabet (A/T/C/G or amino acids), though case-normalized to uppercase  
-- Extreme scoring values allowed within defined ranges  
-
-**Data Sources**  
-- No external libraries required (pure Python implementation)  
-- Logging via `core.data.functions.log.add_log_entry`  
-
-**Logging & Export**  
-- Logs under tool = `"Pairwise Alignment (NW, affine gaps)"`:  
-  - Action = `"Align"` with `{len_a, len_b, score}`  
-- No file export (alignment shown in UI only)  
-
-**Chaining**  
-- Aligned sequences could feed into downstream tools (e.g., similarity scoring, motif detection)  
-
-**Tests**  
-- Example 1: A = `"GATTACA"`, B = `"GCATGCU"` with defaults → produces classical NW alignment with score  
-- Example 2: Identical sequences `"AAAA"` and `"AAAA"` → full match, score = 4  
-- Example 3: One empty sequence `"ATCG"`, `""` → output handled as error  
-- Example 4: Adjusting gap penalties shows expected alignment differences  
-
-**Known Limitations / TODO**  
-- Global alignment only; no local (Smith–Waterman) support  
-- No visualization of alignment statistics (percent identity, gap count)  
-- Not optimized for very long sequences (DP is O(n·m))  
-- Could add FASTA input/output support and alignment export  
 
 ---
 
@@ -2204,228 +1539,6 @@ where N₀ = initial population, r = growth rate, and t = time.
 
 **Known Limitations / TODO**  
 - Only models simple exponential growth (no logistic or carrying c
-
----
-
-### Tool: Reverse Complement
-**Category:** Biology  
-**Version:** v1.0 (2025-08-22)
-
-**Purpose**  
-Generate the reverse complement of a DNA sequence. Commonly used in genomics to analyze the opposite strand of DNA.
-
-**Inputs**  
-- **DNA sequence**: string containing nucleotides (A, T, C, G).  
-
-**Outputs**  
-- Reverse complement sequence as a string.  
-- Example: `"Reverse Complement: TGCA"`  
-- Error message if input is invalid.  
-
-**UI & Interaction**  
-- Single-line text input for DNA sequence  
-- Button: **Compute** → calculates reverse complement  
-- Output label displays result or error  
-
-**Algorithm / Implementation**  
-- Input normalized to uppercase and stripped of whitespace:contentReference[oaicite:0]{index=0}  
-- Uses Biopython `Seq(seq).reverse_complement()` for computation:contentReference[oaicite:1]{index=1}  
-- If successful: result shown + logged  
-- If error (invalid input) → error message displayed + logged  
-
-**Units & Conversion**  
-- No units (purely symbolic DNA sequence manipulation)  
-
-**Edge Cases & Validation**  
-- Empty input → error  
-- Invalid characters not recognized by Biopython → error  
-- Case-insensitive (converted to uppercase automatically)  
-
-**Data Sources**  
-- Biopython `Seq` class:contentReference[oaicite:2]{index=2}  
-- Logging via `core.data.functions.log.add_log_entry`  
-
-**Logging & Export**  
-- Logs under tool = `"Reverse Complement"`:  
-  - Action = `"Compute"` with `{input, result}`, tags = `["bio", "dna"]`  
-  - Action = `"Error"` with `{input, error}`  
-
-**Chaining**  
-- Reverse complement sequence could be passed into translation, GC content, or alignment tools  
-
-**Tests**  
-- Example 1: Input `"ATGC"` → Reverse complement = `"GCAT"`  
-- Example 2: Input `"aaaa"` → Reverse complement = `"TTTT"`  
-- Example 3: Input with invalid chars `"XYZ"` → error  
-- Example 4: Empty input → error  
-
-**Known Limitations / TODO**  
-- Only supports DNA sequences (RNA not directly handled)  
-- No FASTA file input support (manual entry only)  
-- Could add batch mode for multiple sequences  
-- Could extend to return both reverse and complement separately  
-
----
-
-### Tool: Sequence File Parser
-**Category:** Biology  
-**Version:** v1.0 (2025-08-22)
-
-**Purpose**  
-Open and parse DNA/RNA/protein sequence files in FASTA or GenBank format. Displays sequence information (ID, length, sequence) for each record in the file.
-
-**Inputs**  
-- **File input**: user-selected FASTA (`.fasta`, `.fa`) or GenBank (`.gb`, `.gbk`) file.  
-
-**Outputs**  
-- Parsed sequence records displayed in text format, including:  
-  - Sequence ID  
-  - Sequence length  
-  - Raw sequence (as string)  
-- Example output block:  
-
-ID: seq1
-Length: 350
-Sequence:
-ATGCTAGCTAG...
---------------
-
-- Error message shown if parsing fails.  
-
-**UI & Interaction**  
-- Button: **Open File** → opens file dialog for FASTA/GenBank files:contentReference[oaicite:0]{index=0}  
-- Output area: read-only text box with parsed results  
-- Multiple records concatenated with separators  
-
-**Algorithm / Implementation**  
-- Uses Biopython `SeqIO.parse` to load sequences:contentReference[oaicite:1]{index=1}  
-- Attempts FASTA parsing first; if no records, falls back to GenBank:contentReference[oaicite:2]{index=2}  
-- Iterates through records and formats output with ID, length, and sequence  
-- On success: displays results and logs action  
-- On failure: error message displayed + logged  
-
-**Units & Conversion**  
-- No units (sequences are symbolic strings)  
-
-**Edge Cases & Validation**  
-- Empty or invalid file → error message  
-- File not selected → no action  
-- Files with zero records in FASTA → fallback to GenBank parser  
-- Very large sequences → displayed in full (no truncation)  
-
-**Data Sources**  
-- Biopython `SeqIO` library:contentReference[oaicite:3]{index=3}  
-- Logging via `core.data.functions.log.add_log_entry`  
-
-**Logging & Export**  
-- Logs under tool = `"Seq Parser"`:  
-- Action = `"Parse"` with `{file, records}`, tags = `["bio", "seqio"]`  
-- Action = `"Error"` with `{file, error}`  
-
-**Chaining**  
-- Parsed sequences could feed into downstream tools (translation, alignment, GC content analysis)  
-
-**Tests**  
-- Example 1: FASTA file with two sequences → both parsed and displayed with IDs and lengths  
-- Example 2: GenBank file → correctly parsed into annotated sequence output  
-- Example 3: Invalid file type → error `"Error: ..." `  
-- Example 4: Empty FASTA → fallback to GenBank; if also empty → error  
-
-**Known Limitations / TODO**  
-- Displays raw sequences only; no annotation details from GenBank records  
-- No batch export (only in-app viewing)  
-- No truncation for very large sequences (may overload UI)  
-- Could extend to show sequence features, metadata, or save parsed results to file  
-
----
-
-### Tool: DNA Transcription & Translation
-**Category:** Biology  
-**Version:** v1.0 (2025-08-22)
-
-**Purpose**  
-Simulate transcription and translation of a DNA sequence. Produces the corresponding mRNA sequence and the protein sequence derived from codon mapping, and visualizes codon usage frequencies.
-
-**Inputs**  
-- **DNA sequence**: string containing nucleotides (A, T, C, G).  
-  - Whitespace ignored  
-  - Case-insensitive (converted to uppercase)  
-
-**Outputs**  
-- **mRNA sequence** (T → U conversion)  
-- **Protein sequence** as amino acid codes (joined by `-`)  
-- **Codon usage chart** (horizontal bar chart of codon frequencies)  
-- Error messages for invalid input (e.g., non-ATCG characters)  
-
-**UI & Interaction**  
-- Single-line text field for DNA sequence input:contentReference[oaicite:0]{index=0}  
-- Buttons:  
-  - **Translate** → performs transcription & translation  
-  - **Copy Result** → copies text output to clipboard  
-  - **Export Chart…** → saves codon usage chart  
-- Output area: read-only text box showing mRNA and protein sequences  
-- Embedded Matplotlib canvas showing codon usage chart  
-
-**Algorithm / Implementation**  
-- `_translate()`:contentReference[oaicite:1]{index=1}  
-  - Cleans input (`A,T,C,G` only)  
-  - Transcribes DNA → mRNA by replacing T with U  
-  - Splits mRNA into codons (triplets)  
-  - Translates codons using `CODON_TABLE` from `bio_utils.py`  
-  - Stores codons for plotting  
-  - Displays mRNA and protein sequence in text output  
-  - Plots codon usage chart  
-  - Logs `"Translate"` with `{len, codons}`  
-- `_plot_codon_usage(codons)`:contentReference[oaicite:2]{index=2}  
-  - Counts codon occurrences (`Counter`)  
-  - Plots horizontal bar chart (codon vs. frequency)  
-- `_copy()`:contentReference[oaicite:3]{index=3}  
-  - Copies output text to clipboard  
-  - Logs `"Copy"`  
-- `_export_chart()`:contentReference[oaicite:4]{index=4}  
-  - Exports figure via `export_figure`  
-  - Appends saved path to output  
-  - Logs `"ExportChart"`  
-  - On error, logs `"Error"`  
-- `_err(msg)` → displays error message in output and logs  
-
-**Units & Conversion**  
-- Not applicable (symbolic sequence processing only)  
-
-**Edge Cases & Validation**  
-- Empty input → error `"DNA must contain only A,T,C,G."`  
-- Invalid characters in sequence → error message  
-- Length not divisible by 3 → last incomplete codon ignored  
-
-**Data Sources**  
-- Codon table from `core.data.functions.bio_utils.CODON_TABLE`:contentReference[oaicite:5]{index=5}  
-- Logging via `core.data.functions.log.add_log_entry`  
-- Figure export via `core.data.functions.image_export.export_figure`  
-
-**Logging & Export**  
-- Logs under tool = `"DNA Transcription & Translation"`:  
-  - Action = `"Translate"` with `{len, codons}`  
-  - Action = `"Copy"`  
-  - Action = `"ExportChart"` with `{path}`  
-  - Action = `"Error"` with `{msg}`  
-
-**Chaining**  
-- Output protein sequence could be chained to protein property or alignment tools  
-
-**Tests**  
-- Example 1: Input `"ATGGCCATTGTAATGGGCCGCTGAAAGGGTGCCCGATAG"` →  
-  - mRNA = `"AUGGCCAUUGUAAUGGGCCGCUGAAAGGGUGCCCGAUAG"`  
-  - Protein = `Met-Ala-Ile-Val-Met-Gly-Arg-STOP-…`  
-- Example 2: Input with invalid chars `"ATXGC"` → error  
-- Example 3: Empty input → error  
-- Example 4: Codon usage chart shows counts of each codon  
-
-**Known Limitations / TODO**  
-- Uses standard codon table only (no alternative genetic codes)  
-- Outputs amino acids as 3-letter codes (expandable to 1-letter or full names)  
-- Stops not treated as explicit termination (simply labeled `"STOP"`)  
-- No FASTA file import (manual entry only)  
-- Could add option for full protein translation (ORFs, stop codon termination)  
 
 ---
 
