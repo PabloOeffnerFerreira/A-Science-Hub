@@ -1,4 +1,4 @@
-# odo: This is a simple algebraic calculator tool that evaluates a function at a given value of x.
+# Todo: This is a simple algebraic calculator tool that evaluates a function at a given value of x.
 # It will be improved later to handle more complex expressions and provide better error handling.
 
 from __future__ import annotations

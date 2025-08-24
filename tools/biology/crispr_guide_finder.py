@@ -12,7 +12,7 @@ class Tool(QDialog):
         lay = QVBoxLayout(self)
 
         r0 = QHBoxLayout()
-        r0.addWidget(QLabel("Sequence (DNA):")); self.seq = QLineEdit("ACGTACGTACGTGGTTACCGG..."); r0.addWidget(self.seq)
+        r0.addWidget(QLabel("Sequence (DNA):")); self.seq = QLineEdit("ACGTACGTACGTGGTTACCGG"); r0.addWidget(self.seq)
         lay.addLayout(r0)
 
         r1 = QHBoxLayout()

@@ -24,6 +24,7 @@ class Tool(QDialog):
         self.result = QLabel(""); lay.addWidget(self.result)
         btn = QPushButton("Compute"); lay.addWidget(btn); btn.clicked.connect(self._go)
 
+        self.input_value = self.x
     def _go(self):
         try:
             mode = self.mode.currentText()
