@@ -33,6 +33,16 @@ HTML_VIEWER = """<!doctype html>
   select,label,button{font-size:13px}
 </style>
 <script src="https://unpkg.com/ngl@latest/dist/ngl.js"></script>
+<script>
+  // Hide the deprecated useLegacyLights warning from Three.js/NGL
+  (function() {
+    const origWarn = console.warn;
+    console.warn = function (...args) {
+      if (args[0]?.includes("useLegacyLights")) return;
+      origWarn.apply(console, args);
+    };
+  })();
+</script>
 </head>
 <body>
 <div id="tb">
