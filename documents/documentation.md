@@ -2451,7 +2451,7 @@ Simulate the motion of a falling object under gravity and air resistance. The to
 
 ## AlphaFold Tool
 
-**Category:** Microbiology  
+**Category:** Biology 
 
 **Purpose:**  
 The AlphaFold tool integrates protein structure prediction results from the official AlphaFold Protein Structure Database into ASH. It allows the user to fetch predicted 3D structures from a UniProt accession ID, inspect confidence metrics (pLDDT, PAE), and visualize the structure in an interactive 3D viewer.  
