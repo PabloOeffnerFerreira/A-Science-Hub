@@ -2446,3 +2446,184 @@ Simulate the motion of a falling object under gravity and air resistance. The to
 * No deformation modeling (e.g., parachutes opening mid-flight)
 * HUD shows only t, v, y — could expand to include acceleration a(t)
 * Could add particle trails or velocity vectors in 3D for enhanced visualization
+
+---
+
+## AlphaFold Tool
+
+**Category:** Microbiology  
+
+**Purpose:**  
+The AlphaFold tool integrates protein structure prediction results from the official AlphaFold Protein Structure Database into ASH. It allows the user to fetch predicted 3D structures from a UniProt accession ID, inspect confidence metrics (pLDDT, PAE), and visualize the structure in an interactive 3D viewer.  
+
+**Core Features:**  
+- **UniProt accession input:** User provides an accession ID (e.g. A9VLF6).  
+- **Format selection:** Download models in PDB or mmCIF formats.  
+- **Confidence data:** Option to fetch supporting JSON files with per-residue confidence scores (pLDDT) and predicted aligned error (PAE).  
+- **Caching:** Downloaded models and metadata are stored locally under `~/.ash_cache/alphafold`.  
+- **Interactive 3D Viewer:** Structures are displayed via NGL.js embedded in a PyQt6 WebEngine widget. Users can choose different representations (cartoon, licorice, ball+stick, spacefill, backbone) and toggle coloring by pLDDT.  
+
+**Inputs:**  
+- UniProt accession code (string).  
+- Desired file format (PDB or mmCIF).  
+- Checkbox to include pLDDT/PAE confidence data.  
+
+**Outputs:**  
+- Downloaded structure file (.pdb or .cif).  
+- Optional JSON files with pLDDT and PAE confidence metrics.  
+- Display of coverage, creation date, and model identifier metadata.  
+- 3D interactive visualization of the protein structure.  
+
+**Educational Role:**  
+- Provides a bridge between sequence-level biology and 3D structural biology.  
+- Allows users to explore how protein structures are predicted, and visually connect sequence → fold → confidence.  
+- Encourages exploration of different visualization styles and confidence maps for interpretation.  
+
+**Limitations:**  
+- Requires internet access to fetch models from the AlphaFold DB.  
+- 3D viewing requires `pyqt6-webengine` installed. Without it, only downloads and text summaries are available.  
+- Relies entirely on AlphaFold DB availability; no local prediction is performed.  
+
+**Example Workflow:**  
+1. Enter a UniProt accession ID (e.g. A9VLF6).  
+2. Select PDB format and enable confidence data.  
+3. Click *Fetch* → model and metadata are downloaded and cached.  
+4. Open 3D viewer → protein structure appears with default cartoon representation, color-coded by pLDDT.  
+5. Switch visualization style or disable confidence coloring for comparison.  
+
+---
+
+# Smaller Tools Documentation
+
+## Astronomy
+- **Blackbody Peak (Wien’s Law):** Computes peak emission wavelength for a given temperature. Input: T (K). Output: λ_max.  
+- **Escape Velocity:** Calculates minimum speed required to escape gravity. Inputs: mass, radius.  
+- **Exoplanet Transit Depth:** Estimates stellar light dip during transit. Inputs: R_star, R_planet.  
+- **Habitable Zone Estimator:** Calculates habitable zone boundaries from stellar luminosity.  
+- **Magnitude–Distance Modulus:** Relates apparent/absolute magnitudes to distance.  
+- **Orbital Period (Kepler’s 3rd Law):** Computes orbital period from semi-major axis and mass.  
+- **Parallax Distance:** Calculates distance to stars from parallax angle.  
+- **Redshift Calculator:** Computes z from observed vs emitted wavelengths; includes relativistic case.  
+- **Rocket Equation (Tsiolkovsky):** Computes Δv given Isp and mass ratio.  
+- **Stellar Luminosity (Stefan–Boltzmann):** L = 4πR²σT⁴.  
+- **Surface Gravity:** g = GM/R².  
+
+## Biology
+- **Amino Acid Composition:** Counts amino acid occurrences in a protein sequence.  
+- **CRISPR Guide Finder:** Identifies PAM sites and candidate gRNAs.  
+- **DNA Melting Temperature:** Estimates duplex Tm from GC content, length, salt concentration.  
+- **Enzyme Kinetics (Michaelis–Menten):** Computes v from substrate concentration.  
+- **Hardy–Weinberg Calculator:** Calculates genotype frequencies from allele frequencies.  
+- **Osmosis/Tonicity Tool:** Classifies conditions as hypo-, iso-, or hypertonic.  
+- **pH Calculator:** Computes pH from hydrogen ion concentration or acid/base concentration.  
+- **Population Growth Calculator:** Models exponential or logistic growth of N(t).  
+- **Restriction Site Mapper:** Identifies restriction enzyme recognition/cut sites in DNA.  
+
+## Chemistry
+- **Buffer pH (Henderson–Hasselbalch):** Calculates buffer pH from pKa and concentration ratio.  
+- **Equilibrium from ΔG°:** Computes equilibrium constant K from standard Gibbs free energy.  
+- **Ideal Gas Solver:** Solves PV = nRT for any variable.  
+- **Molar Mass Calculator:** Computes molecular weight from a chemical formula.  
+- **Nernst Equation:** Computes cell potential under non-standard conditions.  
+- **Reaction Balancer:** Balances stoichiometric equations.  
+- **Reaction Rate (Arrhenius):** k = Ae^(–Ea/RT).  
+- **Titration Curve Generator:** Computes pH at titration points (basic form).  
+
+## Electricity
+- **Biot–Savart (Straight Wire):** Calculates magnetic field from an infinitely long wire.  
+- **Lorentz Force Calculator:** Computes force on a charge in E and B fields.  
+- **RLC Resonance Calculator:** Finds resonance frequency of an RLC circuit.  
+- **Skin Depth Calculator:** Computes δ = √(2ρ/ωμ).  
+- **Transmission Line Calculator:** Computes impedance/reflection coefficients.  
+
+## Mechanics
+- **Angular Momentum Calculator:** Computes L = r × p or L = Iω.  
+- **Centripetal Force Calculator:** Fc = mv²/r.  
+- **Collision Simulator:** Models elastic and inelastic collisions.  
+- **Impulse–Momentum Calculator:** Δp = FΔt.  
+- **Momentum Conservation Tool:** Calculates before/after momentum of a system.  
+- **Oscillator Damping Tool:** Computes amplitude decay for damped oscillators.  
+- **Power Calculator:** Computes power from work/time or force × velocity.  
+- **Rotational Kinematics Tool:** Relates θ, ω, α, and t.  
+- **SHM Tool:** Simple harmonic motion equations for displacement, velocity, acceleration.  
+- **Terminal Velocity Simulator:** Computes terminal velocity under drag. Includes 3D interactive view.  
+- **Uniform Circular Motion Tool:** Computes velocity and frequency for circular paths.  
+- **Work–Energy Theorem Tool:** W = ΔE.  
+- **Work–Power Tool:** Computes mechanical power from work or velocity.  
+
+## Microbiology
+- **Agar Diffusion Demo:** Simplified diffusion distance calculator.  
+- **Bacterial Growth (Logistic):** Simulates logistic growth curve.  
+- **Biofilm Growth (Gompertz):** Models sigmoidal biofilm development.  
+- **Chemostat Steady State:** Calculates washout threshold and steady state.  
+- **Monod Kinetics:** Computes μ as function of substrate concentration.  
+- **Phylogenetic Distance (Hamming):** Computes dissimilarity between DNA sequences.  
+- **Quorum Sensing Threshold:** Hill-function activation threshold model.  
+- **Shannon & Simpson Diversity Indices:** Computes ecological diversity metrics.  
+- **SIR Epidemic Model:** Compartment model of infectious spread.  
+- **Wright–Fisher Drift Simulation:** Models genetic drift of alleles over generations.  
+
+## Optics
+- **Diffraction Grating Calculator:** Computes diffraction maxima.  
+- **Polarization (Malus’ Law):** I = I₀ cos²θ.  
+- **Single Slit Diffraction Tool:** Computes diffraction minima.  
+- **Thin Film Interference Calculator:** Identifies constructive/destructive interference.  
+- **Thin Lens Combiner:** Computes effective focal length of multiple lenses.  
+- **Young’s Double Slit Calculator:** Computes fringe spacing and positions.  
+
+## Waves
+- **Doppler Effect (Sound):** Frequency shift for moving source/observer in medium.  
+- **Doppler Effect (Light):** Relativistic Doppler calculation.  
+- **Standing Wave (Air Column):** Computes harmonics in open/closed air tubes.  
+- **Standing Wave (String):** Computes harmonics in a vibrating string.  
+
+## Math
+- **Algebraic Calculator:** Evaluates algebraic expressions.  
+- **Function Plotter:** Plots functions y=f(x).  
+- **Quadratic Solver:** Finds roots, discriminant, and vertex.  
+- **Triangle Solver:** Solves sides, angles, and area of triangles.  
+- **Vector Calculator:** Performs dot, cross, projections. Includes interactive 3D view.  
+
+---
+
+# AI Assistant
+
+**Category:** Core / Misc  
+
+**Purpose:**  
+The AI Assistant is a conversational agent inside ASH. It enables natural language queries, explains science concepts, helps navigate tools, and is designed to eventually orchestrate tool execution automatically.  
+
+**Current Features:**  
+- Simple chat interface with input/output log.  
+- Backend powered by a local LLM model (`dolphin3:8b`).  
+- Adjustable parameters: temperature, top_p, top_k, max_tokens.  
+- Pure text generation without tool linkage.  
+
+**Planned Features:**  
+- **Tool Knowledge:** Read from an ASH manifest of all tools (name, category, inputs, outputs).  
+- **Tool Orchestration:** Accept user queries, map to tool calls (JSON schema), and return results.  
+- **Documentation Integration:** Use ASH documentation as knowledge base for explanations.  
+- **Visualization Hooks:** Trigger plots or simulations when applicable.  
+- **User Profiles:** Allow persistence of preferences and previous queries.  
+- **Multi-step Reasoning:** Break down complex queries into sequences of tool calls.  
+
+**Educational Role:**  
+- Explains both results and theory behind them.  
+- Acts as a tutor by linking formulas to intuitive examples.  
+- Connects numerical outputs to visualizations (e.g., “Shall I show you the diffraction pattern?”).  
+
+**Limitations (Now):**  
+- No persistent memory.  
+- No automatic tool execution.  
+- Accuracy relies entirely on the LLM.  
+- No built-in error-checking for physical units.  
+
+**Example Interactions:**  
+- User: *“How do I calculate escape velocity?”*  
+  Assistant: *“Use the Escape Velocity tool. Formula: v = √(2GM/R). Provide the mass and radius of the planet.”*  
+
+- User: *“Simulate logistic bacterial growth with r=0.5 for 10 hours.”*  
+  Assistant: *“This maps to the Bacterial Growth Logistic tool. Inputs: N₀, r=0.5 h⁻¹, t=10 h. I can compute and plot N(t).”*  
+
+- User: *“Show me optics tools.”*  
+  Assistant: *“There are six smaller tools in Optics: Diffraction Grating, Polarization, Single Slit, Thin Film, Thin Lens, and Young’s Double Slit. Each computes conditions of optical interference or diffraction.”*  
