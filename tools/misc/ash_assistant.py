@@ -1,6 +1,7 @@
 from __future__ import annotations
 from PyQt6 import QtWidgets, QtGui
 from core.ai.ash_assistant.ash_assistant import ash_answer_stream, extract_action_json
+import json
 
 class Tool(QtWidgets.QWidget):
     def __init__(self, parent=None):
@@ -35,5 +36,13 @@ class Tool(QtWidgets.QWidget):
             self.output.insertPlainText(chunk)
             QtWidgets.QApplication.processEvents()
         full = "".join(buf)
-        act = extract_action_json(full)
-        if act: self.action.setText(act)
+
+        from core.ai.ash_assistant.ash_assistant import split_text_and_action  # or duplicate the helper here
+        body, act = split_text_and_action(full)
+
+        self.output.clear()
+        self.output.insertPlainText(body if body.strip() else "(no text output)")
+
+        self.action.clear()
+        if act:
+            self.action.setText(json.dumps(act))

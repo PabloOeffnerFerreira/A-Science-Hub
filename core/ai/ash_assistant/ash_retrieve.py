@@ -1,87 +1,113 @@
-# core/ai/ash_assistant/ash_retrieve.py
 from __future__ import annotations
-import json, sqlite3
 from pathlib import Path
+import json
+import re
+from typing import Any, Dict, List
 
-# Paths per your layout
-KB_ROOT = (Path(__file__).resolve().parent / "kb")
-DB_PATH = (Path(__file__).resolve().parent / "storage" / "ash_kb.sqlite")
+# KB lives next to this module in ./kb
+KB_DIR = Path(__file__).resolve().parent / "kb"
 
-def ensure_db() -> None:
-    DB_PATH.parent.mkdir(parents=True, exist_ok=True)
-    db = sqlite3.connect(DB_PATH)
-    c = db.cursor()
-    c.execute("""CREATE TABLE IF NOT EXISTS docs(
-        id TEXT PRIMARY KEY, ns TEXT, title TEXT, body TEXT, view TEXT, updated INTEGER
-    )""")
-    # Full-text search table for BM25 (no embeddings needed)
-    c.execute("""CREATE VIRTUAL TABLE IF NOT EXISTS docs_fts
-                 USING fts5(id, ns, title, view, body, content='')""")
+# ---------- utils ------------------------------------------------------------
 
-    # If empty, build from KB files now
-    count = c.execute("SELECT COUNT(*) FROM docs").fetchone()[0]
-    if count == 0:
-        for p in KB_ROOT.rglob("*"):
-            if p.suffix not in (".json", ".md"):
-                continue
-            if p.suffix == ".json":
-                j = json.loads(p.read_text(encoding="utf-8"))
-                did   = j.get("id") or p.relative_to(KB_ROOT).as_posix()
-                ns    = j.get("ns") or p.parent.name
-                title = j.get("title") or p.stem
-                view  = " ".join([j.get("title",""), j.get("summary",""), j.get("route","")])[:1200]
-                body  = json.dumps(j, ensure_ascii=False)
-            else:
-                txt   = p.read_text(encoding="utf-8")
-                did   = p.relative_to(KB_ROOT).as_posix()
-                ns    = did.split("/")[0]
-                title = p.stem
-                view  = txt.split("\n\n", 1)[0][:1200]
-                body  = txt
+_WORD_RE = re.compile(r"[a-zA-Z0-9_]+")
 
-            c.execute("REPLACE INTO docs(id,ns,title,body,view,updated) VALUES(?,?,?,?,?,strftime('%s','now'))",
-                      (did, ns, title, body, view))
-            c.execute("REPLACE INTO docs_fts(id,ns,title,view,body) VALUES(?,?,?,?,?)",
-                      (did, ns, title, view, body))
-        db.commit()
-    db.close()
+def _flatten_text(x: Any) -> str:
+    """Recursively flatten strings/lists/dicts/numbers into a single text blob."""
+    if x is None:
+        return ""
+    if isinstance(x, str):
+        return x
+    if isinstance(x, (int, float, bool)):
+        return str(x)
+    if isinstance(x, dict):
+        return " ".join(_flatten_text(v) for v in x.values())
+    if isinstance(x, (list, tuple, set)):
+        return " ".join(_flatten_text(v) for v in x)
+    return str(x)
 
-def _fts_query(db, query: str, namespaces: tuple[str,...], k: int):
-    import re
-    # 1) Sanitize: keep only letters/numbers/underscores/spaces
-    cleaned = re.sub(r"[^0-9A-Za-z_ \t]", " ", query)
-    # 2) Tokenize to words (min length 1) and build a MATCH string
-    terms = [t for t in re.split(r"\s+", cleaned) if t]
-    # If nothing survives, fallback to a harmless term
+def _normalize_doc(raw: Dict[str, Any], path: Path) -> Dict[str, Any]:
+    """Bring arbitrary JSON to a stable schema."""
+    doc_id = raw.get("id") or path.stem
+    ns = raw.get("ns") or path.parent.name
+    title = raw.get("title") or raw.get("name") or doc_id.replace("_", " ")
+    view = raw.get("view") or {}
+    body_src = raw.get("body", raw.get("text", raw))
+    body = _flatten_text(body_src)
+    return {"id": doc_id, "ns": ns, "title": title, "view": view, "body": body}
+
+def _load_kb() -> List[Dict[str, Any]]:
+    docs: List[Dict[str, Any]] = []
+    if not KB_DIR.exists():
+        return docs
+    for p in KB_DIR.rglob("*.json"):
+        try:
+            data = json.loads(p.read_text(encoding="utf-8"))
+        except Exception:
+            continue
+        if isinstance(data, list):
+            for item in data:
+                if isinstance(item, dict):
+                    docs.append(_normalize_doc(item, p))
+        elif isinstance(data, dict):
+            docs.append(_normalize_doc(data, p))
+    return docs
+
+_DOCS_CACHE: List[Dict[str, Any]] | None = None
+
+def _docs() -> List[Dict[str, Any]]:
+    global _DOCS_CACHE
+    if _DOCS_CACHE is None:
+        _DOCS_CACHE = _load_kb()
+    return _DOCS_CACHE
+
+# ---------- retrieval --------------------------------------------------------
+
+def retrieve(query: str, k: int = 6, namespaces: List[str] | None = None) -> List[Dict[str, Any]]:
+    """
+    Lightweight lexical retriever.
+    Returns list of {id, ns, title, view, body, snippet}.
+    """
+    docs = _docs()
+    if namespaces:
+        docs = [d for d in docs if d.get("ns") in namespaces]
+
+    q = query.lower().strip()
+    terms = [t for t in _WORD_RE.findall(q) if len(t) > 1]
     if not terms:
-        terms = ["ash"]
+        terms = q.split()
 
-    # FTS5: space = AND between terms. Quote each to avoid operator parsing.
-    match = " ".join(f'"{t}"' for t in terms)
+    def score(d: Dict[str, Any]) -> float:
+        title = d.get("title", "")
+        text = (title + " " + d.get("body", "")).lower()
 
-    # IMPORTANT: filter namespaces via normal WHERE, not inside MATCH
-    qmarks = ",".join("?" * len(namespaces))
-    sql = (
-        f"SELECT id, ns, title, view, body, bm25(docs_fts) AS s "
-        f"FROM docs_fts "
-        f"WHERE docs_fts MATCH ? AND ns IN ({qmarks}) "
-        f"ORDER BY s LIMIT ?"
-    )
-    args = (match, *namespaces, k)
-    cur = db.execute(sql, args)
-    rows = cur.fetchall()
-    return [
-        {"id": id_, "ns": ns, "title": title, "snippet": (view or body)[:800], "score": -s}
-        for id_, ns, title, view, body, s in rows
-    ]
+        s = 0.0
+        # exact phrase boost
+        if q and q in text:
+            s += 2.5
+        # title boosts
+        tl = title.lower()
+        s += sum(1.5 for t in terms if t in tl)
+        # body term hits
+        s += sum(1.0 for t in terms if t in text)
+        # tiny length normalization
+        s += min(len(title) / 100.0, 1.0) * 0.2
+        return s
 
-
-def retrieve(query: str, k: int = 4,
-             namespaces: tuple[str,...] = ("tools","app","faq","dev_public"),
-             db_path: str = str(DB_PATH)) -> list[dict]:
-    ensure_db()
-    db = sqlite3.connect(db_path)
-    try:
-        return _fts_query(db, query, namespaces, k)
-    finally:
-        db.close()
+    ranked = sorted(docs, key=score, reverse=True)
+    out: List[Dict[str, Any]] = []
+    for d in ranked[:k]:
+        body = d.get("body", "")
+        if not body:
+            snip = ""
+        else:
+            idx = 0
+            for t in terms:
+                p = body.lower().find(t)
+                if p != -1:
+                    idx = p
+                    break
+            start = max(0, idx - 120)
+            end = min(len(body), start + 300)
+            snip = body[start:end].strip()
+        out.append({**d, "snippet": snip})
+    return out
