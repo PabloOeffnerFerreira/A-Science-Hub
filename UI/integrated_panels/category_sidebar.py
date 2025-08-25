@@ -1,9 +1,14 @@
 from PyQt6.QtWidgets import QWidget, QVBoxLayout, QPushButton, QScrollArea, QFrame, QComboBox
 from PyQt6.QtCore import Qt, pyqtSignal
 from core.data.functions.tool_registry import discover_categories_and_tools
-
+from PyQt6.QtWidgets import QLabel
+from PyQt6.QtCore import QTimer
+import os, shutil
+from core.data.paths import IMAGES_DIR
 class CategorySidebar(QFrame):
     openTool = pyqtSignal(str, str)
+
+    imagesImported = pyqtSignal(list)
 
     def __init__(self):
         super().__init__()
@@ -38,6 +43,10 @@ class CategorySidebar(QFrame):
         self.cat_layout.addStretch(1)
         scroll.setWidget(c)
         outer.addWidget(scroll)
+
+        # NEW: dropzone above the tool dropdown
+        self.drop_target = DropTarget(self)
+        outer.addWidget(self.drop_target)
 
         self.tool_dropdown = QComboBox()
         self.tool_dropdown.setObjectName("ToolDropdown")
@@ -102,6 +111,12 @@ QComboBox QAbstractItemView {
     selection-color: #ffffff;
     border: 1px solid #2d2d35;
 }
+#GalleryDropTarget {
+    /* base style set in _reset_style; keeping here for theme cohesion if needed */
+}
+#GalleryDropTarget:hover {
+    background-color: #1c1c21;
+}
 """)
 
     def _on_category_clicked(self, category):
@@ -116,3 +131,64 @@ QComboBox QAbstractItemView {
         key = self.tool_dropdown.itemData(index)
         if self._current_category and key:
             self.openTool.emit(self._current_category, key)
+
+# ADD this helper widget inside the same file (above or below CategorySidebar)
+class DropTarget(QFrame):
+    def __init__(self, parent_sidebar: "CategorySidebar"):
+        super().__init__(parent_sidebar)
+        self._sidebar = parent_sidebar
+        self.setAcceptDrops(True)
+        self.setObjectName("GalleryDropTarget")
+        self._label = QLabel("Drop images here → Gallery")
+        self._label.setAlignment(Qt.AlignmentFlag.AlignCenter)
+        lay = QVBoxLayout(self)
+        lay.setContentsMargins(8, 8, 8, 8)
+        lay.addWidget(self._label)
+        self._reset_style()
+        self._timer = QTimer(self)
+        self._timer.setSingleShot(True)
+        self._timer.timeout.connect(self._reset_label)
+
+    def _reset_style(self):
+        self.setStyleSheet("#GalleryDropTarget { border: 1px dashed #2d2d35; border-radius: 8px; background: #18181c; color: #e6e6e9; }")
+
+    def dragEnterEvent(self, e):
+        if e.mimeData().hasUrls():
+            # accept only image files
+            for u in e.mimeData().urls():
+                f = u.toLocalFile().lower()
+                if f.endswith((".png", ".jpg", ".jpeg")):
+                    e.acceptProposedAction()
+                    self.setStyleSheet("#GalleryDropTarget { border: 1px dashed #3b3b8c; border-radius: 8px; background: #1d1d22; color: #ffffff; }")
+                    return
+        e.ignore()
+
+    def dragLeaveEvent(self, e):
+        self._reset_style()
+
+    def dropEvent(self, e):
+        self._reset_style()
+        count = 0
+        added = []
+        for u in e.mimeData().urls():
+            src = u.toLocalFile()
+            if not src.lower().endswith((".png", ".jpg", ".jpeg")):
+                continue
+            base = os.path.basename(src)
+            dest = os.path.join(IMAGES_DIR, base)
+            # avoid overwrite
+            if not os.path.exists(dest):
+                try:
+                    shutil.copyfile(src, dest)
+                    count += 1
+                    added.append(dest)
+                except Exception:
+                    pass  # silent fail (no popups)
+        if count:
+            self._label.setText(f"Imported {count} image(s) ✓")
+            self._timer.start(1400)
+            # optional: let others hook into this
+            self._sidebar.imagesImported.emit(added)
+
+    def _reset_label(self):
+        self._label.setText("Drop images here → Gallery")

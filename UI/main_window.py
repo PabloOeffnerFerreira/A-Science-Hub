@@ -13,7 +13,7 @@ class MainWindow(QMainWindow):
         self._build_ui()
         self._build_dashboard()
         self.setWindowState(Qt.WindowState.WindowMaximized)  # start maximized
-
+ 
     def _build_ui(self):
         w = QWidget()
         self.setCentralWidget(w)
