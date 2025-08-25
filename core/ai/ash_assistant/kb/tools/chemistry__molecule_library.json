@@ -1,0 +1,13 @@
+{
+  "id": "tools/tools/chemistry/molecule_library",
+  "ns": "tools",
+  "title": "Molecule Library",
+  "summary": "Molecule Library tool.",
+  "route": "tools/chemistry/molecule_library.py",
+  "args_schema": [],
+  "examples": [],
+  "updated": "2025-08-24",
+  "tags": [
+    "chemistry"
+  ]
+}

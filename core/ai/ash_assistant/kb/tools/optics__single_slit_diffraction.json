@@ -1,0 +1,30 @@
+{
+  "id": "tools/tools/optics/single_slit_diffraction",
+  "ns": "tools",
+  "title": "Single Slit Diffraction",
+  "summary": "Single Slit Diffraction tool.",
+  "route": "tools/optics/single_slit_diffraction.py",
+  "args_schema": [
+    {
+      "name": "lam_nm",
+      "type": "number"
+    },
+    {
+      "name": "a_m",
+      "type": "number"
+    },
+    {
+      "name": "L",
+      "type": "number"
+    },
+    {
+      "name": "m",
+      "type": "number"
+    }
+  ],
+  "examples": [],
+  "updated": "2025-08-24",
+  "tags": [
+    "optics"
+  ]
+}

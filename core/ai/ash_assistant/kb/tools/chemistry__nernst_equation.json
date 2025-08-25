@@ -1,0 +1,30 @@
+{
+  "id": "tools/tools/chemistry/nernst_equation",
+  "ns": "tools",
+  "title": "Nernst Equation",
+  "summary": "Nernst Equation tool.",
+  "route": "tools/chemistry/nernst_equation.py",
+  "args_schema": [
+    {
+      "name": "E0",
+      "type": "number"
+    },
+    {
+      "name": "n",
+      "type": "number"
+    },
+    {
+      "name": "T",
+      "type": "number"
+    },
+    {
+      "name": "Q",
+      "type": "number"
+    }
+  ],
+  "examples": [],
+  "updated": "2025-08-24",
+  "tags": [
+    "chemistry"
+  ]
+}

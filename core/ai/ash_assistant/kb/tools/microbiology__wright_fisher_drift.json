@@ -1,0 +1,30 @@
+{
+  "id": "tools/tools/microbiology/wright_fisher_drift",
+  "ns": "tools",
+  "title": "Wright Fisher Drift",
+  "summary": "Wright Fisher Drift tool.",
+  "route": "tools/microbiology/wright_fisher_drift.py",
+  "args_schema": [
+    {
+      "name": "N",
+      "type": "number"
+    },
+    {
+      "name": "p",
+      "type": "number"
+    },
+    {
+      "name": "G",
+      "type": "number"
+    },
+    {
+      "name": "T",
+      "type": "number"
+    }
+  ],
+  "examples": [],
+  "updated": "2025-08-24",
+  "tags": [
+    "microbiology"
+  ]
+}

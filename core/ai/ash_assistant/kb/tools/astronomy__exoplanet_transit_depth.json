@@ -1,0 +1,22 @@
+{
+  "id": "tools/tools/astronomy/exoplanet_transit_depth",
+  "ns": "tools",
+  "title": "Exoplanet Transit Depth",
+  "summary": "Exoplanet Transit Depth tool.",
+  "route": "tools/astronomy/exoplanet_transit_depth.py",
+  "args_schema": [
+    {
+      "name": "Rp",
+      "type": "number"
+    },
+    {
+      "name": "Rs",
+      "type": "number"
+    }
+  ],
+  "examples": [],
+  "updated": "2025-08-24",
+  "tags": [
+    "astronomy"
+  ]
+}

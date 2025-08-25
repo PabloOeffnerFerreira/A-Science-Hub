@@ -1,0 +1,26 @@
+{
+  "id": "tools/tools/astronomy/magnitude_distance_modulus",
+  "ns": "tools",
+  "title": "Magnitude Distance Modulus",
+  "summary": "Magnitude Distance Modulus tool.",
+  "route": "tools/astronomy/magnitude_distance_modulus.py",
+  "args_schema": [
+    {
+      "name": "m",
+      "type": "number"
+    },
+    {
+      "name": "M",
+      "type": "number"
+    },
+    {
+      "name": "d",
+      "type": "number"
+    }
+  ],
+  "examples": [],
+  "updated": "2025-08-24",
+  "tags": [
+    "astronomy"
+  ]
+}

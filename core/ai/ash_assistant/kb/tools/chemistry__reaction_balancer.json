@@ -1,0 +1,13 @@
+{
+  "id": "tools/tools/chemistry/reaction_balancer",
+  "ns": "tools",
+  "title": "Reaction Balancer",
+  "summary": "Reaction Balancer tool.",
+  "route": "tools/chemistry/reaction_balancer.py",
+  "args_schema": [],
+  "examples": [],
+  "updated": "2025-08-24",
+  "tags": [
+    "chemistry"
+  ]
+}

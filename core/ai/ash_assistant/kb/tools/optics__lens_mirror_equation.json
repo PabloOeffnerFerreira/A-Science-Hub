@@ -1,0 +1,18 @@
+{
+  "id": "tools/tools/optics/lens_mirror_equation",
+  "ns": "tools",
+  "title": "Lens Mirror Equation",
+  "summary": "Lens Mirror Equation tool.",
+  "route": "tools/optics/lens_mirror_equation.py",
+  "args_schema": [
+    {
+      "name": "m",
+      "type": "number"
+    }
+  ],
+  "examples": [],
+  "updated": "2025-08-24",
+  "tags": [
+    "optics"
+  ]
+}

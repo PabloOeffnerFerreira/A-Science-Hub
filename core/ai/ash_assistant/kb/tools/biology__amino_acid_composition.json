@@ -1,0 +1,13 @@
+{
+  "id": "tools/tools/biology/amino_acid_composition",
+  "ns": "tools",
+  "title": "Amino Acid Composition",
+  "summary": "Amino Acid Composition tool.",
+  "route": "tools/biology/amino_acid_composition.py",
+  "args_schema": [],
+  "examples": [],
+  "updated": "2025-08-24",
+  "tags": [
+    "biology"
+  ]
+}

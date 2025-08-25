@@ -1,0 +1,13 @@
+{
+  "id": "tools/tools/biology/dna_lab",
+  "ns": "tools",
+  "title": "Dna Lab",
+  "summary": "Dna Lab tool.",
+  "route": "tools/biology/dna_lab.py",
+  "args_schema": [],
+  "examples": [],
+  "updated": "2025-08-24",
+  "tags": [
+    "biology"
+  ]
+}

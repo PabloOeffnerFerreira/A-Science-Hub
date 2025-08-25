@@ -1,0 +1,30 @@
+{
+  "id": "tools/tools/optics/young_double_slit",
+  "ns": "tools",
+  "title": "Young Double Slit",
+  "summary": "Young Double Slit tool.",
+  "route": "tools/optics/young_double_slit.py",
+  "args_schema": [
+    {
+      "name": "lam_nm",
+      "type": "number"
+    },
+    {
+      "name": "d_m",
+      "type": "number"
+    },
+    {
+      "name": "L",
+      "type": "number"
+    },
+    {
+      "name": "m",
+      "type": "number"
+    }
+  ],
+  "examples": [],
+  "updated": "2025-08-24",
+  "tags": [
+    "optics"
+  ]
+}

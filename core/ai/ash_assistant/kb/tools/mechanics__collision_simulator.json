@@ -1,0 +1,30 @@
+{
+  "id": "tools/tools/mechanics/collision_simulator",
+  "ns": "tools",
+  "title": "Collision Simulator",
+  "summary": "Collision Simulator tool.",
+  "route": "tools/mechanics/collision_simulator.py",
+  "args_schema": [
+    {
+      "name": "m1",
+      "type": "number"
+    },
+    {
+      "name": "m2",
+      "type": "number"
+    },
+    {
+      "name": "v1",
+      "type": "number"
+    },
+    {
+      "name": "v2",
+      "type": "number"
+    }
+  ],
+  "examples": [],
+  "updated": "2025-08-24",
+  "tags": [
+    "mechanics"
+  ]
+}

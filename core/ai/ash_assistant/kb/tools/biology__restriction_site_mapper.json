@@ -1,0 +1,13 @@
+{
+  "id": "tools/tools/biology/restriction_site_mapper",
+  "ns": "tools",
+  "title": "Restriction Site Mapper",
+  "summary": "Restriction Site Mapper tool.",
+  "route": "tools/biology/restriction_site_mapper.py",
+  "args_schema": [],
+  "examples": [],
+  "updated": "2025-08-24",
+  "tags": [
+    "biology"
+  ]
+}

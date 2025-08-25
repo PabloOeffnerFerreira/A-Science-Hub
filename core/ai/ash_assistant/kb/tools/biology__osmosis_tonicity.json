@@ -1,0 +1,22 @@
+{
+  "id": "tools/tools/biology/osmosis_tonicity",
+  "ns": "tools",
+  "title": "Osmosis Tonicity",
+  "summary": "Osmosis Tonicity tool.",
+  "route": "tools/biology/osmosis_tonicity.py",
+  "args_schema": [
+    {
+      "name": "inside",
+      "type": "number"
+    },
+    {
+      "name": "outside",
+      "type": "number"
+    }
+  ],
+  "examples": [],
+  "updated": "2025-08-24",
+  "tags": [
+    "biology"
+  ]
+}

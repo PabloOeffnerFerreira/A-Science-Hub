@@ -1,0 +1,26 @@
+{
+  "id": "tools/tools/microbiology/monod_kinetics",
+  "ns": "tools",
+  "title": "Monod Kinetics",
+  "summary": "Monod Kinetics tool.",
+  "route": "tools/microbiology/monod_kinetics.py",
+  "args_schema": [
+    {
+      "name": "umax",
+      "type": "number"
+    },
+    {
+      "name": "Ks",
+      "type": "number"
+    },
+    {
+      "name": "S",
+      "type": "number"
+    }
+  ],
+  "examples": [],
+  "updated": "2025-08-24",
+  "tags": [
+    "microbiology"
+  ]
+}

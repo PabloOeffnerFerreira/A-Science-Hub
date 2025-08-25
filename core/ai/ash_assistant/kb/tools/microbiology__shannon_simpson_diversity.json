@@ -1,0 +1,13 @@
+{
+  "id": "tools/tools/microbiology/shannon_simpson_diversity",
+  "ns": "tools",
+  "title": "Shannon Simpson Diversity",
+  "summary": "Shannon Simpson Diversity tool.",
+  "route": "tools/microbiology/shannon_simpson_diversity.py",
+  "args_schema": [],
+  "examples": [],
+  "updated": "2025-08-24",
+  "tags": [
+    "microbiology"
+  ]
+}

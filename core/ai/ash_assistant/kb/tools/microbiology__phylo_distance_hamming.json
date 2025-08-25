@@ -1,0 +1,13 @@
+{
+  "id": "tools/tools/microbiology/phylo_distance_hamming",
+  "ns": "tools",
+  "title": "Phylo Distance Hamming",
+  "summary": "Phylo Distance Hamming tool.",
+  "route": "tools/microbiology/phylo_distance_hamming.py",
+  "args_schema": [],
+  "examples": [],
+  "updated": "2025-08-24",
+  "tags": [
+    "microbiology"
+  ]
+}

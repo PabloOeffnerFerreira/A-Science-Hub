@@ -1,0 +1,22 @@
+{
+  "id": "tools/tools/astronomy/stellar_luminosity_sb",
+  "ns": "tools",
+  "title": "Stellar Luminosity Sb",
+  "summary": "Stellar Luminosity Sb tool.",
+  "route": "tools/astronomy/stellar_luminosity_sb.py",
+  "args_schema": [
+    {
+      "name": "R",
+      "type": "number"
+    },
+    {
+      "name": "T",
+      "type": "number"
+    }
+  ],
+  "examples": [],
+  "updated": "2025-08-24",
+  "tags": [
+    "astronomy"
+  ]
+}

@@ -1,0 +1,26 @@
+{
+  "id": "tools/tools/biology/population_growth_calculator",
+  "ns": "tools",
+  "title": "Population Growth Calculator",
+  "summary": "Population Growth Calculator tool.",
+  "route": "tools/biology/population_growth_calculator.py",
+  "args_schema": [
+    {
+      "name": "N0",
+      "type": "number"
+    },
+    {
+      "name": "r",
+      "type": "number"
+    },
+    {
+      "name": "t",
+      "type": "number"
+    }
+  ],
+  "examples": [],
+  "updated": "2025-08-24",
+  "tags": [
+    "biology"
+  ]
+}

@@ -1,0 +1,30 @@
+{
+  "id": "tools/tools/chemistry/ideal_gas_solver",
+  "ns": "tools",
+  "title": "Ideal Gas Solver",
+  "summary": "Ideal Gas Solver tool.",
+  "route": "tools/chemistry/ideal_gas_solver.py",
+  "args_schema": [
+    {
+      "name": "P",
+      "type": "number"
+    },
+    {
+      "name": "V",
+      "type": "number"
+    },
+    {
+      "name": "n",
+      "type": "number"
+    },
+    {
+      "name": "T",
+      "type": "number"
+    }
+  ],
+  "examples": [],
+  "updated": "2025-08-24",
+  "tags": [
+    "chemistry"
+  ]
+}

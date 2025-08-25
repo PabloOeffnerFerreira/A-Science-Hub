@@ -1,0 +1,49 @@
+{
+  "id": "dev/profile",
+  "ns": "dev_public",
+  "title": "Pablo Oeffner Ferreira",
+  "summary": "Student at Altes Gymnasium Bremen (10th grade). Autodidact. Developer of ASH (A Science Hub). Loves natural sciences, sports, jogging, and outdoor adventure.",
+  "updated": "2025-08-24",
+  "body": {
+    "name": "Pablo Oeffner Ferreira",
+    "birthday": "August 27",
+    "age": "14 (as of August 2025)",
+    "school": {
+      "name": "Altes Gymnasium Bremen",
+      "grade": "10",
+      "note": "The school has no 13th grade; grade 10 already counts as upper level."
+    },
+    "interests": [
+      "Science: chemistry, biology, physics, astronomy",
+      "Programming (Python)",
+      "Sports and jogging",
+      "Adventure and outdoor activities"
+    ],
+    "self_description": [
+      "Autodidact, learns by building and experimenting.",
+      "Created ASH both as a personal learning platform and a large scientific toolkit."
+    ],
+    "projects": [
+      {
+        "name": "ASH – A Science Hub",
+        "role": "Creator and developer",
+        "overview": "Local science suite with more than 100 tools and multiple 'Labs'. GUIs are minimalistic; main focus is on quick inputs and later visualizations.",
+        "highlights": [
+          "Labs: Element Lab, Molecule Library, Mechanics Lab, DNA Lab, Electricity & Magnetism Lab, Geo Lab, Microbiology Lab",
+          "Interactive 3D viewers: Molecules, AlphaFold, Terminal Velocity 3D",
+          "Covers wide areas: astronomy, biology, chemistry, electricity, geology, math, mechanics, optics, waves"
+        ]
+      }
+    ],
+    "communication_guidelines": {
+      "language": "English for tools; concise style when explaining.",
+      "style": [
+        "No filler words, no emojis.",
+        "Minimal bold text.",
+        "Do not suggest what was not asked – answer only.",
+        "Be truthful, precise, and slightly critical."
+      ]
+    }
+  },
+  "tags": ["profile","developer","owner","preferences"]
+}

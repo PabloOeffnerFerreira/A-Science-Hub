@@ -1,0 +1,22 @@
+{
+  "id": "tools/tools/mechanics/angular_momentum",
+  "ns": "tools",
+  "title": "Angular Momentum",
+  "summary": "Angular Momentum tool.",
+  "route": "tools/mechanics/angular_momentum.py",
+  "args_schema": [
+    {
+      "name": "I",
+      "type": "number"
+    },
+    {
+      "name": "w",
+      "type": "number"
+    }
+  ],
+  "examples": [],
+  "updated": "2025-08-24",
+  "tags": [
+    "mechanics"
+  ]
+}

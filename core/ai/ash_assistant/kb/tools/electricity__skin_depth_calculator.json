@@ -1,0 +1,26 @@
+{
+  "id": "tools/tools/electricity/skin_depth_calculator",
+  "ns": "tools",
+  "title": "Skin Depth Calculator",
+  "summary": "Skin Depth Calculator tool.",
+  "route": "tools/electricity/skin_depth_calculator.py",
+  "args_schema": [
+    {
+      "name": "f",
+      "type": "number"
+    },
+    {
+      "name": "sigma",
+      "type": "number"
+    },
+    {
+      "name": "mu_r",
+      "type": "number"
+    }
+  ],
+  "examples": [],
+  "updated": "2025-08-24",
+  "tags": [
+    "electricity"
+  ]
+}

@@ -1,0 +1,22 @@
+{
+  "id": "tools/tools/math/function_plotter",
+  "ns": "tools",
+  "title": "Function Plotter",
+  "summary": "Function Plotter tool.",
+  "route": "tools/math/function_plotter.py",
+  "args_schema": [
+    {
+      "name": "xmin",
+      "type": "number"
+    },
+    {
+      "name": "xmax",
+      "type": "number"
+    }
+  ],
+  "examples": [],
+  "updated": "2025-08-24",
+  "tags": [
+    "math"
+  ]
+}

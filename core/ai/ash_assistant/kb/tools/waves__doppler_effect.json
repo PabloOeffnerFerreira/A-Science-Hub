@@ -1,0 +1,30 @@
+{
+  "id": "tools/tools/waves/doppler_effect",
+  "ns": "tools",
+  "title": "Doppler Effect",
+  "summary": "Doppler Effect tool.",
+  "route": "tools/waves/doppler_effect.py",
+  "args_schema": [
+    {
+      "name": "f",
+      "type": "number"
+    },
+    {
+      "name": "v",
+      "type": "number"
+    },
+    {
+      "name": "vs",
+      "type": "number"
+    },
+    {
+      "name": "vo",
+      "type": "number"
+    }
+  ],
+  "examples": [],
+  "updated": "2025-08-24",
+  "tags": [
+    "waves"
+  ]
+}

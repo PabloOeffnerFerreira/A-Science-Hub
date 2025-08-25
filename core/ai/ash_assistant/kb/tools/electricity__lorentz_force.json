@@ -1,0 +1,30 @@
+{
+  "id": "tools/tools/electricity/lorentz_force",
+  "ns": "tools",
+  "title": "Lorentz Force",
+  "summary": "Lorentz Force tool.",
+  "route": "tools/electricity/lorentz_force.py",
+  "args_schema": [
+    {
+      "name": "q",
+      "type": "number"
+    },
+    {
+      "name": "Ez",
+      "type": "number"
+    },
+    {
+      "name": "vz",
+      "type": "number"
+    },
+    {
+      "name": "Bz",
+      "type": "number"
+    }
+  ],
+  "examples": [],
+  "updated": "2025-08-24",
+  "tags": [
+    "electricity"
+  ]
+}

@@ -1,0 +1,22 @@
+{
+  "id": "tools/tools/astronomy/orbital_period_kepler3",
+  "ns": "tools",
+  "title": "Orbital Period Kepler3",
+  "summary": "Orbital Period Kepler3 tool.",
+  "route": "tools/astronomy/orbital_period_kepler3.py",
+  "args_schema": [
+    {
+      "name": "a",
+      "type": "number"
+    },
+    {
+      "name": "M",
+      "type": "number"
+    }
+  ],
+  "examples": [],
+  "updated": "2025-08-24",
+  "tags": [
+    "astronomy"
+  ]
+}

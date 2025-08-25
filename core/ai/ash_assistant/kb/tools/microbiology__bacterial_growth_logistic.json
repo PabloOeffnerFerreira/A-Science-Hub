@@ -1,0 +1,30 @@
+{
+  "id": "tools/tools/microbiology/bacterial_growth_logistic",
+  "ns": "tools",
+  "title": "Bacterial Growth Logistic",
+  "summary": "Bacterial Growth Logistic tool.",
+  "route": "tools/microbiology/bacterial_growth_logistic.py",
+  "args_schema": [
+    {
+      "name": "N0",
+      "type": "number"
+    },
+    {
+      "name": "K",
+      "type": "number"
+    },
+    {
+      "name": "r",
+      "type": "number"
+    },
+    {
+      "name": "t",
+      "type": "number"
+    }
+  ],
+  "examples": [],
+  "updated": "2025-08-24",
+  "tags": [
+    "microbiology"
+  ]
+}

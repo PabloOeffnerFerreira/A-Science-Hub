@@ -1,0 +1,13 @@
+{
+  "id": "tools/tools/electricity/electricity_&_magnetism_lab",
+  "ns": "tools",
+  "title": "Electricity & Magnetism Lab",
+  "summary": "Electricity & Magnetism Lab tool.",
+  "route": "tools/electricity/electricity_&_magnetism_lab.py",
+  "args_schema": [],
+  "examples": [],
+  "updated": "2025-08-24",
+  "tags": [
+    "electricity"
+  ]
+}

@@ -1,0 +1,22 @@
+{
+  "id": "tools/tools/biology/hardy_weinberg",
+  "ns": "tools",
+  "title": "Hardy Weinberg",
+  "summary": "Hardy Weinberg tool.",
+  "route": "tools/biology/hardy_weinberg.py",
+  "args_schema": [
+    {
+      "name": "p",
+      "type": "number"
+    },
+    {
+      "name": "N",
+      "type": "number"
+    }
+  ],
+  "examples": [],
+  "updated": "2025-08-24",
+  "tags": [
+    "biology"
+  ]
+}

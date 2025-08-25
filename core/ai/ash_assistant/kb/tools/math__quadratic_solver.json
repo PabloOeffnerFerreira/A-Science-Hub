@@ -1,0 +1,26 @@
+{
+  "id": "tools/tools/math/quadratic_solver",
+  "ns": "tools",
+  "title": "Quadratic Solver",
+  "summary": "Quadratic Solver tool.",
+  "route": "tools/math/quadratic_solver.py",
+  "args_schema": [
+    {
+      "name": "a",
+      "type": "number"
+    },
+    {
+      "name": "b",
+      "type": "number"
+    },
+    {
+      "name": "c",
+      "type": "number"
+    }
+  ],
+  "examples": [],
+  "updated": "2025-08-24",
+  "tags": [
+    "math"
+  ]
+}

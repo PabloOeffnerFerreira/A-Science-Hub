@@ -1,0 +1,13 @@
+{
+  "id": "tools/tools/misc/settings",
+  "ns": "tools",
+  "title": "Settings",
+  "summary": "Settings tool.",
+  "route": "tools/misc/settings.py",
+  "args_schema": [],
+  "examples": [],
+  "updated": "2025-08-24",
+  "tags": [
+    "misc"
+  ]
+}

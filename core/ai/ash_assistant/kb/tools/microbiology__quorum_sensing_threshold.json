@@ -1,0 +1,30 @@
+{
+  "id": "tools/tools/microbiology/quorum_sensing_threshold",
+  "ns": "tools",
+  "title": "Quorum Sensing Threshold",
+  "summary": "Quorum Sensing Threshold tool.",
+  "route": "tools/microbiology/quorum_sensing_threshold.py",
+  "args_schema": [
+    {
+      "name": "A",
+      "type": "number"
+    },
+    {
+      "name": "K",
+      "type": "number"
+    },
+    {
+      "name": "n",
+      "type": "number"
+    },
+    {
+      "name": "Rmax",
+      "type": "number"
+    }
+  ],
+  "examples": [],
+  "updated": "2025-08-24",
+  "tags": [
+    "microbiology"
+  ]
+}

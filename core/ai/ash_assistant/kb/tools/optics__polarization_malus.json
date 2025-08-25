@@ -1,0 +1,18 @@
+{
+  "id": "tools/tools/optics/polarization_malus",
+  "ns": "tools",
+  "title": "Polarization Malus",
+  "summary": "Polarization Malus tool.",
+  "route": "tools/optics/polarization_malus.py",
+  "args_schema": [
+    {
+      "name": "I0",
+      "type": "number"
+    }
+  ],
+  "examples": [],
+  "updated": "2025-08-24",
+  "tags": [
+    "optics"
+  ]
+}

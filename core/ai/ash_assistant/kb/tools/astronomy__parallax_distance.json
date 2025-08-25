@@ -1,0 +1,18 @@
+{
+  "id": "tools/tools/astronomy/parallax_distance",
+  "ns": "tools",
+  "title": "Parallax Distance",
+  "summary": "Parallax Distance tool.",
+  "route": "tools/astronomy/parallax_distance.py",
+  "args_schema": [
+    {
+      "name": "p",
+      "type": "number"
+    }
+  ],
+  "examples": [],
+  "updated": "2025-08-24",
+  "tags": [
+    "astronomy"
+  ]
+}

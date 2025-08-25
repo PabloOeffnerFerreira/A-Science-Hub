@@ -1,0 +1,38 @@
+{
+  "id": "tools/tools/mechanics/terminal_velocity",
+  "ns": "tools",
+  "title": "Terminal Velocity",
+  "summary": "Terminal Velocity tool.",
+  "route": "tools/mechanics/terminal_velocity.py",
+  "args_schema": [
+    {
+      "name": "mass",
+      "type": "number"
+    },
+    {
+      "name": "area",
+      "type": "number"
+    },
+    {
+      "name": "height",
+      "type": "number"
+    },
+    {
+      "name": "aval",
+      "type": "number"
+    },
+    {
+      "name": "Cd",
+      "type": "number"
+    },
+    {
+      "name": "_y",
+      "type": "number"
+    }
+  ],
+  "examples": [],
+  "updated": "2025-08-24",
+  "tags": [
+    "mechanics"
+  ]
+}

@@ -1,0 +1,30 @@
+{
+  "id": "tools/tools/microbiology/chemostat_steady_state",
+  "ns": "tools",
+  "title": "Chemostat Steady State",
+  "summary": "Chemostat Steady State tool.",
+  "route": "tools/microbiology/chemostat_steady_state.py",
+  "args_schema": [
+    {
+      "name": "D",
+      "type": "number"
+    },
+    {
+      "name": "umax",
+      "type": "number"
+    },
+    {
+      "name": "Ks",
+      "type": "number"
+    },
+    {
+      "name": "Sin",
+      "type": "number"
+    }
+  ],
+  "examples": [],
+  "updated": "2025-08-24",
+  "tags": [
+    "microbiology"
+  ]
+}

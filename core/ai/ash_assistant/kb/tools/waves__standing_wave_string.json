@@ -1,0 +1,26 @@
+{
+  "id": "tools/tools/waves/standing_wave_string",
+  "ns": "tools",
+  "title": "Standing Wave String",
+  "summary": "Standing Wave String tool.",
+  "route": "tools/waves/standing_wave_string.py",
+  "args_schema": [
+    {
+      "name": "L",
+      "type": "number"
+    },
+    {
+      "name": "n",
+      "type": "number"
+    },
+    {
+      "name": "v",
+      "type": "number"
+    }
+  ],
+  "examples": [],
+  "updated": "2025-08-24",
+  "tags": [
+    "waves"
+  ]
+}

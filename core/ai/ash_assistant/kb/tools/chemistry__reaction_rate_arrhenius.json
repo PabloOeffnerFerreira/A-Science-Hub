@@ -1,0 +1,26 @@
+{
+  "id": "tools/tools/chemistry/reaction_rate_arrhenius",
+  "ns": "tools",
+  "title": "Reaction Rate Arrhenius",
+  "summary": "Reaction Rate Arrhenius tool.",
+  "route": "tools/chemistry/reaction_rate_arrhenius.py",
+  "args_schema": [
+    {
+      "name": "A",
+      "type": "number"
+    },
+    {
+      "name": "Ea_kJ",
+      "type": "number"
+    },
+    {
+      "name": "T",
+      "type": "number"
+    }
+  ],
+  "examples": [],
+  "updated": "2025-08-24",
+  "tags": [
+    "chemistry"
+  ]
+}

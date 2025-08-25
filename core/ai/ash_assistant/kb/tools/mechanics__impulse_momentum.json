@@ -1,0 +1,30 @@
+{
+  "id": "tools/tools/mechanics/impulse_momentum",
+  "ns": "tools",
+  "title": "Impulse Momentum",
+  "summary": "Impulse Momentum tool.",
+  "route": "tools/mechanics/impulse_momentum.py",
+  "args_schema": [
+    {
+      "name": "m",
+      "type": "number"
+    },
+    {
+      "name": "v0",
+      "type": "number"
+    },
+    {
+      "name": "F",
+      "type": "number"
+    },
+    {
+      "name": "dt",
+      "type": "number"
+    }
+  ],
+  "examples": [],
+  "updated": "2025-08-24",
+  "tags": [
+    "mechanics"
+  ]
+}

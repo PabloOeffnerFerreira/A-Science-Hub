@@ -1,0 +1,18 @@
+{
+  "id": "tools/tools/mechanics/mechanics_lab",
+  "ns": "tools",
+  "title": "Mechanics Lab",
+  "summary": "Mechanics Lab tool.",
+  "route": "tools/mechanics/mechanics_lab.py",
+  "args_schema": [
+    {
+      "name": "Cd",
+      "type": "number"
+    }
+  ],
+  "examples": [],
+  "updated": "2025-08-24",
+  "tags": [
+    "mechanics"
+  ]
+}

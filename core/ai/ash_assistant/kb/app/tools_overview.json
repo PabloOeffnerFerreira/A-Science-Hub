@@ -1,0 +1,112 @@
+{
+  "namespaces": [
+    "tools"
+  ],
+  "categories": {
+    "astronomy": [
+      "tools/tools/astronomy/blackbody_peak_wien",
+      "tools/tools/astronomy/escape_velocity",
+      "tools/tools/astronomy/exoplanet_transit_depth",
+      "tools/tools/astronomy/habitable_zone_estimator",
+      "tools/tools/astronomy/magnitude_distance_modulus",
+      "tools/tools/astronomy/orbital_period_kepler3",
+      "tools/tools/astronomy/parallax_distance",
+      "tools/tools/astronomy/redshift_calculator",
+      "tools/tools/astronomy/rocket_equation_tsiolkovsky",
+      "tools/tools/astronomy/stellar_luminosity_sb",
+      "tools/tools/astronomy/surface_gravity"
+    ],
+    "biology": [
+      "tools/tools/biology/alphafold",
+      "tools/tools/biology/amino_acid_composition",
+      "tools/tools/biology/crispr_guide_finder",
+      "tools/tools/biology/dna_lab",
+      "tools/tools/biology/dna_melting_temp",
+      "tools/tools/biology/enzyme_kinetics_michaelis_menten",
+      "tools/tools/biology/hardy_weinberg",
+      "tools/tools/biology/osmosis_tonicity",
+      "tools/tools/biology/ph_calculator",
+      "tools/tools/biology/population_growth_calculator",
+      "tools/tools/biology/restriction_site_mapper"
+    ],
+    "chemistry": [
+      "tools/tools/chemistry/buffer_ph_henderson",
+      "tools/tools/chemistry/element_lab",
+      "tools/tools/chemistry/equillibbrium_from_dG",
+      "tools/tools/chemistry/ideal_gas_solver",
+      "tools/tools/chemistry/molar_mass",
+      "tools/tools/chemistry/molecule_library",
+      "tools/tools/chemistry/nernst_equation",
+      "tools/tools/chemistry/reaction_balancer",
+      "tools/tools/chemistry/reaction_rate_arrhenius",
+      "tools/tools/chemistry/titration_curve"
+    ],
+    "electricity": [
+      "tools/tools/electricity/biot_savart_straight_wire",
+      "tools/tools/electricity/electricity_&_magnetism_lab",
+      "tools/tools/electricity/lorentz_force",
+      "tools/tools/electricity/rlc_resonance",
+      "tools/tools/electricity/skin_depth_calculator",
+      "tools/tools/electricity/transmission_line_calculator"
+    ],
+    "geology": [
+      "tools/tools/geology/geo_lab"
+    ],
+    "math": [
+      "tools/tools/math/algebraic_calculator",
+      "tools/tools/math/function_plotter",
+      "tools/tools/math/quadratic_solver",
+      "tools/tools/math/triangle_solver",
+      "tools/tools/math/vector_calculator"
+    ],
+    "mechanics": [
+      "tools/tools/mechanics/angular_momentum",
+      "tools/tools/mechanics/centripetal_force",
+      "tools/tools/mechanics/collision_simulator",
+      "tools/tools/mechanics/impulse_momentum",
+      "tools/tools/mechanics/mechanics_lab",
+      "tools/tools/mechanics/momentum_conservation",
+      "tools/tools/mechanics/oscillator_damping",
+      "tools/tools/mechanics/power_calculator",
+      "tools/tools/mechanics/rotational_kinematics",
+      "tools/tools/mechanics/shm_tool",
+      "tools/tools/mechanics/terminal_velocity",
+      "tools/tools/mechanics/uniform_circular_motion",
+      "tools/tools/mechanics/work_energy_theorem",
+      "tools/tools/mechanics/work_power"
+    ],
+    "microbiology": [
+      "tools/tools/microbiology/agar_diffusion_demo",
+      "tools/tools/microbiology/bacterial_growth_logistic",
+      "tools/tools/microbiology/biofilm_growth_gompertz",
+      "tools/tools/microbiology/chemostat_steady_state",
+      "tools/tools/microbiology/monod_kinetics",
+      "tools/tools/microbiology/phylo_distance_hamming",
+      "tools/tools/microbiology/quorum_sensing_threshold",
+      "tools/tools/microbiology/shannon_simpson_diversity",
+      "tools/tools/microbiology/sir_epidemic_model",
+      "tools/tools/microbiology/wright_fisher_drift"
+    ],
+    "misc": [
+      "tools/tools/misc/ai_assistant",
+      "tools/tools/misc/ash_assistant",
+      "tools/tools/misc/settings"
+    ],
+    "optics": [
+      "tools/tools/optics/diffraction_grating",
+      "tools/tools/optics/lens_mirror_equation",
+      "tools/tools/optics/polarization_malus",
+      "tools/tools/optics/single_slit_diffraction",
+      "tools/tools/optics/thin_film_interference",
+      "tools/tools/optics/thin_lens_combiner",
+      "tools/tools/optics/young_double_slit"
+    ],
+    "waves": [
+      "tools/tools/waves/doppler_effect",
+      "tools/tools/waves/doppler_light",
+      "tools/tools/waves/standing_wave_air",
+      "tools/tools/waves/standing_wave_string"
+    ]
+  },
+  "updated": "2025-08-24"
+}

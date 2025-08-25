@@ -1,0 +1,22 @@
+{
+  "id": "tools/tools/biology/crispr_guide_finder",
+  "ns": "tools",
+  "title": "Crispr Guide Finder",
+  "summary": "Crispr Guide Finder tool.",
+  "route": "tools/biology/crispr_guide_finder.py",
+  "args_schema": [
+    {
+      "name": "gl",
+      "type": "number"
+    },
+    {
+      "name": "maxn",
+      "type": "number"
+    }
+  ],
+  "examples": [],
+  "updated": "2025-08-24",
+  "tags": [
+    "biology"
+  ]
+}

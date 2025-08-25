@@ -1,0 +1,30 @@
+{
+  "id": "tools/tools/mechanics/rotational_kinematics",
+  "ns": "tools",
+  "title": "Rotational Kinematics",
+  "summary": "Rotational Kinematics tool.",
+  "route": "tools/mechanics/rotational_kinematics.py",
+  "args_schema": [
+    {
+      "name": "th0",
+      "type": "number"
+    },
+    {
+      "name": "w0",
+      "type": "number"
+    },
+    {
+      "name": "a",
+      "type": "number"
+    },
+    {
+      "name": "t",
+      "type": "number"
+    }
+  ],
+  "examples": [],
+  "updated": "2025-08-24",
+  "tags": [
+    "mechanics"
+  ]
+}

@@ -1,0 +1,22 @@
+{
+  "id": "tools/tools/waves/doppler_light",
+  "ns": "tools",
+  "title": "Doppler Light",
+  "summary": "Doppler Light tool.",
+  "route": "tools/waves/doppler_light.py",
+  "args_schema": [
+    {
+      "name": "f",
+      "type": "number"
+    },
+    {
+      "name": "v",
+      "type": "number"
+    }
+  ],
+  "examples": [],
+  "updated": "2025-08-24",
+  "tags": [
+    "waves"
+  ]
+}

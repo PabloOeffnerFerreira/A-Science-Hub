@@ -1,0 +1,18 @@
+{
+  "id": "tools/tools/misc/ai_assistant",
+  "ns": "tools",
+  "title": "Ai Assistant",
+  "summary": "Ai Assistant tool.",
+  "route": "tools/misc/ai_assistant.py",
+  "args_schema": [
+    {
+      "name": "dt_ms",
+      "type": "number"
+    }
+  ],
+  "examples": [],
+  "updated": "2025-08-24",
+  "tags": [
+    "misc"
+  ]
+}

@@ -1,0 +1,18 @@
+{
+  "id": "tools/tools/astronomy/habitable_zone_estimator",
+  "ns": "tools",
+  "title": "Habitable Zone Estimator",
+  "summary": "Habitable Zone Estimator tool.",
+  "route": "tools/astronomy/habitable_zone_estimator.py",
+  "args_schema": [
+    {
+      "name": "L_rel",
+      "type": "number"
+    }
+  ],
+  "examples": [],
+  "updated": "2025-08-24",
+  "tags": [
+    "astronomy"
+  ]
+}

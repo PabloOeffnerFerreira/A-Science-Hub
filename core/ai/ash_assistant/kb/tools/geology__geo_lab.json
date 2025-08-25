@@ -1,0 +1,38 @@
+{
+  "id": "tools/tools/geology/geo_lab",
+  "ns": "tools",
+  "title": "Geo Lab",
+  "summary": "Geo Lab tool.",
+  "route": "tools/geology/geo_lab.py",
+  "args_schema": [
+    {
+      "name": "N0",
+      "type": "number"
+    },
+    {
+      "name": "hl",
+      "type": "number"
+    },
+    {
+      "name": "T",
+      "type": "number"
+    },
+    {
+      "name": "rem",
+      "type": "number"
+    },
+    {
+      "name": "d_km",
+      "type": "number"
+    },
+    {
+      "name": "t_ma",
+      "type": "number"
+    }
+  ],
+  "examples": [],
+  "updated": "2025-08-24",
+  "tags": [
+    "geology"
+  ]
+}

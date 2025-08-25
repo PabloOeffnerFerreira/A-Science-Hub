@@ -1,0 +1,26 @@
+{
+  "id": "tools/tools/chemistry/buffer_ph_henderson",
+  "ns": "tools",
+  "title": "Buffer Ph Henderson",
+  "summary": "Buffer Ph Henderson tool.",
+  "route": "tools/chemistry/buffer_ph_henderson.py",
+  "args_schema": [
+    {
+      "name": "pKa",
+      "type": "number"
+    },
+    {
+      "name": "A",
+      "type": "number"
+    },
+    {
+      "name": "HA",
+      "type": "number"
+    }
+  ],
+  "examples": [],
+  "updated": "2025-08-24",
+  "tags": [
+    "chemistry"
+  ]
+}

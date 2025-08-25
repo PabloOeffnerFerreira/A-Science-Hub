@@ -1,0 +1,13 @@
+{
+  "id": "tools/tools/biology/alphafold",
+  "ns": "tools",
+  "title": "Alphafold",
+  "summary": "Alphafold tool.",
+  "route": "tools/biology/alphafold.py",
+  "args_schema": [],
+  "examples": [],
+  "updated": "2025-08-24",
+  "tags": [
+    "biology"
+  ]
+}

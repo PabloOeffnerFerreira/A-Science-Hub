@@ -1,0 +1,30 @@
+{
+  "id": "tools/tools/mechanics/work_power",
+  "ns": "tools",
+  "title": "Work Power",
+  "summary": "Work Power tool.",
+  "route": "tools/mechanics/work_power.py",
+  "args_schema": [
+    {
+      "name": "F",
+      "type": "number"
+    },
+    {
+      "name": "s",
+      "type": "number"
+    },
+    {
+      "name": "th_deg",
+      "type": "number"
+    },
+    {
+      "name": "t",
+      "type": "number"
+    }
+  ],
+  "examples": [],
+  "updated": "2025-08-24",
+  "tags": [
+    "mechanics"
+  ]
+}

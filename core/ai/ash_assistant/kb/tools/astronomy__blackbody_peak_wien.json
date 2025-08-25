@@ -1,0 +1,18 @@
+{
+  "id": "tools/tools/astronomy/blackbody_peak_wien",
+  "ns": "tools",
+  "title": "Blackbody Peak Wien",
+  "summary": "Blackbody Peak Wien tool.",
+  "route": "tools/astronomy/blackbody_peak_wien.py",
+  "args_schema": [
+    {
+      "name": "x",
+      "type": "number"
+    }
+  ],
+  "examples": [],
+  "updated": "2025-08-24",
+  "tags": [
+    "astronomy"
+  ]
+}

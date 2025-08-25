@@ -1,0 +1,22 @@
+{
+  "id": "tools/tools/mechanics/power_calculator",
+  "ns": "tools",
+  "title": "Power Calculator",
+  "summary": "Power Calculator tool.",
+  "route": "tools/mechanics/power_calculator.py",
+  "args_schema": [
+    {
+      "name": "W",
+      "type": "number"
+    },
+    {
+      "name": "t",
+      "type": "number"
+    }
+  ],
+  "examples": [],
+  "updated": "2025-08-24",
+  "tags": [
+    "mechanics"
+  ]
+}

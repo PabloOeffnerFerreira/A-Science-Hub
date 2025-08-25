@@ -1,0 +1,22 @@
+{
+  "id": "tools/tools/electricity/transmission_line_calculator",
+  "ns": "tools",
+  "title": "Transmission Line Calculator",
+  "summary": "Transmission Line Calculator tool.",
+  "route": "tools/electricity/transmission_line_calculator.py",
+  "args_schema": [
+    {
+      "name": "Lp",
+      "type": "number"
+    },
+    {
+      "name": "Cp",
+      "type": "number"
+    }
+  ],
+  "examples": [],
+  "updated": "2025-08-24",
+  "tags": [
+    "electricity"
+  ]
+}

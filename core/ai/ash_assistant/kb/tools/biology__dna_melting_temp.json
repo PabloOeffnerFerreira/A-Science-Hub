@@ -1,0 +1,18 @@
+{
+  "id": "tools/tools/biology/dna_melting_temp",
+  "ns": "tools",
+  "title": "Dna Melting Temp",
+  "summary": "Dna Melting Temp tool.",
+  "route": "tools/biology/dna_melting_temp.py",
+  "args_schema": [
+    {
+      "name": "na_mM",
+      "type": "number"
+    }
+  ],
+  "examples": [],
+  "updated": "2025-08-24",
+  "tags": [
+    "biology"
+  ]
+}

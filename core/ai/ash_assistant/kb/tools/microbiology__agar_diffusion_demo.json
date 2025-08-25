@@ -1,0 +1,22 @@
+{
+  "id": "tools/tools/microbiology/agar_diffusion_demo",
+  "ns": "tools",
+  "title": "Agar Diffusion Demo",
+  "summary": "Agar Diffusion Demo tool.",
+  "route": "tools/microbiology/agar_diffusion_demo.py",
+  "args_schema": [
+    {
+      "name": "D",
+      "type": "number"
+    },
+    {
+      "name": "t",
+      "type": "number"
+    }
+  ],
+  "examples": [],
+  "updated": "2025-08-24",
+  "tags": [
+    "microbiology"
+  ]
+}

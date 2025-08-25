@@ -1,0 +1,26 @@
+{
+  "id": "tools/tools/electricity/rlc_resonance",
+  "ns": "tools",
+  "title": "Rlc Resonance",
+  "summary": "Rlc Resonance tool.",
+  "route": "tools/electricity/rlc_resonance.py",
+  "args_schema": [
+    {
+      "name": "R",
+      "type": "number"
+    },
+    {
+      "name": "L",
+      "type": "number"
+    },
+    {
+      "name": "C",
+      "type": "number"
+    }
+  ],
+  "examples": [],
+  "updated": "2025-08-24",
+  "tags": [
+    "electricity"
+  ]
+}

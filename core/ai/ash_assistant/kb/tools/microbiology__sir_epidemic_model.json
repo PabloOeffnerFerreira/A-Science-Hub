@@ -1,0 +1,38 @@
+{
+  "id": "tools/tools/microbiology/sir_epidemic_model",
+  "ns": "tools",
+  "title": "Sir Epidemic Model",
+  "summary": "Sir Epidemic Model tool.",
+  "route": "tools/microbiology/sir_epidemic_model.py",
+  "args_schema": [
+    {
+      "name": "S0",
+      "type": "number"
+    },
+    {
+      "name": "I0",
+      "type": "number"
+    },
+    {
+      "name": "R0x",
+      "type": "number"
+    },
+    {
+      "name": "beta",
+      "type": "number"
+    },
+    {
+      "name": "gamma",
+      "type": "number"
+    },
+    {
+      "name": "t",
+      "type": "number"
+    }
+  ],
+  "examples": [],
+  "updated": "2025-08-24",
+  "tags": [
+    "microbiology"
+  ]
+}

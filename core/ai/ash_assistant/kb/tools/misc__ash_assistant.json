@@ -1,0 +1,13 @@
+{
+  "id": "tools/tools/misc/ash_assistant",
+  "ns": "tools",
+  "title": "Ash Assistant",
+  "summary": "Ash Assistant tool.",
+  "route": "tools/misc/ash_assistant.py",
+  "args_schema": [],
+  "examples": [],
+  "updated": "2025-08-24",
+  "tags": [
+    "misc"
+  ]
+}

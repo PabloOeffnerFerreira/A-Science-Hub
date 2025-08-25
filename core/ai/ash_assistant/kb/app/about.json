@@ -1,0 +1,30 @@
+{
+  "id": "app/about",
+  "ns": "app",
+  "title": "About ASH (A Science Hub)",
+  "summary": "ASH is a personal science suite created by Pablo Oeffner Ferreira. It organizes more than 100 interactive tools into categories and labs, serving both as a calculator and as a learning platform.",
+  "updated": "2025-08-24",
+  "body": {
+    "main_goal": "Provide a unified, offline-accessible hub for exploring, calculating, and visualizing concepts in science. It is designed not just as a toolkit, but as a personal environment for learning through interaction and visualization.",
+    "vision": [
+      "Turn formulas into interactive tools to make abstract concepts tangible.",
+      "Enrich every tool with plots, simulations, and 3D visualizations for better understanding.",
+      "Use ASH as both a reference and an active learning assistant."
+    ],
+    "design_principles": [
+      "Keep interfaces minimal and fast for input → result workflows.",
+      "Tools and labs are modular: categories in /tools map directly to tool dropdowns.",
+      "Knowledge is stored locally, ensuring independence from external servers."
+    ],
+    "scope": {
+      "categories": "ASH spans across astronomy, biology, chemistry, electricity, geology, math, mechanics, microbiology, optics, and waves.",
+      "labs": "Collections of related tools such as the Element Lab, Molecule Library, Mechanics Lab, DNA Lab, Electricity & Magnetism Lab, Geo Lab."
+    },
+    "future": [
+      "Expand tool explanations: not just results, but intuition, formula derivations, and unit checks.",
+      "Add educational features like guided workflows and typical error warnings.",
+      "Deeply integrate the ASH assistant with this knowledge base for navigation and help."
+    ]
+  },
+  "tags": ["about","vision","goals","principles"]
+}

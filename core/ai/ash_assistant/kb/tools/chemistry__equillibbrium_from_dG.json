@@ -1,0 +1,22 @@
+{
+  "id": "tools/tools/chemistry/equillibbrium_from_dG",
+  "ns": "tools",
+  "title": "Equillibbrium From Dg",
+  "summary": "Equillibbrium From Dg tool.",
+  "route": "tools/chemistry/equillibbrium_from_dG.py",
+  "args_schema": [
+    {
+      "name": "dG_kJ",
+      "type": "number"
+    },
+    {
+      "name": "T",
+      "type": "number"
+    }
+  ],
+  "examples": [],
+  "updated": "2025-08-24",
+  "tags": [
+    "chemistry"
+  ]
+}

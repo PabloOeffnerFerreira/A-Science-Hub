@@ -1,0 +1,26 @@
+{
+  "id": "tools/tools/optics/diffraction_grating",
+  "ns": "tools",
+  "title": "Diffraction Grating",
+  "summary": "Diffraction Grating tool.",
+  "route": "tools/optics/diffraction_grating.py",
+  "args_schema": [
+    {
+      "name": "lines",
+      "type": "number"
+    },
+    {
+      "name": "m",
+      "type": "number"
+    },
+    {
+      "name": "l_nm",
+      "type": "number"
+    }
+  ],
+  "examples": [],
+  "updated": "2025-08-24",
+  "tags": [
+    "optics"
+  ]
+}

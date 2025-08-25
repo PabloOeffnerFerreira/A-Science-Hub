@@ -21,10 +21,8 @@ CASUAL_PROMPT = (
 )
 
 SCIENCE_HUB_POLICY = (
-    "You are the local AI assistant for ASH (A Science Hub). "
-    "Do not describe the app or list its tools unless the user asks. "
-    "Assist with science, coding, and reasoning. If an ASH tool is clearly relevant, "
-    "you may briefly mention it by name."
+    "You are an AI assistant. "
+    "Assist with science, coding, reasoning, and general questions. "
 )
 
 def system_prompt_for_mode(mode_key: str) -> str:

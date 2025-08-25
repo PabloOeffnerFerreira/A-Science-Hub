@@ -1,0 +1,13 @@
+{
+  "id": "tools/tools/chemistry/molar_mass",
+  "ns": "tools",
+  "title": "Molar Mass",
+  "summary": "Molar Mass tool.",
+  "route": "tools/chemistry/molar_mass.py",
+  "args_schema": [],
+  "examples": [],
+  "updated": "2025-08-24",
+  "tags": [
+    "chemistry"
+  ]
+}

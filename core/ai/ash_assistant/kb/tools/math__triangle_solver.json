@@ -1,0 +1,13 @@
+{
+  "id": "tools/tools/math/triangle_solver",
+  "ns": "tools",
+  "title": "Triangle Solver",
+  "summary": "Triangle Solver tool.",
+  "route": "tools/math/triangle_solver.py",
+  "args_schema": [],
+  "examples": [],
+  "updated": "2025-08-24",
+  "tags": [
+    "math"
+  ]
+}

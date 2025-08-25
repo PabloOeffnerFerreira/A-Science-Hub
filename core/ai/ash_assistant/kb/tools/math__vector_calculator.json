@@ -1,0 +1,30 @@
+{
+  "id": "tools/tools/math/vector_calculator",
+  "ns": "tools",
+  "title": "Vector Calculator",
+  "summary": "Vector Calculator tool.",
+  "route": "tools/math/vector_calculator.py",
+  "args_schema": [
+    {
+      "name": "cos_t",
+      "type": "number"
+    },
+    {
+      "name": "nb2",
+      "type": "number"
+    },
+    {
+      "name": "c",
+      "type": "number"
+    },
+    {
+      "name": "val",
+      "type": "number"
+    }
+  ],
+  "examples": [],
+  "updated": "2025-08-24",
+  "tags": [
+    "math"
+  ]
+}

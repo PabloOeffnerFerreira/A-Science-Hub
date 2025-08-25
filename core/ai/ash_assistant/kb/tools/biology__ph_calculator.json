@@ -1,0 +1,22 @@
+{
+  "id": "tools/tools/biology/ph_calculator",
+  "ns": "tools",
+  "title": "Ph Calculator",
+  "summary": "Ph Calculator tool.",
+  "route": "tools/biology/ph_calculator.py",
+  "args_schema": [
+    {
+      "name": "h",
+      "type": "number"
+    },
+    {
+      "name": "oh",
+      "type": "number"
+    }
+  ],
+  "examples": [],
+  "updated": "2025-08-24",
+  "tags": [
+    "biology"
+  ]
+}

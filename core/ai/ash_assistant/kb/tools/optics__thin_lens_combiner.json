@@ -1,0 +1,26 @@
+{
+  "id": "tools/tools/optics/thin_lens_combiner",
+  "ns": "tools",
+  "title": "Thin Lens Combiner",
+  "summary": "Thin Lens Combiner tool.",
+  "route": "tools/optics/thin_lens_combiner.py",
+  "args_schema": [
+    {
+      "name": "f1",
+      "type": "number"
+    },
+    {
+      "name": "f2",
+      "type": "number"
+    },
+    {
+      "name": "d",
+      "type": "number"
+    }
+  ],
+  "examples": [],
+  "updated": "2025-08-24",
+  "tags": [
+    "optics"
+  ]
+}

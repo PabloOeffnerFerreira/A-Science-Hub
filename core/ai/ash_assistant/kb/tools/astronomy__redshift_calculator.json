@@ -1,0 +1,18 @@
+{
+  "id": "tools/tools/astronomy/redshift_calculator",
+  "ns": "tools",
+  "title": "Redshift Calculator",
+  "summary": "Redshift Calculator tool.",
+  "route": "tools/astronomy/redshift_calculator.py",
+  "args_schema": [
+    {
+      "name": "val",
+      "type": "number"
+    }
+  ],
+  "examples": [],
+  "updated": "2025-08-24",
+  "tags": [
+    "astronomy"
+  ]
+}

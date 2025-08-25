@@ -1,0 +1,26 @@
+{
+  "id": "tools/tools/optics/thin_film_interference",
+  "ns": "tools",
+  "title": "Thin Film Interference",
+  "summary": "Thin Film Interference tool.",
+  "route": "tools/optics/thin_film_interference.py",
+  "args_schema": [
+    {
+      "name": "t_nm",
+      "type": "number"
+    },
+    {
+      "name": "n",
+      "type": "number"
+    },
+    {
+      "name": "m",
+      "type": "number"
+    }
+  ],
+  "examples": [],
+  "updated": "2025-08-24",
+  "tags": [
+    "optics"
+  ]
+}

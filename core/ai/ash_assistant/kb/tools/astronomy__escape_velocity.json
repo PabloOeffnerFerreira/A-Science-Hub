@@ -1,0 +1,22 @@
+{
+  "id": "tools/tools/astronomy/escape_velocity",
+  "ns": "tools",
+  "title": "Escape Velocity",
+  "summary": "Escape Velocity tool.",
+  "route": "tools/astronomy/escape_velocity.py",
+  "args_schema": [
+    {
+      "name": "M",
+      "type": "number"
+    },
+    {
+      "name": "R",
+      "type": "number"
+    }
+  ],
+  "examples": [],
+  "updated": "2025-08-24",
+  "tags": [
+    "astronomy"
+  ]
+}

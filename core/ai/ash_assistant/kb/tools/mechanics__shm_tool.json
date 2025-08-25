@@ -1,0 +1,34 @@
+{
+  "id": "tools/tools/mechanics/shm_tool",
+  "ns": "tools",
+  "title": "Shm Tool",
+  "summary": "Shm Tool tool.",
+  "route": "tools/mechanics/shm_tool.py",
+  "args_schema": [
+    {
+      "name": "A",
+      "type": "number"
+    },
+    {
+      "name": "t",
+      "type": "number"
+    },
+    {
+      "name": "omega",
+      "type": "number"
+    },
+    {
+      "name": "k",
+      "type": "number"
+    },
+    {
+      "name": "m",
+      "type": "number"
+    }
+  ],
+  "examples": [],
+  "updated": "2025-08-24",
+  "tags": [
+    "mechanics"
+  ]
+}

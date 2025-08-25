@@ -1,0 +1,22 @@
+{
+  "id": "tools/tools/electricity/biot_savart_straight_wire",
+  "ns": "tools",
+  "title": "Biot Savart Straight Wire",
+  "summary": "Biot Savart Straight Wire tool.",
+  "route": "tools/electricity/biot_savart_straight_wire.py",
+  "args_schema": [
+    {
+      "name": "I",
+      "type": "number"
+    },
+    {
+      "name": "r",
+      "type": "number"
+    }
+  ],
+  "examples": [],
+  "updated": "2025-08-24",
+  "tags": [
+    "electricity"
+  ]
+}

@@ -1,0 +1,26 @@
+{
+  "id": "tools/tools/astronomy/rocket_equation_tsiolkovsky",
+  "ns": "tools",
+  "title": "Rocket Equation Tsiolkovsky",
+  "summary": "Rocket Equation Tsiolkovsky tool.",
+  "route": "tools/astronomy/rocket_equation_tsiolkovsky.py",
+  "args_schema": [
+    {
+      "name": "Isp",
+      "type": "number"
+    },
+    {
+      "name": "m0",
+      "type": "number"
+    },
+    {
+      "name": "mf",
+      "type": "number"
+    }
+  ],
+  "examples": [],
+  "updated": "2025-08-24",
+  "tags": [
+    "astronomy"
+  ]
+}

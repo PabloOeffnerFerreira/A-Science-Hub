@@ -1,0 +1,26 @@
+{
+  "id": "tools/tools/biology/enzyme_kinetics_michaelis_menten",
+  "ns": "tools",
+  "title": "Enzyme Kinetics Michaelis Menten",
+  "summary": "Enzyme Kinetics Michaelis Menten tool.",
+  "route": "tools/biology/enzyme_kinetics_michaelis_menten.py",
+  "args_schema": [
+    {
+      "name": "Vmax",
+      "type": "number"
+    },
+    {
+      "name": "Km",
+      "type": "number"
+    },
+    {
+      "name": "S",
+      "type": "number"
+    }
+  ],
+  "examples": [],
+  "updated": "2025-08-24",
+  "tags": [
+    "biology"
+  ]
+}

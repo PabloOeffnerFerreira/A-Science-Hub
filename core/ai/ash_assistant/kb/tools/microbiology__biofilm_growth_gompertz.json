@@ -1,0 +1,30 @@
+{
+  "id": "tools/tools/microbiology/biofilm_growth_gompertz",
+  "ns": "tools",
+  "title": "Biofilm Growth Gompertz",
+  "summary": "Biofilm Growth Gompertz tool.",
+  "route": "tools/microbiology/biofilm_growth_gompertz.py",
+  "args_schema": [
+    {
+      "name": "A",
+      "type": "number"
+    },
+    {
+      "name": "mu",
+      "type": "number"
+    },
+    {
+      "name": "lam",
+      "type": "number"
+    },
+    {
+      "name": "t",
+      "type": "number"
+    }
+  ],
+  "examples": [],
+  "updated": "2025-08-24",
+  "tags": [
+    "microbiology"
+  ]
+}

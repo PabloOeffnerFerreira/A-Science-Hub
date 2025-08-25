@@ -1,0 +1,30 @@
+{
+  "id": "tools/tools/mechanics/oscillator_damping",
+  "ns": "tools",
+  "title": "Oscillator Damping",
+  "summary": "Oscillator Damping tool.",
+  "route": "tools/mechanics/oscillator_damping.py",
+  "args_schema": [
+    {
+      "name": "A",
+      "type": "number"
+    },
+    {
+      "name": "gamma",
+      "type": "number"
+    },
+    {
+      "name": "w0",
+      "type": "number"
+    },
+    {
+      "name": "t",
+      "type": "number"
+    }
+  ],
+  "examples": [],
+  "updated": "2025-08-24",
+  "tags": [
+    "mechanics"
+  ]
+}

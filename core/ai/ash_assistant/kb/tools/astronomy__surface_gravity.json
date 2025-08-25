@@ -1,0 +1,22 @@
+{
+  "id": "tools/tools/astronomy/surface_gravity",
+  "ns": "tools",
+  "title": "Surface Gravity",
+  "summary": "Surface Gravity tool.",
+  "route": "tools/astronomy/surface_gravity.py",
+  "args_schema": [
+    {
+      "name": "M",
+      "type": "number"
+    },
+    {
+      "name": "R",
+      "type": "number"
+    }
+  ],
+  "examples": [],
+  "updated": "2025-08-24",
+  "tags": [
+    "astronomy"
+  ]
+}

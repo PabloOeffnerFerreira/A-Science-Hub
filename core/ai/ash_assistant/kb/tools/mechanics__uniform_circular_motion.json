@@ -1,0 +1,22 @@
+{
+  "id": "tools/tools/mechanics/uniform_circular_motion",
+  "ns": "tools",
+  "title": "Uniform Circular Motion",
+  "summary": "Uniform Circular Motion tool.",
+  "route": "tools/mechanics/uniform_circular_motion.py",
+  "args_schema": [
+    {
+      "name": "r",
+      "type": "number"
+    },
+    {
+      "name": "T",
+      "type": "number"
+    }
+  ],
+  "examples": [],
+  "updated": "2025-08-24",
+  "tags": [
+    "mechanics"
+  ]
+}

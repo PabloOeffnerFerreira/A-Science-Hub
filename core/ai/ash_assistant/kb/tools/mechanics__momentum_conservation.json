@@ -1,0 +1,30 @@
+{
+  "id": "tools/tools/mechanics/momentum_conservation",
+  "ns": "tools",
+  "title": "Momentum Conservation",
+  "summary": "Momentum Conservation tool.",
+  "route": "tools/mechanics/momentum_conservation.py",
+  "args_schema": [
+    {
+      "name": "m1",
+      "type": "number"
+    },
+    {
+      "name": "v1",
+      "type": "number"
+    },
+    {
+      "name": "m2",
+      "type": "number"
+    },
+    {
+      "name": "v2",
+      "type": "number"
+    }
+  ],
+  "examples": [],
+  "updated": "2025-08-24",
+  "tags": [
+    "mechanics"
+  ]
+}

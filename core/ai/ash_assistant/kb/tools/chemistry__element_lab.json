@@ -1,0 +1,13 @@
+{
+  "id": "tools/tools/chemistry/element_lab",
+  "ns": "tools",
+  "title": "Element Lab",
+  "summary": "Element Lab tool.",
+  "route": "tools/chemistry/element_lab.py",
+  "args_schema": [],
+  "examples": [],
+  "updated": "2025-08-24",
+  "tags": [
+    "chemistry"
+  ]
+}

@@ -1,0 +1,26 @@
+{
+  "id": "tools/tools/mechanics/centripetal_force",
+  "ns": "tools",
+  "title": "Centripetal Force",
+  "summary": "Centripetal Force tool.",
+  "route": "tools/mechanics/centripetal_force.py",
+  "args_schema": [
+    {
+      "name": "m",
+      "type": "number"
+    },
+    {
+      "name": "v",
+      "type": "number"
+    },
+    {
+      "name": "r",
+      "type": "number"
+    }
+  ],
+  "examples": [],
+  "updated": "2025-08-24",
+  "tags": [
+    "mechanics"
+  ]
+}

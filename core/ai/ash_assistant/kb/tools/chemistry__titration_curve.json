@@ -1,0 +1,30 @@
+{
+  "id": "tools/tools/chemistry/titration_curve",
+  "ns": "tools",
+  "title": "Titration Curve",
+  "summary": "Titration Curve tool.",
+  "route": "tools/chemistry/titration_curve.py",
+  "args_schema": [
+    {
+      "name": "ca",
+      "type": "number"
+    },
+    {
+      "name": "va",
+      "type": "number"
+    },
+    {
+      "name": "cb",
+      "type": "number"
+    },
+    {
+      "name": "vb",
+      "type": "number"
+    }
+  ],
+  "examples": [],
+  "updated": "2025-08-24",
+  "tags": [
+    "chemistry"
+  ]
+}

@@ -1,0 +1,26 @@
+{
+  "id": "tools/tools/mechanics/work_energy_theorem",
+  "ns": "tools",
+  "title": "Work Energy Theorem",
+  "summary": "Work Energy Theorem tool.",
+  "route": "tools/mechanics/work_energy_theorem.py",
+  "args_schema": [
+    {
+      "name": "m",
+      "type": "number"
+    },
+    {
+      "name": "v0",
+      "type": "number"
+    },
+    {
+      "name": "vf",
+      "type": "number"
+    }
+  ],
+  "examples": [],
+  "updated": "2025-08-24",
+  "tags": [
+    "mechanics"
+  ]
+}
