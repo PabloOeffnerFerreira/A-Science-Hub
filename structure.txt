@@ -7,21 +7,118 @@ C:.
 |   README.md
 |   requirements.txt
 |   structure.txt
-|   
-+---.vscode
-|       launch.json
-|       
+|         
 +---core
 |   +---ai
-|   |   |   ai_manager.py
-|   |   |   mode_handler.py
-|   |   |   ollama_wrapper.py
+|   |   |   chat_store.py
+|   |   |   client.py
+|   |   |   logger.py
+|   |   |   models.py
+|   |   |   prompts.py
+|   |   |   tokenizer.py
+|   |   |   __init__.py
 |   |   |   
-|   |   \---configs
-|   |           models.json
-|   |           modes.json
-|   |           prompts.json
-|   |           
+|   |   \---ash_assistant
+|   |       |   ash_assistant.py
+|   |       |   ash_prompts.py
+|   |       |   ash_retrieve.py
+|   |       |   
+|   |       +---kb
+|   |       |   +---app
+|   |       |   |       about.json
+|   |       |   |       tools_overview.json
+|   |       |   |       voice_and_style.json
+|   |       |   |       
+|   |       |   +---dev
+|   |       |   |       profile.json
+|   |       |   |       
+|   |       |   \---tools
+|   |       |           astronomy__blackbody_peak_wien.json
+|   |       |           astronomy__escape_velocity.json
+|   |       |           astronomy__exoplanet_transit_depth.json
+|   |       |           astronomy__habitable_zone_estimator.json
+|   |       |           astronomy__magnitude_distance_modulus.json
+|   |       |           astronomy__orbital_period_kepler3.json
+|   |       |           astronomy__parallax_distance.json
+|   |       |           astronomy__redshift_calculator.json
+|   |       |           astronomy__rocket_equation_tsiolkovsky.json
+|   |       |           astronomy__stellar_luminosity_sb.json
+|   |       |           astronomy__surface_gravity.json
+|   |       |           biology__alphafold.json
+|   |       |           biology__amino_acid_composition.json
+|   |       |           biology__crispr_guide_finder.json
+|   |       |           biology__dna_lab.json
+|   |       |           biology__dna_melting_temp.json
+|   |       |           biology__enzyme_kinetics_michaelis_menten.json
+|   |       |           biology__hardy_weinberg.json
+|   |       |           biology__osmosis_tonicity.json
+|   |       |           biology__ph_calculator.json
+|   |       |           biology__population_growth_calculator.json
+|   |       |           biology__restriction_site_mapper.json
+|   |       |           chemistry__buffer_ph_henderson.json
+|   |       |           chemistry__element_lab.json
+|   |       |           chemistry__equillibbrium_from_dG.json
+|   |       |           chemistry__ideal_gas_solver.json
+|   |       |           chemistry__molar_mass.json
+|   |       |           chemistry__molecule_library.json
+|   |       |           chemistry__nernst_equation.json
+|   |       |           chemistry__reaction_balancer.json
+|   |       |           chemistry__reaction_rate_arrhenius.json
+|   |       |           chemistry__titration_curve.json
+|   |       |           electricity__biot_savart_straight_wire.json
+|   |       |           electricity__electricity_&_magnetism_lab.json
+|   |       |           electricity__lorentz_force.json
+|   |       |           electricity__rlc_resonance.json
+|   |       |           electricity__skin_depth_calculator.json
+|   |       |           electricity__transmission_line_calculator.json
+|   |       |           geology__geo_lab.json
+|   |       |           math__algebraic_calculator.json
+|   |       |           math__function_plotter.json
+|   |       |           math__quadratic_solver.json
+|   |       |           math__triangle_solver.json
+|   |       |           math__vector_calculator.json
+|   |       |           mechanics__angular_momentum.json
+|   |       |           mechanics__centripetal_force.json
+|   |       |           mechanics__collision_simulator.json
+|   |       |           mechanics__impulse_momentum.json
+|   |       |           mechanics__mechanics_lab.json
+|   |       |           mechanics__momentum_conservation.json
+|   |       |           mechanics__oscillator_damping.json
+|   |       |           mechanics__power_calculator.json
+|   |       |           mechanics__rotational_kinematics.json
+|   |       |           mechanics__shm_tool.json
+|   |       |           mechanics__terminal_velocity.json
+|   |       |           mechanics__uniform_circular_motion.json
+|   |       |           mechanics__work_energy_theorem.json
+|   |       |           mechanics__work_power.json
+|   |       |           microbiology__agar_diffusion_demo.json
+|   |       |           microbiology__bacterial_growth_logistic.json
+|   |       |           microbiology__biofilm_growth_gompertz.json
+|   |       |           microbiology__chemostat_steady_state.json
+|   |       |           microbiology__monod_kinetics.json
+|   |       |           microbiology__phylo_distance_hamming.json
+|   |       |           microbiology__quorum_sensing_threshold.json
+|   |       |           microbiology__shannon_simpson_diversity.json
+|   |       |           microbiology__sir_epidemic_model.json
+|   |       |           microbiology__wright_fisher_drift.json
+|   |       |           misc__ai_assistant.json
+|   |       |           misc__ash_assistant.json
+|   |       |           misc__settings.json
+|   |       |           optics__diffraction_grating.json
+|   |       |           optics__lens_mirror_equation.json
+|   |       |           optics__polarization_malus.json
+|   |       |           optics__single_slit_diffraction.json
+|   |       |           optics__thin_film_interference.json
+|   |       |           optics__thin_lens_combiner.json
+|   |       |           optics__young_double_slit.json
+|   |       |           waves__doppler_effect.json
+|   |       |           waves__doppler_light.json
+|   |       |           waves__standing_wave_air.json
+|   |       |           waves__standing_wave_string.json
+|   |       |           
+|   |       \---storage
+|   |               ash_kb.sqlite
+|   |               
 |   +---data
 |   |   |   info.py
 |   |   |   paths.py
@@ -29,7 +126,6 @@ C:.
 |   |   +---databases
 |   |   |   |   codon_table.json
 |   |   |   |   constants_data.py
-|   |   |   |   dna_sequences.json
 |   |   |   |   minerals.csv
 |   |   |   |   minerals.json
 |   |   |   |   o_states.json
@@ -154,7 +250,18 @@ C:.
 |   |           tool_template.py
 |   |           
 |   \---tests
+|           test_all.py
+|           
 +---storage
+|   |   ash_kb.sqlite
+|   |   
+|   +---ai
+|   |   +---attachments
+|   |   +---chats
+|   |   |       
+|   |   \---logs
+|   |           ai_events_0001.jsonl
+|   |           
 |   +---favourites
 |   |       .keep
 |   |       geo_favs.json
@@ -164,38 +271,6 @@ C:.
 |   |       
 |   +---images
 |   |       .keep
-|   |       image_20250822_161440.png
-|   |       image_20250822_163527.png
-|   |       image_20250822_163758.png
-|   |       image_20250822_164957.png
-|   |       image_20250822_212746.png
-|   |       image_20250822_213130.png
-|   |       image_20250822_213852.png
-|   |       image_20250822_213905.png
-|   |       image_20250823_083018.png
-|   |       image_20250823_083323.png
-|   |       image_20250823_083633.png
-|   |       image_20250823_083650.png
-|   |       image_20250823_083713.png
-|   |       image_20250823_084021.png
-|   |       image_20250823_084036.png
-|   |       image_20250823_084048.png
-|   |       image_20250823_084050.png
-|   |       image_20250823_084425.png
-|   |       image_20250823_084938.png
-|   |       image_20250823_085637.png
-|   |       image_20250823_091936.png
-|   |       image_20250823_091952.png
-|   |       image_20250823_103244.png
-|   |       image_20250823_112526.png
-|   |       image_20250823_113411.png
-|   |       image_20250823_120651.png
-|   |       image_20250823_120659.png
-|   |       image_20250823_121822.png
-|   |       image_20250823_121853.png
-|   |       image_20250823_121903.png
-|   |       image_20250823_141145.png
-|   |       image_20250823_183601.png
 |   |       
 |   +---logs
 |   |       .keep
@@ -223,6 +298,7 @@ C:.
 |   |       surface_gravity.py
 |   |       
 |   +---biology
+|   |       alphafold.py
 |   |       amino_acid_composition.py
 |   |       crispr_guide_finder.py
 |   |       dna_lab.py
@@ -237,7 +313,7 @@ C:.
 |   +---chemistry
 |   |       buffer_ph_henderson.py
 |   |       element_lab.py
-|   |       equilibbrium_from_dG.py
+|   |       equillibbrium_from_dG.py
 |   |       ideal_gas_solver.py
 |   |       molar_mass.py
 |   |       molecule_library.py
@@ -269,9 +345,8 @@ C:.
 |   |       centripetal_force.py
 |   |       collision_simulator.py
 |   |       impulse_momentum.py
-|   |       lens_mirror_equation.py
 |   |       mechanics_lab.py
-|   |       momentum_conversation.py
+|   |       momentum_conservation.py
 |   |       oscillator_damping.py
 |   |       power_calculator.py
 |   |       rotational_kinematics.py
@@ -283,7 +358,6 @@ C:.
 |   |       
 |   +---microbiology
 |   |       agar_diffusion_demo.py
-|   |       alphafold.py
 |   |       bacterial_growth_logistic.py
 |   |       biofilm_growth_gompertz.py
 |   |       chemostat_steady_state.py
@@ -295,10 +369,13 @@ C:.
 |   |       wright_fisher_drift.py
 |   |       
 |   +---misc
+|   |       ai_assistant.py
+|   |       ash_assistant.py
 |   |       settings.py
 |   |       
 |   +---optics
 |   |       diffraction_grating.py
+|   |       lens_mirror_equation.py
 |   |       polarization_malus.py
 |   |       single_slit_diffraction.py
 |   |       thin_film_interference.py
