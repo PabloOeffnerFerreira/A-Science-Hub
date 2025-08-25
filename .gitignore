@@ -49,7 +49,7 @@ core/data/databases/intdatabases/wm.json
 storage/logs/*
 !storage/logs/.gitkeep
 
-# Notes (add this)
+# Notes
 storage/notes/*
 !storage/notes/.gitkeep
 storage/ai/chats/*
@@ -57,3 +57,10 @@ storage/ai/chats/*
 storage/ai/logs/*
 !storage/ai/logs/.gitkeep
 core/data/databases/dna_squences.json
+
+# Exclude Windows executables in root
+/ASH.exe
+/ASHdev.exe
+
+# Exclude misc/.spec directory and all contents
+/misc/.spec/
