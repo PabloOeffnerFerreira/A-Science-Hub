@@ -5,9 +5,10 @@ from PyQt6.QtWidgets import (
 )
 from matplotlib.figure import Figure
 from matplotlib.backends.backend_qtagg import FigureCanvasQTAgg as FigureCanvas
-from core.data.functions.bio_utils import CODON_TABLE, AMINO_ACID_GROUPS
+from core.data.functions.bio_utils import AMINO_ACID_GROUPS
 from core.data.functions.image_export import export_figure
 from core.data.functions.log import add_log_entry
+from core.data.databases.codon_table import CODON_TABLE
 
 class Tool(QDialog):
     TITLE = "Codon Lookup"
