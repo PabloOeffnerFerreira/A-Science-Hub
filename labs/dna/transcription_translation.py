@@ -9,7 +9,7 @@ from matplotlib.figure import Figure
 from matplotlib.backends.backend_qtagg import FigureCanvasQTAgg as FigureCanvas
 from core.data.functions.image_export import export_figure
 from core.data.functions.log import add_log_entry
-from core.data.functions.bio_utils import CODON_TABLE  # place this file at core/data/functions/bio_utils.py
+from core.data.databases.codon_table
 
 class Tool(QDialog):
     TITLE = "DNA Transcription & Translation"
