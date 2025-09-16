@@ -10,7 +10,7 @@ from matplotlib.figure import Figure
 from matplotlib.backends.backend_qtagg import FigureCanvasQTAgg as FigureCanvas
 from matplotlib.backends.backend_qtagg import NavigationToolbar2QT as NavigationToolbar
 from core.data.functions.log import add_log_entry
-from core.data.functions.bio_utils import CODON_TABLE  # RNA (U-based) codon table
+from core.data.databases.codon_table import CODON_TABLE
 
 # 3-letter → 1-letter
 AA1 = {
