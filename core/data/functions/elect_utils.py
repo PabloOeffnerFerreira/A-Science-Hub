@@ -12,3 +12,6 @@
       ("Gold",   None, 0.1, "±5%"),
       ("Silver", None, 0.01, "±10%"),
   ]
+
+
+MU0 = 4e-7*math.pi
