@@ -291,3 +291,6 @@ _COLOUR_BY_CATEGORY = {
     "lanthanide": "#FF69B4",
     "actinide": "#BA55D3",
 }
+
+
+R = 8.314462618  # J/(mol·K)
