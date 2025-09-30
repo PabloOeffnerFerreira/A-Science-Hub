@@ -7,7 +7,7 @@ from PyQt6.QtWidgets import (
     QComboBox, QCheckBox, QTextEdit
 )
 from core.data.functions.log import add_log_entry
-
+from core.data.functions.bio_utils import HTML_VIEWER
 # ---- config/const ----
 HUB_SUMMARY = "https://www.ebi.ac.uk/pdbe/pdbe-kb/3dbeacons/api/uniprot/summary/{acc}.json"
 AF_FILES_BASE = "https://alphafold.ebi.ac.uk/files/"
@@ -21,74 +21,6 @@ def _maybe_gunzip(data: bytes, url: str) -> bytes: return gzip.decompress(data) 
 def _basename_from_model_url(model_url: str) -> str | None:
     m = re.search(r'/files/(AF-[A-Za-z0-9]+-F\d+)-model_v\d+\.(?:pdb|cif)(?:\.gz)?$', model_url)
     return m.group(1) if m else None
-
-# ---- embedded HTML for the WebEngine dialog ----
-HTML_VIEWER = """<!doctype html>
-<html><head><meta charset="utf-8"/>
-<title>AlphaFold 3D</title>
-<style>
-  html,body{height:100%;margin:0;background:#111;color:#ddd;font-family:system-ui}
-  #tb{height:44px;display:flex;gap:10px;align-items:center;padding:8px;border-bottom:1px solid #333;background:#1a1a1a}
-  #v{height:calc(100% - 44px)}
-  select,label,button{font-size:13px}
-</style>
-<script src="https://unpkg.com/ngl@latest/dist/ngl.js"></script>
-<script>
-  // Hide the deprecated useLegacyLights warning from Three.js/NGL
-  (function() {
-    const origWarn = console.warn;
-    console.warn = function (...args) {
-      if (args[0]?.includes("useLegacyLights")) return;
-      origWarn.apply(console, args);
-    };
-  })();
-</script>
-</head>
-<body>
-<div id="tb">
-  <label>Representation</label>
-  <select id="rep">
-    <option value="cartoon">cartoon</option>
-    <option value="licorice">licorice</option>
-    <option value="ball+stick">ball+stick</option>
-    <option value="spacefill">spacefill</option>
-    <option value="backbone">backbone</option>
-  </select>
-  <label><input id="plddt" type="checkbox" checked> color by pLDDT</label>
-  <button id="apply">Apply</button>
-  <span id="st" style="margin-left:auto;opacity:.7"></span>
-</div>
-<div id="v"></div>
-<script>
-let stage, comp;
-function init(){
-  stage = new NGL.Stage("v",{backgroundColor:"black"});
-  window.addEventListener("resize",()=>stage.handleResize());
-  document.getElementById("apply").addEventListener("click", apply);
-}
-function apply(){
-  if(!comp) return;
-  const rep = document.getElementById("rep").value;
-  const by = document.getElementById("plddt").checked;
-  comp.removeAllRepresentations();
-  const p = by ? {colorScheme:"bfactor"} : {};
-  comp.addRepresentation(rep, p);
-  comp.autoView();
-}
-function loadFromText(txt, ext){
-  document.getElementById("st").textContent="Loading…";
-  if(comp){ comp.dispose(); comp=null; }
-  const blob = new Blob([txt], {type:"text/plain"});
-  stage.loadFile(blob, { ext: ext }).then(c=>{
-    comp=c; apply(); document.getElementById("st").textContent="Loaded";
-  }).catch(e=>{
-    console.error(e); document.getElementById("st").textContent="Error";
-  });
-}
-window.addEventListener("DOMContentLoaded", init);
-</script>
-</body></html>
-"""
 
 # ---- viewer dialog ----
 try:
