@@ -259,3 +259,35 @@ PROPERTY_METADATA = {
     "OxidationStates": {"label": "Oxidation States", "unit": "", "category": "Chemical", "desc": "Common oxidation states", "numeric": False},
 }
 CATEGORIES = sorted(set(p["category"] for p in PROPERTY_METADATA.values()))
+
+
+
+# ---- Property aliases and colours ----
+_PROP_KEYS = {
+    "Atomic number": ["number", "AtomicNumber"],
+    "Group": ["group", "Group"],
+    "Period": ["period", "Period"],
+    "Atomic mass (u)": ["atomic_mass", "AtomicMass"],
+    "Density (g/cm³)": ["density", "Density"],
+    "Melting point (K)": ["melt", "MeltingPoint"],
+    "Boiling point (K)": ["boil", "BoilingPoint"],
+    "Electronegativity (Pauling)": ["electronegativity_pauling", "Electronegativity"],
+    "Electron affinity (kJ/mol)": ["electron_affinity", "ElectronAffinity"],
+    "First ionisation (eV)": ["first_ionization", "FirstIonization"],
+    "Molar heat (J/mol·K)": ["molar_heat", "SpecificHeat"],
+}
+
+_COLOUR_BY_CATEGORY = {
+    "alkali metal": "#FF6666",
+    "alkaline earth metal": "#FFDEAD",
+    "transition metal": "#FFB347",
+    "post-transition metal": "#FFD700",
+    "metalloid": "#ADFF2F",
+    "polyatomic nonmetal": "#90EE90",
+    "diatomic nonmetal": "#98FB98",
+    "nonmetal": "#90EE90",
+    "halogen": "#87CEFA",
+    "noble gas": "#D8BFD8",
+    "lanthanide": "#FF69B4",
+    "actinide": "#BA55D3",
+}
