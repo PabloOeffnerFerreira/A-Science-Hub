@@ -2,7 +2,7 @@ from __future__ import annotations
 
 import math
 from dataclasses import dataclass
-
+from core.data.functions.elect_utils import BANDS
 from PyQt6.QtCore import Qt
 from PyQt6.QtGui import QDoubleValidator, QIntValidator
 from PyQt6.QtWidgets import (
@@ -64,20 +64,6 @@ def set_output(label: QLabel, value: float, unit: str):
 
 # ---------- Resistor Color Code ----------
 class ResistorBands(QWidget):
-    BANDS = [
-        ("Black",  0, 1,  None),
-        ("Brown",  1, 10, "±1%"),
-        ("Red",    2, 100,"±2%"),
-        ("Orange", 3, 1_000, None),
-        ("Yellow", 4, 10_000, None),
-        ("Green",  5, 100_000, "±0.5%"),
-        ("Blue",   6, 1_000_000, "±0.25%"),
-        ("Violet", 7, 10_000_000, "±0.1%"),
-        ("Grey",   8, 100_000_000, "±0.05%"),
-        ("White",  9, 1_000_000_000, None),
-        ("Gold",   None, 0.1, "±5%"),
-        ("Silver", None, 0.01, "±10%"),
-    ]
     def __init__(self, parent=None):
         super().__init__(parent)
         gb = QGroupBox("Resistor Color Code (4-band)")
