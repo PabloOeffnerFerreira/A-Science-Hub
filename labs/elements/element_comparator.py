@@ -5,19 +5,7 @@ from PyQt6.QtWidgets import (
 )
 from PyQt6.QtGui import QBrush, QColor, QFont
 from PyQt6.QtCore import Qt
-from core.data.functions.chemistry_utils import load_element_data
-
-PROPERTY_METADATA = {
-    "AtomicNumber": {"label": "Atomic Number", "unit": "", "category": "Atomic", "desc": "Number of protons", "numeric": True},
-    "AtomicMass": {"label": "Atomic Mass", "unit": "u", "category": "Atomic", "desc": "Average atomic mass (u)", "numeric": True},
-    "Electronegativity": {"label": "Electronegativity", "unit": "", "category": "Chemical", "desc": "Pauling electronegativity", "numeric": True},
-    "BoilingPoint": {"label": "Boiling Point", "unit": "K", "category": "Physical", "desc": "Boiling point (K)", "numeric": True},
-    "MeltingPoint": {"label": "Melting Point", "unit": "K", "category": "Physical", "desc": "Melting point (K)", "numeric": True},
-    "Density": {"label": "Density", "unit": "g/cm³", "category": "Physical", "desc": "Density (near RT)", "numeric": True},
-    "Type": {"label": "Type", "unit": "", "category": "Chemical", "desc": "Element category/type", "numeric": False},
-    "OxidationStates": {"label": "Oxidation States", "unit": "", "category": "Chemical", "desc": "Common oxidation states", "numeric": False},
-}
-CATEGORIES = sorted(set(p["category"] for p in PROPERTY_METADATA.values()))
+from core.data.functions.chemistry_utils import load_element_data, CATEGORIES, PROPERTY_METADATA
 
 class Tool(QDialog):
     TITLE = "Element Comparator"
