@@ -292,5 +292,4 @@ _COLOUR_BY_CATEGORY = {
     "actinide": "#BA55D3",
 }
 
-
-R = 8.314462618  # J/(mol·K)
+R = 8.31446261815324  #Gas constant
