@@ -1,8 +1,7 @@
 from __future__ import annotations
 from PyQt6.QtWidgets import QDialog, QVBoxLayout, QHBoxLayout, QLabel, QLineEdit, QPushButton, QComboBox
 from core.data.functions.log import add_log_entry
-
-R = 8.314462618  # J/(mol·K)
+from core.data.functions.chemistry_utils import R
 
 class Tool(QDialog):
     TITLE = "Ideal Gas Solver (PV = nRT)"
