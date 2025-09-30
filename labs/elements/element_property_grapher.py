@@ -13,7 +13,7 @@ from PyQt6.QtGui import QFont
 
 from matplotlib.figure import Figure
 from matplotlib.backends.backend_qtagg import FigureCanvasQTAgg as FigureCanvas
-
+from core.data.chemistry_utils import _PROP_KEYS, _COLOUR_BY_CATEGORY
 from core.data.functions.log import add_log_entry
 
 
@@ -42,38 +42,6 @@ def _load_elements_fallback() -> Dict[str, dict]:
         )
     obj = json.loads(local.read_text(encoding="utf-8"))
     return {el.get("symbol"): el for el in obj.get("elements", []) if el.get("symbol")}
-
-
-# ---- Property aliases and colours ----
-_PROP_KEYS = {
-    "Atomic number": ["number", "AtomicNumber"],
-    "Group": ["group", "Group"],
-    "Period": ["period", "Period"],
-    "Atomic mass (u)": ["atomic_mass", "AtomicMass"],
-    "Density (g/cm³)": ["density", "Density"],
-    "Melting point (K)": ["melt", "MeltingPoint"],
-    "Boiling point (K)": ["boil", "BoilingPoint"],
-    "Electronegativity (Pauling)": ["electronegativity_pauling", "Electronegativity"],
-    "Electron affinity (kJ/mol)": ["electron_affinity", "ElectronAffinity"],
-    "First ionisation (eV)": ["first_ionization", "FirstIonization"],
-    "Molar heat (J/mol·K)": ["molar_heat", "SpecificHeat"],
-}
-
-_COLOUR_BY_CATEGORY = {
-    "alkali metal": "#FF6666",
-    "alkaline earth metal": "#FFDEAD",
-    "transition metal": "#FFB347",
-    "post-transition metal": "#FFD700",
-    "metalloid": "#ADFF2F",
-    "polyatomic nonmetal": "#90EE90",
-    "diatomic nonmetal": "#98FB98",
-    "nonmetal": "#90EE90",
-    "halogen": "#87CEFA",
-    "noble gas": "#D8BFD8",
-    "lanthanide": "#FF69B4",
-    "actinide": "#BA55D3",
-}
-
 
 def _coerce_float(x) -> Optional[float]:
     if x is None:
