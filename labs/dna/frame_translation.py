@@ -11,13 +11,7 @@ from matplotlib.backends.backend_qtagg import FigureCanvasQTAgg as FigureCanvas
 from matplotlib.backends.backend_qtagg import NavigationToolbar2QT as NavigationToolbar
 from core.data.functions.log import add_log_entry
 from core.data.databases.codon_table import CODON_TABLE
-
-# 3-letter → 1-letter
-AA1 = {
-    "Ala":"A","Arg":"R","Asn":"N","Asp":"D","Cys":"C","Gln":"Q","Glu":"E","Gly":"G",
-    "His":"H","Ile":"I","Leu":"L","Lys":"K","Met":"M","Phe":"F","Pro":"P","Ser":"S",
-    "Thr":"T","Trp":"W","Tyr":"Y","Val":"V","STOP":"*"
-}
+from core.data.functions.bio_utils import AA1
 
 def _sanitize_dna(s: str) -> str:
     s = re.sub(r"\s+", "", s).upper().replace("U", "T")
