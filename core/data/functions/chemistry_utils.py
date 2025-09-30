@@ -292,4 +292,5 @@ _COLOUR_BY_CATEGORY = {
     "actinide": "#BA55D3",
 }
 
-R = 8.31446261815324  #Gas constant
+R = 8.31446261815324  # Gas Constant
+F = 96485.33212  # Faraday's Constant
