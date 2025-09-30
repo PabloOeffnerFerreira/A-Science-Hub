@@ -2,8 +2,7 @@ from __future__ import annotations
 import math
 from PyQt6.QtWidgets import QDialog, QVBoxLayout, QHBoxLayout, QLabel, QLineEdit, QPushButton
 from core.data.functions.log import add_log_entry
-
-MU0 = 4e-7*math.pi
+from core.data.functions.elect_utils import MU0
 
 class Tool(QDialog):
     TITLE = "Biot–Savart: Long Straight Wire"
