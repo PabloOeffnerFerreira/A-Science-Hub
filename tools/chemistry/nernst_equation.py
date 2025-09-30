@@ -2,9 +2,7 @@ from __future__ import annotations
 import math
 from PyQt6.QtWidgets import QDialog, QVBoxLayout, QHBoxLayout, QLabel, QLineEdit, QPushButton
 from core.data.functions.log import add_log_entry
-
-R = 8.314462618  # J/(mol·K)
-F = 96485.33212  # C/mol
+from core.data.functions.chemistry_utils import F, R
 
 class Tool(QDialog):
     TITLE = "Nernst Equation (E = E° - RT/nF ln Q)"
